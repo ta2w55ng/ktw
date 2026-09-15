@@ -1,0 +1,1479 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Home</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+:root {
+  --bg: #f4f6fb;
+  --bg-grad: radial-gradient(1200px 600px at 10% -10%, #dfe7ff 0%, transparent 60%),
+             radial-gradient(900px 500px at 110% 10%, #ffe6f0 0%, transparent 55%);
+  --card: #ffffff;
+  --text: #1b1f2a;
+  --muted: #6b7385;
+  --line: #e6e9f2;
+  --hover: #f1f4fb;
+  --accent: #4f6bff;
+  --accent-soft: #e8ecff;
+  --google: #188a52;
+  --google-soft: #e1f4ea;
+  --danger: #e5484d;
+  --warn: #f5a524;
+  --sun: #e5484d;
+  --sat: #3b73e0;
+  --shadow: 0 1px 2px rgba(20, 30, 60, .04), 0 8px 24px rgba(20, 30, 60, .06);
+  --radius: 18px;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1218;
+  --bg-grad: radial-gradient(1200px 600px at 10% -10%, #1c2440 0%, transparent 60%),
+             radial-gradient(900px 500px at 110% 10%, #2a1a2a 0%, transparent 55%);
+  --card: #171b24;
+  --text: #e8ebf2;
+  --muted: #9097a8;
+  --line: #262c38;
+  --hover: #1f2430;
+  --accent: #7b8cff;
+  --accent-soft: #232a4a;
+  --google: #3ccf8a;
+  --google-soft: #15302a;
+  --danger: #ff6b6f;
+  --sun: #ff7b7f;
+  --sat: #7aa5ff;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  min-height: 100vh;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif;
+  background: var(--bg-grad), var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+
+.app { max-width: 1180px; margin: 0 auto; padding: 28px 20px 48px; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+h2 { margin: 0; font-size: 18px; font-weight: 700; }
+
+/* ---------- 상단: 시계 + 검색 ---------- */
+.hero { text-align: center; padding-bottom: 28px; }
+.hero-top { display: flex; justify-content: space-between; align-items: center; }
+.greeting { margin: 0; color: rgba(255, 255, 255, .9); font-size: 15px; }
+.clock .time {
+  margin-top: 4px;
+  font-size: clamp(56px, 11vw, 104px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.clock .sec {
+  display: inline-block;
+  width: 1.4em;
+  margin-left: .2em;
+  font-size: .32em;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-align: left;
+  color: rgba(255, 255, 255, .75);
+}
+.clock .date { margin-top: 12px; font-size: clamp(16px, 2.4vw, 20px); font-weight: 500; color: rgba(255, 255, 255, .92); }
+
+/* ---------- 날씨 배경 ---------- */
+@property --sky1 { syntax: '<color>'; inherits: true; initial-value: #3d8bff; }
+@property --sky2 { syntax: '<color>'; inherits: true; initial-value: #a6d4ff; }
+@property --cloud { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
+
+.scene {
+  --sky1: #3d8bff;
+  --sky2: #a6d4ff;
+  --cloud: #ffffff;
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 320px;
+  padding-block: 18px 30px;
+  padding-inline: 20px;
+  overflow: hidden;
+  border-radius: 28px;
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: --sky1 1.5s, --sky2 1.5s, --cloud 1.5s;
+}
+.scene[data-weather="partly"] { --sky1: #4f8fdc; --sky2: #b9dcf7; }
+.scene[data-weather="cloudy"] { --sky1: #6f7f94; --sky2: #aeb9c6; --cloud: #dfe4ea; }
+.scene[data-weather="fog"]    { --sky1: #8793a0; --sky2: #c3cad2; --cloud: #e3e7eb; }
+.scene[data-weather="rain"]   { --sky1: #3d4b5e; --sky2: #718296; --cloud: #8995a4; }
+.scene[data-weather="snow"]   { --sky1: #7d92aa; --sky2: #c9d5e1; --cloud: #eef2f6; }
+.scene[data-weather="storm"]  { --sky1: #1f2533; --sky2: #464f68; --cloud: #555e71; }
+.scene[data-tod="dusk"]:is([data-weather="clear"], [data-weather="partly"]) { --sky1: #4b4a9a; --sky2: #ff9f6e; --cloud: #ffd9c4; }
+.scene[data-tod="night"] { --sky1: #060e26; --sky2: #1d2d5a; --cloud: #3f4a66; }
+.scene[data-tod="night"]:is([data-weather="cloudy"], [data-weather="fog"], [data-weather="snow"]) { --sky1: #121824; --sky2: #313a4f; --cloud: #4a5366; }
+.scene[data-tod="night"]:is([data-weather="rain"], [data-weather="storm"]) { --sky1: #06090f; --sky2: #1a2130; --cloud: #2c3445; }
+
+.sky, .scene-layer { position: absolute; inset: 0; pointer-events: none; }
+.sky { z-index: -2; background: linear-gradient(180deg, var(--sky1), var(--sky2)); }
+.scene-layer { z-index: -1; }
+.scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 55% 60% at 50% 55%, rgba(8, 16, 36, .28), transparent 75%);
+  pointer-events: none;
+}
+.scene-content { text-shadow: 0 1px 3px rgba(0, 0, 0, .35), 0 2px 16px rgba(0, 0, 0, .3); }
+.scene .icon-btn { color: rgba(255, 255, 255, .85); }
+.scene .icon-btn:hover { background: rgba(255, 255, 255, .18); color: #fff; }
+
+.sun-orb, .moon-orb, .stars, .cloud, .fog { opacity: 0; transition: opacity 1.2s, top 1.2s; }
+.sun-orb {
+  position: absolute;
+  top: 14%;
+  right: 11%;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffbe0 0%, #ffe066 45%, #ffc02e 100%);
+  box-shadow: 0 0 40px 12px rgba(255, 214, 90, .55), 0 0 120px 40px rgba(255, 214, 90, .25);
+  animation: sun-glow 5s ease-in-out infinite;
+}
+.scene[data-tod="dusk"] .sun-orb {
+  top: 62%;
+  background: radial-gradient(circle, #fff1c9 0%, #ffb36b 55%, #ff7a45 100%);
+  box-shadow: 0 0 40px 14px rgba(255, 140, 80, .55), 0 0 120px 40px rgba(255, 120, 80, .3);
+}
+.scene:is([data-weather="clear"], [data-weather="partly"]):not([data-tod="night"]) .sun-orb { opacity: 1; }
+@keyframes sun-glow { 50% { transform: scale(1.04); filter: brightness(1.05); } }
+
+.moon-orb {
+  position: absolute;
+  top: 15%;
+  right: 13%;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  box-shadow: 16px -6px 0 0 #f5f0d8;
+  filter: drop-shadow(0 0 16px rgba(255, 248, 210, .5));
+}
+.scene[data-tod="night"]:is([data-weather="clear"], [data-weather="partly"]) .moon-orb { opacity: 1; }
+.stars { position: absolute; inset: 0; }
+.stars i { position: absolute; width: var(--size); height: var(--size); border-radius: 50%; background: #fff; animation: twinkle var(--dur) ease-in-out var(--delay) infinite; }
+.scene[data-tod="night"][data-weather="clear"] .stars { opacity: 1; }
+.scene[data-tod="night"][data-weather="partly"] .stars { opacity: .55; }
+@keyframes twinkle { 50% { opacity: .2; } }
+
+.cloud {
+  position: absolute;
+  top: var(--top);
+  left: -260px;
+  width: 200px;
+  height: 60px;
+  border-radius: 60px;
+  background: var(--cloud);
+  filter: blur(1px);
+  animation: cloud-drift var(--dur) linear var(--delay) infinite;
+}
+.cloud::before, .cloud::after { content: ''; position: absolute; border-radius: 50%; background: inherit; }
+.cloud::before { top: -45px; left: 30px; width: 90px; height: 90px; }
+.cloud::after { top: -60px; left: 80px; width: 110px; height: 110px; }
+.scene[data-weather="clear"] .cloud:nth-child(1) { opacity: .45; }
+.scene[data-weather="partly"] .cloud:nth-child(-n+3) { opacity: .8; }
+.scene:is([data-weather="cloudy"], [data-weather="fog"], [data-weather="rain"], [data-weather="snow"], [data-weather="storm"]) .cloud { opacity: .8; }
+@keyframes cloud-drift {
+  from { transform: translateX(0) scale(var(--s)); }
+  to { transform: translateX(calc(100cqw + 320px)) scale(var(--s)); }
+}
+
+.fog span { position: absolute; left: -50%; width: 200%; height: 45%; background: radial-gradient(ellipse at center, rgba(255, 255, 255, .6), transparent 65%); filter: blur(10px); animation: fog-drift 30s ease-in-out infinite alternate; }
+.fog span:nth-child(1) { top: 5%; }
+.fog span:nth-child(2) { top: 35%; animation-duration: 42s; animation-direction: alternate-reverse; }
+.fog span:nth-child(3) { top: 62%; animation-duration: 54s; }
+.scene[data-weather="fog"] .fog { opacity: 1; }
+@keyframes fog-drift { from { transform: translateX(-12%); } to { transform: translateX(12%); } }
+
+.particles i { position: absolute; top: -40px; display: block; }
+.scene:is([data-weather="rain"], [data-weather="storm"]) .particles i {
+  width: 2px;
+  height: var(--len);
+  border-radius: 2px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(215, 232, 255, .8));
+  rotate: 4deg;
+  animation: rain-fall var(--dur) linear var(--delay) infinite;
+}
+.scene[data-weather="snow"] .particles i {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .95);
+  box-shadow: 0 0 6px rgba(255, 255, 255, .6);
+  animation: snow-fall var(--dur) linear var(--delay) infinite;
+}
+@keyframes rain-fall { to { transform: translate(-40px, 560px); } }
+@keyframes snow-fall {
+  50% { transform: translate(var(--sway), 280px); }
+  to { transform: translate(0, 560px); }
+}
+
+.flash { background: #fff; opacity: 0; }
+.scene[data-weather="storm"] .flash { animation: lightning 8s infinite; }
+@keyframes lightning {
+  0%, 90%, 100% { opacity: 0; }
+  91% { opacity: .55; }
+  92% { opacity: .05; }
+  93.5% { opacity: .35; }
+  95% { opacity: 0; }
+}
+
+.weather-chip {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 10px;
+  max-width: 100%;
+  margin: 18px auto 0;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .16);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 14px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .25);
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+}
+.weather-chip:hover { background: rgba(255, 255, 255, .26); }
+.weather-chip.loading { opacity: .7; }
+.wc-icon { font-size: 20px; line-height: 1; text-shadow: none; }
+.wc-temp { font-size: 20px; font-weight: 700; }
+.wc-sep { opacity: .5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene *, .scene *::before, .scene *::after { animation: none !important; }
+  .particles i { top: var(--y); }
+  .cloud { left: calc(var(--top) * 1.2); }
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 640px;
+  margin: 28px auto 0;
+  padding: 6px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  transition: border-color .15s, box-shadow .15s;
+}
+.search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft), var(--shadow); }
+.search select { border: 0; background: transparent; padding: 10px 6px 10px 14px; color: var(--muted); font-weight: 600; cursor: pointer; outline: none; }
+.search select option { background: var(--card); color: var(--text); }
+.search input { flex: 1; min-width: 0; border: 0; background: transparent; padding: 10px 8px; font-size: 16px; outline: none; }
+.search button { border: 0; background: var(--accent); color: #fff; padding: 10px 22px; border-radius: 999px; font-weight: 600; cursor: pointer; }
+.search button:hover { filter: brightness(1.06); }
+
+/* ---------- 즐겨찾기 ---------- */
+.bookmarks { max-width: 760px; margin: 22px auto 0; }
+.bookmarks ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.bm { position: relative; width: 88px; }
+.bm a, .bm-add { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; padding: 12px 4px 10px; border: 0; border-radius: 14px; background: transparent; color: var(--text); text-decoration: none; cursor: pointer; }
+.bm a:hover, .bm-add:hover { background: color-mix(in srgb, var(--card) 70%, transparent); }
+.bm-icon { display: grid; place-items: center; width: 48px; height: 48px; overflow: hidden; border: 1px solid var(--line); border-radius: 50%; background: var(--card); box-shadow: var(--shadow); font-size: 18px; font-weight: 700; }
+.bm-icon img { width: 24px; height: 24px; }
+.bm-icon.letter { border-color: transparent; background: hsl(var(--hue, 230) 55% 52%); color: #fff; }
+.bm-icon.letter::after { content: attr(data-letter); }
+.bm-name { max-width: 100%; overflow: hidden; font-size: 12px; white-space: nowrap; text-overflow: ellipsis; }
+.bm-add .bm-icon { border: 1.5px dashed var(--muted); background: transparent; box-shadow: none; color: var(--muted); font-size: 22px; font-weight: 400; }
+.bm-add .bm-name { color: var(--muted); }
+.bm-edit { position: absolute; top: 4px; right: 10px; width: 22px; height: 22px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--card); color: var(--muted); font-size: 11px; line-height: 1; cursor: pointer; opacity: 0; transition: opacity .15s; }
+.bm:hover .bm-edit, .bm-edit:focus-visible { opacity: 1; }
+.bm-edit:hover { color: var(--text); }
+@media (hover: none) { .bm-edit { opacity: .85; } }
+.bm.dragging { opacity: .35; }
+.bm.drop-target a { background: var(--accent-soft); }
+
+/* ---------- 레이아웃 ---------- */
+.grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.side { display: grid; gap: 20px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
+
+.btn { border: 1px solid var(--line); background: var(--card); padding: 8px 14px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; text-decoration: none; }
+.btn:hover { background: var(--hover); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover { filter: brightness(1.06); }
+.btn.ghost { background: transparent; }
+.btn.ghost:hover { background: var(--hover); }
+.btn.danger { background: transparent; border-color: transparent; color: var(--danger); padding-left: 4px; }
+.btn:disabled { opacity: .55; cursor: default; }
+.icon-btn { display: inline-grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 10px; background: transparent; color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; }
+.icon-btn:hover { background: var(--hover); color: var(--text); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- 달력 ---------- */
+.cal-head { display: flex; align-items: center; gap: 4px; margin-bottom: 14px; }
+.cal-head h2 { min-width: 124px; text-align: center; }
+.cal-head .btn { margin-left: auto; }
+.weekdays, .days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.weekdays { padding-bottom: 8px; text-align: center; font-size: 12px; font-weight: 600; color: var(--muted); }
+.weekdays span:first-child { color: var(--sun); }
+.weekdays span:last-child { color: var(--sat); }
+.days { gap: 4px; }
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  min-height: 92px;
+  padding: 6px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+.day:hover { background: var(--hover); }
+.day .num { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font-size: 13px; font-weight: 600; }
+.day.sun .num { color: var(--sun); }
+.day.sat .num { color: var(--sat); }
+.day.out { opacity: .4; }
+.day.today .num { background: var(--accent); color: #fff; }
+.day.selected { border-color: var(--accent); background: var(--accent-soft); }
+.chips { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.chip { padding: 0 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); font-size: 11px; font-weight: 600; line-height: 1.55; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chip.google { background: var(--google-soft); color: var(--google); }
+.day.selected .chip:not(.google) { background: var(--card); }
+.more { padding-left: 6px; font-size: 11px; color: var(--muted); }
+
+/* ---------- 일정 목록 ---------- */
+.sched-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.sched-head p { margin: 4px 0 0; font-size: 13px; }
+.events { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.event { display: flex; gap: 12px; width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: transparent; text-align: left; cursor: pointer; }
+.event:hover { background: var(--hover); }
+.ev-bar { flex-shrink: 0; width: 4px; border-radius: 4px; background: var(--accent); }
+.event.google .ev-bar { background: var(--google); }
+.ev-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ev-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.ev-date { font-weight: 700; color: var(--text); }
+.ev-tag { padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 10px; font-weight: 700; }
+.event.google .ev-tag { background: var(--google-soft); color: var(--google); }
+.ev-title { font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }
+.ev-memo { font-size: 13px; color: var(--muted); white-space: pre-wrap; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.empty { padding: 22px 8px; border: 1px dashed var(--line); border-radius: 12px; text-align: center; font-size: 14px; line-height: 1.6; color: var(--muted); }
+
+/* ---------- Google 연동 ---------- */
+.g-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.g-status { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.g-actions { display: flex; gap: 6px; }
+.dot { flex-shrink: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+.dot[data-state="on"] { background: var(--google); box-shadow: 0 0 0 4px var(--google-soft); }
+.dot[data-state="busy"] { background: var(--accent); animation: pulse 1s ease-in-out infinite; }
+.dot[data-state="warn"] { background: var(--warn); }
+@keyframes pulse { 50% { opacity: .25; } }
+.g-hint { margin: 10px 0 0; font-size: 12px; line-height: 1.6; color: var(--muted); }
+.g-hint:empty { display: none; }
+.g-hint code { padding: 1px 5px; border-radius: 4px; background: var(--hover); }
+
+/* ---------- 일정 편집 창 ---------- */
+dialog { width: min(440px, calc(100vw - 32px)); padding: 0; border: 0; border-radius: 20px; background: var(--card); color: var(--text); box-shadow: 0 24px 60px rgba(0, 0, 0, .25); }
+dialog::backdrop { background: rgba(15, 18, 30, .45); backdrop-filter: blur(2px); }
+dialog form { display: grid; gap: 14px; padding: 22px; }
+.dlg-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+dialog h3 { margin: 0; font-size: 18px; }
+.source-note { font-size: 12px; color: var(--muted); }
+dialog label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+dialog input:not([type="checkbox"]), dialog textarea, dialog select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+}
+dialog input:focus, dialog textarea:focus, dialog select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+dialog textarea { resize: vertical; }
+dialog label.check { display: flex; align-items: center; gap: 8px; color: var(--text); font-weight: 500; }
+dialog label.check input { width: 16px; height: 16px; margin: 0; accent-color: var(--accent); }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.times.disabled { opacity: .45; }
+.form-error { margin: 0; font-size: 13px; color: var(--danger); }
+.form-error:empty { display: none; }
+.dlg-actions { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+.dlg-link { font-size: 13px; color: var(--accent); text-decoration: none; }
+.dlg-link:hover { text-decoration: underline; }
+.spacer { flex: 1; }
+
+.toast { position: fixed; left: 50%; bottom: 24px; z-index: 100; max-width: calc(100vw - 32px); padding: 12px 18px; border-radius: 12px; background: #1b1f2a; color: #fff; font-size: 14px; box-shadow: 0 8px 24px rgba(0, 0, 0, .25); transform: translateX(-50%); }
+[data-theme="dark"] .toast { background: #2c3242; }
+.toast.error { background: var(--danger); }
+
+/* ---------- 반응형 ---------- */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .app { padding: 16px 16px 36px; }
+  .card { padding: 16px; }
+  .scene { min-height: 290px; border-radius: 22px; padding-inline: 16px; }
+  .sun-orb { top: 21%; right: 5%; width: 58px; height: 58px; }
+  .moon-orb { top: 22%; right: 9%; width: 42px; height: 42px; box-shadow: 12px -5px 0 0 #f5f0d8; }
+  .search select { padding-left: 10px; }
+  .search button { padding: 10px 14px; }
+  .bm { width: 72px; }
+  .bm-edit { right: 4px; }
+  .day { align-items: center; min-height: 54px; padding: 4px 2px; }
+  .chips { flex-direction: row; justify-content: center; gap: 3px; }
+  .day .chip, .day.selected .chip:not(.google) { width: 6px; height: 6px; padding: 0; border-radius: 50%; background: var(--accent); font-size: 0; }
+  .day .chip.google { background: var(--google); }
+  .more { display: none; }
+}
+  </style>
+  <script>
+// Google 캘린더 연동 설정
+// README.md 의 "Google 캘린더 연동 설정" 순서대로 OAuth 클라이언트 ID를 발급받아 입력하세요.
+// 클라이언트 ID는 공개되어도 되는 값입니다. (클라이언트 보안 비밀번호는 절대 넣지 마세요)
+window.APP_CONFIG = {
+  GOOGLE_CLIENT_ID: '1003094391028-eg6oa68lmj4n4c5v1lbo9087lk1p57df.apps.googleusercontent.com',
+  CALENDAR_ID: 'primary', // 기본 캘린더. 다른 캘린더를 쓰려면 캘린더 ID 입력
+};
+  </script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <section class="scene" id="scene" data-weather="clear" data-tod="day" role="img" aria-label="날씨 배경">
+        <div class="sky" aria-hidden="true"></div>
+        <div class="scene-layer" aria-hidden="true">
+          <div class="stars" id="stars"></div>
+          <div class="sun-orb"></div>
+          <div class="moon-orb"></div>
+        </div>
+        <div class="scene-layer" id="clouds" aria-hidden="true"></div>
+        <div class="scene-layer fog" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="scene-layer particles" id="particles" aria-hidden="true"></div>
+        <div class="scene-layer flash" aria-hidden="true"></div>
+        <div class="scene-content">
+          <div class="hero-top">
+            <p class="greeting" id="greeting">&nbsp;</p>
+            <button type="button" class="icon-btn" id="themeToggle" aria-label="라이트/다크 테마 전환" title="테마 전환">◐</button>
+          </div>
+          <div class="clock" aria-live="off">
+            <div class="time" id="time">--:--</div>
+            <div class="date" id="date">&nbsp;</div>
+          </div>
+          <button type="button" class="weather-chip" id="weatherChip"><span>날씨 불러오는 중…</span></button>
+        </div>
+      </section>
+      <form class="search" id="searchForm" role="search">
+        <select id="engine" aria-label="검색 엔진">
+          <option value="google">Google</option>
+          <option value="naver">Naver</option>
+          <option value="youtube">YouTube</option>
+        </select>
+        <input id="q" type="search" placeholder="검색어를 입력하세요  ( / 키로 바로 입력)" autocomplete="off" aria-label="검색어">
+        <button type="submit">검색</button>
+      </form>
+      <nav class="bookmarks" aria-label="즐겨찾기">
+        <ul id="bookmarkList"></ul>
+      </nav>
+    </header>
+
+    <main class="grid">
+      <section class="card calendar-card" aria-label="달력">
+        <div class="cal-head">
+          <button type="button" class="icon-btn" id="prevMonth" aria-label="이전 달">‹</button>
+          <h2 id="monthLabel"></h2>
+          <button type="button" class="icon-btn" id="nextMonth" aria-label="다음 달">›</button>
+          <button type="button" class="btn ghost" id="todayBtn">오늘</button>
+        </div>
+        <div class="weekdays" aria-hidden="true">
+          <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+        </div>
+        <div class="days" id="days"></div>
+      </section>
+
+      <div class="side">
+        <section class="card" aria-labelledby="selLabel">
+          <div class="sched-head">
+            <div>
+              <h2 id="selLabel"></h2>
+              <p class="muted" id="selSub"></p>
+            </div>
+            <button type="button" class="btn primary" id="addBtn">+ 일정 추가</button>
+          </div>
+          <ul class="events" id="eventList"></ul>
+        </section>
+
+        <section class="card">
+          <div class="sched-head"><h2>다가오는 일정</h2><span class="muted small">7일</span></div>
+          <ul class="events" id="upcomingList"></ul>
+        </section>
+
+        <section class="card google-card">
+          <div class="g-row">
+            <div class="g-status"><span class="dot" id="gDot"></span><span id="gText"></span></div>
+            <div class="g-actions">
+              <button type="button" class="btn ghost" id="gSync" hidden>새로고침</button>
+              <button type="button" class="btn" id="gConnect">Google 계정 연결</button>
+            </div>
+          </div>
+          <p class="g-hint" id="gHint"></p>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="eventDialog">
+    <form id="eventForm" novalidate>
+      <div class="dlg-head">
+        <h3 id="dlgTitle">새 일정</h3>
+        <span class="source-note" id="sourceNote"></span>
+      </div>
+      <label>제목<input name="title" maxlength="200" autocomplete="off" placeholder="예: 팀 회의"></label>
+      <label>날짜<input type="date" name="date"></label>
+      <label class="check"><input type="checkbox" name="allDay"> 하루 종일</label>
+      <div class="row times" id="timeRow">
+        <label>시작<input type="time" name="start"></label>
+        <label>종료<input type="time" name="end"></label>
+      </div>
+      <label>메모<textarea name="memo" rows="3" placeholder="장소, 준비물 등"></textarea></label>
+      <label id="targetWrap">저장 위치
+        <select name="target">
+          <option value="google">Google 캘린더</option>
+          <option value="local">이 브라우저에만 저장</option>
+        </select>
+      </label>
+      <p class="form-error" id="formError" role="alert"></p>
+      <div class="dlg-actions">
+        <button type="button" class="btn danger" id="deleteBtn">삭제</button>
+        <a class="dlg-link" id="openInGoogle" target="_blank" rel="noopener" hidden>Google에서 열기 ↗</a>
+        <span class="spacer"></span>
+        <button type="button" class="btn ghost" id="cancelBtn">취소</button>
+        <button type="submit" class="btn primary" id="saveBtn">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="bookmarkDialog">
+    <form id="bookmarkForm" novalidate>
+      <div class="dlg-head"><h3 id="bmDlgTitle">즐겨찾기 추가</h3></div>
+      <label>사이트 주소<input name="bmUrl" inputmode="url" autocomplete="off" placeholder="예: naver.com"></label>
+      <label>이름<input name="bmName" maxlength="30" autocomplete="off" placeholder="비워두면 사이트 주소로 표시"></label>
+      <p class="form-error" id="bmError" role="alert"></p>
+      <div class="dlg-actions">
+        <button type="button" class="btn danger" id="bmDelete">삭제</button>
+        <span class="spacer"></span>
+        <button type="button" class="btn ghost" id="bmCancel">취소</button>
+        <button type="submit" class="btn primary">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script>
+(() => {
+  'use strict';
+
+  const CFG = Object.assign({ GOOGLE_CLIENT_ID: '', CALENDAR_ID: 'primary' }, window.APP_CONFIG);
+  const SCOPE = 'https://www.googleapis.com/auth/calendar.events';
+  const API = 'https://www.googleapis.com/calendar/v3';
+  const UPCOMING_DAYS = 7;
+  const WEEK = ['일', '월', '화', '수', '목', '금', '토'];
+  const KEY = { events: 'home.events.v1', bookmarks: 'home.bookmarks.v2', weather: 'home.weather.v1', theme: 'home.theme', engine: 'home.engine', token: 'home.gtoken' };
+
+  // ---------- 유틸 ----------
+  const $ = (sel) => document.querySelector(sel);
+  const pad = (n) => String(n).padStart(2, '0');
+  const ymd = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const hm = (d) => `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  const parseYmd = (s) => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+  const dayDiff = (a, b) => Math.round((parseYmd(b) - parseYmd(a)) / 86400000);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const uid = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2));
+
+  const store = {
+    get(key, fallback) {
+      try { const v = localStorage.getItem(key); return v === null ? fallback : JSON.parse(v); } catch { return fallback; }
+    },
+    set(key, value) {
+      try { localStorage.setItem(key, JSON.stringify(value)); } catch { /* 저장소를 쓸 수 없는 환경 */ }
+    },
+  };
+
+  let toastTimer;
+  function toast(msg, isError = false) {
+    const el = $('#toast');
+    el.textContent = msg;
+    el.classList.toggle('error', isError);
+    el.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { el.hidden = true; }, 3500);
+  }
+
+  // ---------- 테마 ----------
+  const applyTheme = (t) => { document.documentElement.dataset.theme = t; };
+  applyTheme(store.get(KEY.theme, null) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  $('#themeToggle').addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    store.set(KEY.theme, next);
+  });
+
+  // ---------- 시계 ----------
+  let lastDay = ymd(new Date());
+  function tick() {
+    const now = new Date();
+    const h = now.getHours();
+    $('#time').innerHTML = `${pad(h)}:${pad(now.getMinutes())}<span class="sec">${pad(now.getSeconds())}</span>`;
+    $('#date').textContent = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 ${WEEK[now.getDay()]}요일`;
+    $('#greeting').textContent =
+      h < 5 ? '늦은 밤이에요, 푹 쉬세요 🌙' : h < 12 ? '좋은 아침이에요 ☀️' : h < 18 ? '좋은 오후예요 🌤️' : '편안한 저녁 되세요 🌆';
+    const today = ymd(now);
+    if (today !== lastDay) { lastDay = today; renderAll(); }
+    updateScene(now);
+  }
+
+  // ---------- 날씨 배경 (Open-Meteo, API 키 불필요) ----------
+  const WEATHER_TTL = 15 * 60 * 1000;
+  const DEFAULT_PLACE = { lat: 37.5665, lon: 126.978, name: '서울' };
+  const scene = $('#scene');
+  const weatherChip = $('#weatherChip');
+  let weather = store.get(KEY.weather, null);
+  let weatherLoading = false;
+  let sceneKey = '';
+  let particleKey = '';
+
+  function describeWeather(code, night) {
+    const c = Number(code);
+    if (c === 0) return { kind: 'clear', text: '맑음', icon: night ? '🌙' : '☀️' };
+    if (c === 1) return { kind: 'clear', text: '대체로 맑음', icon: night ? '🌙' : '🌤️' };
+    if (c === 2) return { kind: 'partly', text: '구름 조금', icon: night ? '☁️' : '⛅' };
+    if (c === 3) return { kind: 'cloudy', text: '흐림', icon: '☁️' };
+    if (c === 45 || c === 48) return { kind: 'fog', text: '안개', icon: '🌫️' };
+    if (c >= 51 && c <= 57) return { kind: 'rain', level: 'light', text: '이슬비', icon: '🌦️' };
+    if (c === 61 || c === 80) return { kind: 'rain', level: 'light', text: c === 80 ? '약한 소나기' : '약한 비', icon: '🌦️' };
+    if (c === 63 || c === 66 || c === 81) return { kind: 'rain', text: c === 81 ? '소나기' : c === 66 ? '어는 비' : '비', icon: '🌧️' };
+    if (c === 65 || c === 67 || c === 82) return { kind: 'rain', level: 'heavy', text: c === 82 ? '강한 소나기' : '강한 비', icon: '🌧️' };
+    if (c === 71 || c === 77 || c === 85) return { kind: 'snow', level: 'light', text: c === 77 ? '싸락눈' : '약한 눈', icon: '🌨️' };
+    if (c === 73) return { kind: 'snow', text: '눈', icon: '🌨️' };
+    if (c === 75 || c === 86) return { kind: 'snow', level: 'heavy', text: '많은 눈', icon: '❄️' };
+    if (c >= 95) return { kind: 'storm', level: 'heavy', text: c === 95 ? '천둥번개' : '우박 동반 천둥번개', icon: '⛈️' };
+    return { kind: 'cloudy', text: '흐림', icon: '☁️' };
+  }
+
+  // 일출·일몰 전후 40분은 노을, 그 사이는 낮, 나머지는 밤
+  function timeOfDay(now) {
+    const at = (iso, h, m) => {
+      if (iso) [h, m] = iso.slice(11, 16).split(':').map(Number);
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
+    };
+    const rise = at(weather && weather.sunrise, 6, 0);
+    const set = at(weather && weather.sunset, 18, 30);
+    const DUSK = 40 * 60 * 1000;
+    if (Math.abs(now - rise) < DUSK || Math.abs(now - set) < DUSK) return 'dusk';
+    return now > rise && now < set ? 'day' : 'night';
+  }
+
+  function updateScene(now = new Date()) {
+    const tod = timeOfDay(now);
+    const info = weather ? describeWeather(weather.code, tod === 'night') : { kind: 'clear' };
+    const key = `${tod}|${info.kind}|${weather ? weather.at : ''}|${weatherLoading}`;
+    if (key === sceneKey) return;
+    sceneKey = key;
+    scene.dataset.tod = tod;
+    scene.dataset.weather = info.kind;
+    const pKey = `${info.kind}:${info.level || 'normal'}`;
+    if (pKey !== particleKey) { particleKey = pKey; buildParticles(info.kind, info.level || 'normal'); }
+    renderWeatherChip(info);
+  }
+
+  function renderWeatherChip(info) {
+    weatherChip.classList.toggle('loading', weatherLoading);
+    if (!weather) {
+      weatherChip.innerHTML = weatherLoading ? '<span>날씨 불러오는 중…</span>' : '<span>날씨 정보를 불러오지 못했어요 · 다시 시도</span>';
+      weatherChip.title = '';
+      return;
+    }
+    const r = Math.round;
+    weatherChip.innerHTML = `<span class="wc-icon" aria-hidden="true">${info.icon}</span>
+      <span class="wc-temp">${r(weather.temp)}°</span><span>${info.text}</span>
+      <span class="wc-sep">·</span><span>최고 ${r(weather.max)}° / 최저 ${r(weather.min)}°</span>
+      <span class="wc-sep">·</span><span>📍 ${esc(weather.place)}</span>`;
+    weatherChip.title = `체감 ${r(weather.feels)}° · 습도 ${weather.humidity}% · 바람 ${weather.wind}m/s`
+      + (weather.approx ? '\n위치 권한을 허용하면 현재 위치의 날씨가 표시돼요.' : '')
+      + '\n클릭하면 새로고침';
+    scene.setAttribute('aria-label', `현재 날씨 ${info.text}, ${r(weather.temp)}도`);
+  }
+
+  function buildParticles(kind, level) {
+    const layer = $('#particles');
+    const counts = { rain: { light: 45, normal: 85, heavy: 130 }, storm: { heavy: 120 }, snow: { light: 35, normal: 60, heavy: 100 } };
+    if (!counts[kind]) { layer.innerHTML = ''; return; }
+    const n = counts[kind][level] || Object.values(counts[kind]).pop();
+    const rnd = (a, b) => (a + Math.random() * (b - a)).toFixed(2);
+    let html = '';
+    for (let i = 0; i < n; i++) {
+      if (kind === 'snow') {
+        const dur = rnd(7, 14);
+        html += `<i style="left:${rnd(-2, 102)}%;--y:${rnd(0, 100)}%;--size:${rnd(3, 7)}px;--sway:${rnd(-30, 30)}px;--dur:${dur}s;--delay:-${rnd(0, dur)}s;opacity:${rnd(0.5, 1)}"></i>`;
+      } else {
+        const dur = rnd(0.5, 0.9);
+        html += `<i style="left:${rnd(-2, 106)}%;--y:${rnd(0, 100)}%;--len:${rnd(12, 24)}px;--dur:${dur}s;--delay:-${rnd(0, dur)}s;opacity:${rnd(0.35, 0.85)}"></i>`;
+      }
+    }
+    layer.innerHTML = html;
+  }
+
+  (function buildSceneDecor() {
+    // [top %, 크기, 이동 시간(s), 시작 위치 비율]
+    const CLOUDS = [[6, 0.9, 70, 0.1], [34, 0.55, 95, 0.5], [58, 1.05, 80, 0.78], [16, 0.5, 110, 0.32], [46, 0.75, 65, 0.92], [72, 0.65, 90, 0.6], [24, 1.2, 120, 0.2]];
+    $('#clouds').innerHTML = CLOUDS
+      .map(([top, s, dur, f]) => `<div class="cloud" style="--top:${top}%;--s:${s};--dur:${dur}s;--delay:${-dur * f}s"></div>`)
+      .join('');
+    let stars = '';
+    for (let i = 0; i < 50; i++) {
+      stars += `<i style="left:${(Math.random() * 100).toFixed(1)}%;top:${(Math.random() * 75).toFixed(1)}%;--size:${(1 + Math.random() * 2).toFixed(1)}px;--dur:${(2 + Math.random() * 4).toFixed(1)}s;--delay:-${(Math.random() * 6).toFixed(1)}s"></i>`;
+    }
+    $('#stars').innerHTML = stars;
+  })();
+
+  function getPosition() {
+    if (!navigator.geolocation) return Promise.resolve(null);
+    const geo = new Promise((resolve) => {
+      navigator.geolocation.getCurrentPosition(
+        (p) => resolve({ lat: p.coords.latitude, lon: p.coords.longitude }),
+        () => resolve(null),
+        { timeout: 8000, maximumAge: 30 * 60 * 1000 },
+      );
+    });
+    // 권한 요청에 응답하지 않으면 10초 후 기본 위치 사용
+    return Promise.race([geo, new Promise((resolve) => setTimeout(() => resolve(null), 10000))]);
+  }
+
+  async function placeName(lat, lon) {
+    try {
+      const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=ko`);
+      const d = await res.json();
+      return [...new Set([d.city || d.principalSubdivision, d.locality].filter(Boolean))].join(' ') || '현재 위치';
+    } catch {
+      return '현재 위치';
+    }
+  }
+
+  async function loadWeather(force = false) {
+    if (weatherLoading) return;
+    if (!force && weather && Date.now() - weather.at < WEATHER_TTL) return;
+    weatherLoading = true;
+    updateScene();
+    try {
+      const pos = await getPosition();
+      // 위치는 소수점 2자리(약 1km)로만 전송
+      const lat = (pos ? pos.lat : DEFAULT_PLACE.lat).toFixed(2);
+      const lon = (pos ? pos.lon : DEFAULT_PLACE.lon).toFixed(2);
+      const params = new URLSearchParams({
+        latitude: lat,
+        longitude: lon,
+        current: 'temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m',
+        daily: 'temperature_2m_max,temperature_2m_min,sunrise,sunset',
+        timezone: 'auto',
+        forecast_days: '1',
+        wind_speed_unit: 'ms',
+      });
+      const [res, place] = await Promise.all([
+        fetch(`https://api.open-meteo.com/v1/forecast?${params}`),
+        pos ? placeName(lat, lon) : Promise.resolve(DEFAULT_PLACE.name),
+      ]);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const d = await res.json();
+      weather = {
+        at: Date.now(),
+        code: d.current.weather_code,
+        temp: d.current.temperature_2m,
+        feels: d.current.apparent_temperature,
+        humidity: d.current.relative_humidity_2m,
+        wind: d.current.wind_speed_10m,
+        max: d.daily.temperature_2m_max[0],
+        min: d.daily.temperature_2m_min[0],
+        sunrise: d.daily.sunrise[0],
+        sunset: d.daily.sunset[0],
+        place,
+        approx: !pos,
+      };
+      store.set(KEY.weather, weather);
+    } catch {
+      if (force) toast('날씨 정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.', true);
+    } finally {
+      weatherLoading = false;
+      updateScene();
+    }
+  }
+
+  weatherChip.addEventListener('click', () => loadWeather(true));
+
+  // ---------- 검색 ----------
+  const ENGINES = {
+    google: (q) => `https://www.google.com/search?q=${encodeURIComponent(q)}`,
+    naver: (q) => `https://search.naver.com/search.naver?query=${encodeURIComponent(q)}`,
+    youtube: (q) => `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`,
+  };
+  const engineSel = $('#engine');
+  const savedEngine = store.get(KEY.engine, 'google');
+  engineSel.value = ENGINES[savedEngine] ? savedEngine : 'google';
+  engineSel.addEventListener('change', () => store.set(KEY.engine, engineSel.value));
+  $('#searchForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = $('#q').value.trim();
+    if (!q) return;
+    const url = /^https?:\/\/\S+$/i.test(q) ? q : ENGINES[engineSel.value](q);
+    window.open(url, '_blank', 'noopener');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey || $('dialog[open]')) return;
+    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+    e.preventDefault();
+    $('#q').focus();
+  });
+
+  // ---------- 즐겨찾기 ----------
+  const DEFAULT_BOOKMARKS = [
+    { name: 'Gemini', url: 'https://gemini.google.com/' },
+    { name: 'ChatGPT', url: 'https://chatgpt.com/' },
+    { name: 'Perplexity', url: 'https://www.perplexity.ai/' },
+    { name: 'Google', url: 'https://www.google.com/' },
+    { name: 'Naver', url: 'https://www.naver.com/' },
+  ];
+  const MAX_BOOKMARKS = 24;
+  const bmList = $('#bookmarkList');
+  const bmDlg = $('#bookmarkDialog');
+  const bmForm = $('#bookmarkForm');
+  const bf = bmForm.elements;
+  let bookmarks = store.get(KEY.bookmarks, null);
+  if (!Array.isArray(bookmarks)) bookmarks = DEFAULT_BOOKMARKS.map((b) => ({ ...b }));
+  let bmEditing = -1;
+  let dragFrom = -1;
+
+  const saveBookmarks = () => store.set(KEY.bookmarks, bookmarks);
+  const hostOf = (url) => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return url; } };
+
+  // "naver.com" → "https://naver.com/" · http(s) 이외의 주소는 거부
+  function normalizeUrl(raw) {
+    const s = raw.trim();
+    if (!s) return null;
+    if (/^[a-z][a-z\d+.-]*:\/\//i.test(s) && !/^https?:\/\//i.test(s)) return null;
+    try {
+      const u = new URL(/^https?:\/\//i.test(s) ? s : `https://${s}`);
+      if (!u.hostname.includes('.') && u.hostname !== 'localhost') return null;
+      return u.href;
+    } catch {
+      return null;
+    }
+  }
+
+  function renderBookmarks() {
+    const items = bookmarks.map((b, i) => {
+      const host = hostOf(b.url);
+      const name = b.name || host;
+      const hue = [...host].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
+      return `<li class="bm" draggable="true" data-index="${i}">
+        <a href="${esc(b.url)}" target="_blank" rel="noopener" draggable="false" title="${esc(name)}&#10;${esc(b.url)}">
+          <span class="bm-icon" data-letter="${esc(([...name][0] || '?').toUpperCase())}" style="--hue:${hue}">
+            <img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&amp;sz=64" alt="" loading="lazy" draggable="false">
+          </span>
+          <span class="bm-name">${esc(name)}</span>
+        </a>
+        <button type="button" class="bm-edit" data-index="${i}" aria-label="${esc(name)} 편집" title="편집">✎</button>
+      </li>`;
+    });
+    if (bookmarks.length < MAX_BOOKMARKS) {
+      items.push('<li class="bm"><button type="button" class="bm-add" id="bmAdd"><span class="bm-icon">+</span><span class="bm-name">추가</span></button></li>');
+    }
+    bmList.innerHTML = items.join('');
+  }
+
+  function openBookmarkDialog(index) {
+    const b = bookmarks[index];
+    bmEditing = b ? index : -1;
+    bmForm.reset();
+    $('#bmError').textContent = '';
+    $('#bmDlgTitle').textContent = b ? '즐겨찾기 편집' : '즐겨찾기 추가';
+    bf.bmUrl.value = b ? b.url : '';
+    bf.bmName.value = b ? b.name : '';
+    $('#bmDelete').hidden = !b;
+    bmDlg.showModal();
+    bf.bmUrl.focus();
+  }
+
+  // 파비콘을 못 불러오면 첫 글자 아이콘으로 대체
+  bmList.addEventListener('error', (e) => {
+    if (e.target.tagName !== 'IMG') return;
+    e.target.parentElement.classList.add('letter');
+    e.target.remove();
+  }, true);
+
+  bmList.addEventListener('click', (e) => {
+    const edit = e.target.closest('.bm-edit');
+    if (edit) openBookmarkDialog(Number(edit.dataset.index));
+    else if (e.target.closest('#bmAdd')) openBookmarkDialog(-1);
+  });
+
+  // 끌어서 순서 바꾸기
+  bmList.addEventListener('dragstart', (e) => {
+    const li = e.target.closest('.bm[data-index]');
+    if (!li) return;
+    dragFrom = Number(li.dataset.index);
+    li.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', bookmarks[dragFrom].url);
+  });
+  bmList.addEventListener('dragover', (e) => {
+    const li = e.target.closest('.bm[data-index]');
+    if (dragFrom < 0 || !li) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    bmList.querySelectorAll('.drop-target').forEach((x) => { if (x !== li) x.classList.remove('drop-target'); });
+    li.classList.add('drop-target');
+  });
+  bmList.addEventListener('drop', (e) => {
+    const li = e.target.closest('.bm[data-index]');
+    if (dragFrom < 0 || !li) return;
+    e.preventDefault();
+    const to = Number(li.dataset.index);
+    if (to !== dragFrom) {
+      const [moved] = bookmarks.splice(dragFrom, 1);
+      bookmarks.splice(to, 0, moved);
+      saveBookmarks();
+    }
+  });
+  bmList.addEventListener('dragend', () => { dragFrom = -1; renderBookmarks(); });
+
+  bmForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const url = normalizeUrl(bf.bmUrl.value);
+    if (!url) { $('#bmError').textContent = '올바른 사이트 주소를 입력해 주세요. (예: naver.com)'; return; }
+    const entry = { name: bf.bmName.value.trim() || hostOf(url), url };
+    const isEdit = bmEditing >= 0;
+    if (isEdit) bookmarks[bmEditing] = entry;
+    else bookmarks.push(entry);
+    saveBookmarks();
+    renderBookmarks();
+    bmDlg.close();
+    toast(isEdit ? '즐겨찾기를 수정했어요.' : '즐겨찾기를 추가했어요.');
+  });
+  $('#bmDelete').addEventListener('click', () => {
+    if (bmEditing < 0) return;
+    const [removed] = bookmarks.splice(bmEditing, 1);
+    saveBookmarks();
+    renderBookmarks();
+    bmDlg.close();
+    toast(`“${removed.name}” 즐겨찾기를 삭제했어요.`);
+  });
+  $('#bmCancel').addEventListener('click', () => bmDlg.close());
+
+  renderBookmarks();
+
+  // ---------- 로컬 일정 (Google 미연결 시에도 사용 가능) ----------
+  const localEvents = {
+    all: () => store.get(KEY.events, []),
+    upsert(ev) { store.set(KEY.events, [...this.all().filter((e) => e.id !== ev.id), ev]); },
+    remove(id) { store.set(KEY.events, this.all().filter((e) => e.id !== id)); },
+  };
+
+  // ---------- Google 캘린더 ----------
+  const gcal = { client: null, token: null, expiresAt: 0, expired: false, loadFailed: false, events: new Map(), loading: 0, seq: 0, pending: null };
+  const isConnected = () => !!gcal.token && Date.now() < gcal.expiresAt;
+  const eventsPath = () => `/calendars/${encodeURIComponent(CFG.CALENDAR_ID || 'primary')}/events`;
+
+  function initGoogle() {
+    if (!CFG.GOOGLE_CLIENT_ID) return;
+
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(KEY.token));
+      if (saved && saved.expiresAt > Date.now()) {
+        gcal.token = saved.token;
+        gcal.expiresAt = saved.expiresAt;
+        syncGoogle();
+      }
+    } catch { /* 저장된 토큰 없음 */ }
+
+    let tries = 0;
+    const wait = setInterval(() => {
+      if (window.google && google.accounts && google.accounts.oauth2) {
+        clearInterval(wait);
+        gcal.client = google.accounts.oauth2.initTokenClient({
+          client_id: CFG.GOOGLE_CLIENT_ID,
+          scope: SCOPE,
+          callback: onToken,
+          error_callback: (err) => {
+            const p = gcal.pending; gcal.pending = null;
+            if (p) p.reject(new Error(err && err.type === 'popup_closed' ? '로그인 창이 닫혔습니다.' : 'Google 로그인에 실패했습니다.'));
+          },
+        });
+        renderGoogleStatus();
+      } else if (++tries > 50) {
+        clearInterval(wait);
+        gcal.loadFailed = true;
+        renderGoogleStatus();
+      }
+    }, 200);
+  }
+
+  function onToken(resp) {
+    const p = gcal.pending; gcal.pending = null;
+    if (resp.error) { if (p) p.reject(new Error(resp.error_description || resp.error)); return; }
+    if (!google.accounts.oauth2.hasGrantedAllScopes(resp, SCOPE)) {
+      if (p) p.reject(new Error('캘린더 접근 권한을 허용해야 연동할 수 있어요.'));
+      return;
+    }
+    gcal.token = resp.access_token;
+    gcal.expiresAt = Date.now() + (Number(resp.expires_in) - 60) * 1000;
+    gcal.expired = false;
+    try { sessionStorage.setItem(KEY.token, JSON.stringify({ token: gcal.token, expiresAt: gcal.expiresAt })); } catch { /* 무시 */ }
+    if (p) p.resolve();
+  }
+
+  async function connectGoogle() {
+    if (!CFG.GOOGLE_CLIENT_ID) { toast('config.js에 Google 클라이언트 ID를 먼저 입력해 주세요. (README 참고)', true); return; }
+    if (location.protocol === 'file:') { toast('Google 연동은 http://localhost 같은 웹 서버에서 열었을 때만 동작해요.', true); return; }
+    if (!gcal.client) { toast('Google 로그인 모듈을 불러오는 중이에요. 잠시 후 다시 시도해 주세요.', true); return; }
+    try {
+      await new Promise((resolve, reject) => {
+        gcal.pending = { resolve, reject };
+        gcal.client.requestAccessToken();
+      });
+      toast('Google 캘린더가 연결되었어요.');
+      await syncGoogle();
+    } catch (err) {
+      toast(err.message, true);
+    }
+  }
+
+  function clearGoogle() {
+    gcal.token = null;
+    gcal.expiresAt = 0;
+    gcal.events = new Map();
+    gcal.seq++;
+    try { sessionStorage.removeItem(KEY.token); } catch { /* 무시 */ }
+  }
+
+  function disconnectGoogle() {
+    if (gcal.token && window.google && google.accounts && google.accounts.oauth2) google.accounts.oauth2.revoke(gcal.token, () => {});
+    clearGoogle();
+    gcal.expired = false;
+    renderAll();
+    toast('Google 캘린더 연결을 해제했어요.');
+  }
+
+  function expireGoogle() {
+    clearGoogle();
+    gcal.expired = true;
+    renderAll();
+  }
+
+  async function api(path, { method = 'GET', body } = {}) {
+    const expiredMsg = 'Google 로그인이 만료되었어요. 다시 연결해 주세요.';
+    if (!isConnected()) { expireGoogle(); throw new Error(expiredMsg); }
+    const res = await fetch(API + path, {
+      method,
+      headers: { Authorization: `Bearer ${gcal.token}`, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    if (res.status === 401) { expireGoogle(); throw new Error(expiredMsg); }
+    if (method === 'DELETE' && res.status === 410) return null; // 이미 삭제됨
+    if (!res.ok) {
+      let msg = `${res.status} ${res.statusText}`;
+      try { msg = (await res.json()).error.message || msg; } catch { /* 본문 없음 */ }
+      throw new Error(msg);
+    }
+    return res.status === 204 ? null : res.json();
+  }
+
+  function fromGoogle(item) {
+    const allDay = !!item.start.date;
+    let date, endDate, start = '', end = '';
+    if (allDay) {
+      date = item.start.date;
+      endDate = ymd(addDays(parseYmd(item.end.date), -1)); // Google 종일 일정의 종료일은 다음날(미포함)
+    } else {
+      const s = new Date(item.start.dateTime);
+      const e = new Date(item.end.dateTime);
+      date = ymd(s);
+      endDate = ymd(e);
+      start = hm(s);
+      end = hm(e);
+      if (endDate > date && start !== '00:00' && end === '00:00') endDate = ymd(addDays(e, -1));
+    }
+    return {
+      id: item.id,
+      source: 'google',
+      title: item.summary || '(제목 없음)',
+      date, endDate, allDay, start, end,
+      memo: item.description || '',
+      link: item.htmlLink || '',
+    };
+  }
+
+  function toGoogle(ev) {
+    const body = { summary: ev.title, description: ev.memo };
+    if (ev.allDay) {
+      // PATCH 시 기존 dateTime 값이 남지 않도록 null 로 명시
+      body.start = { date: ev.date, dateTime: null, timeZone: null };
+      body.end = { date: ymd(addDays(parseYmd(ev.endDate), 1)), dateTime: null, timeZone: null };
+    } else {
+      const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      body.start = { dateTime: `${ev.date}T${ev.start}:00`, timeZone, date: null };
+      body.end = { dateTime: `${ev.endDate}T${ev.end}:00`, timeZone, date: null };
+    }
+    return body;
+  }
+
+  async function fetchGoogleInto(map, start, end) {
+    const params = new URLSearchParams({
+      timeMin: start.toISOString(),
+      timeMax: end.toISOString(),
+      singleEvents: 'true',
+      orderBy: 'startTime',
+      maxResults: '250',
+    });
+    let pageToken = '';
+    do {
+      if (pageToken) params.set('pageToken', pageToken);
+      const data = await api(`${eventsPath()}?${params}`);
+      for (const item of data.items || []) {
+        if (item.status !== 'cancelled' && item.start) map.set(item.id, fromGoogle(item));
+      }
+      pageToken = data.nextPageToken || '';
+    } while (pageToken);
+  }
+
+  // 현재 보이는 달 + 다가오는 7일 범위를 불러와 교체
+  async function syncGoogle() {
+    if (!isConnected()) return;
+    const seq = ++gcal.seq;
+    gcal.loading++;
+    renderGoogleStatus();
+    try {
+      const fresh = new Map();
+      const { start, end } = gridRange();
+      const today = parseYmd(ymd(new Date()));
+      await Promise.all([
+        fetchGoogleInto(fresh, start, end),
+        fetchGoogleInto(fresh, today, addDays(today, UPCOMING_DAYS)),
+      ]);
+      if (seq === gcal.seq) gcal.events = fresh;
+    } catch (err) {
+      if (seq === gcal.seq) toast(`Google 캘린더를 불러오지 못했어요: ${err.message}`, true);
+    } finally {
+      gcal.loading--;
+      renderAll();
+    }
+  }
+
+  // ---------- 달력 / 목록 렌더링 ----------
+  const now0 = new Date();
+  let view = new Date(now0.getFullYear(), now0.getMonth(), 1);
+  let selected = ymd(now0);
+
+  function gridRange() {
+    const start = addDays(view, -view.getDay());
+    return { start, end: addDays(start, 42) };
+  }
+
+  const allEvents = () => [...localEvents.all(), ...gcal.events.values()];
+  const byTime = (a, b) => (b.allDay - a.allDay) || (a.start || '').localeCompare(b.start || '') || a.title.localeCompare(b.title);
+  const eventsOn = (list, ds) => list.filter((e) => e.date <= ds && ds <= (e.endDate || e.date)).sort(byTime);
+
+  function timeLabel(e, ds) {
+    if (e.allDay) return '하루 종일';
+    const endDate = e.endDate || e.date;
+    if (endDate === e.date) return `${e.start} – ${e.end}`;
+    if (ds === e.date) return `${e.start} ~`;
+    if (ds === endDate) return `~ ${e.end}`;
+    return '종일';
+  }
+
+  function eventItem(e, ds, showDate = false) {
+    const d = parseYmd(ds);
+    const when = showDate ? `<span class="ev-date">${d.getMonth() + 1}/${d.getDate()} (${WEEK[d.getDay()]})</span>` : '';
+    return `<li><button type="button" class="event ${e.source}" data-id="${esc(e.id)}" data-source="${e.source}">
+      <span class="ev-bar"></span>
+      <span class="ev-body">
+        <span class="ev-meta">${when}<span>${esc(timeLabel(e, ds))}</span><span class="ev-tag">${e.source === 'google' ? 'Google' : '로컬'}</span></span>
+        <span class="ev-title">${esc(e.title)}</span>
+        ${e.memo ? `<span class="ev-memo">${esc(e.memo)}</span>` : ''}
+      </span>
+    </button></li>`;
+  }
+
+  function renderCalendar(list) {
+    $('#monthLabel').textContent = `${view.getFullYear()}년 ${view.getMonth() + 1}월`;
+    const { start } = gridRange();
+    const today = ymd(new Date());
+    const html = [];
+    for (let i = 0; i < 42; i++) {
+      const d = addDays(start, i);
+      const ds = ymd(d);
+      const evs = eventsOn(list, ds);
+      const cls = ['day',
+        d.getMonth() !== view.getMonth() && 'out',
+        ds === today && 'today',
+        ds === selected && 'selected',
+        d.getDay() === 0 && 'sun',
+        d.getDay() === 6 && 'sat'].filter(Boolean).join(' ');
+      const chips = evs.slice(0, 2).map((e) => `<span class="chip ${e.source}">${esc(e.title)}</span>`).join('');
+      const more = evs.length > 2 ? `<span class="more">+${evs.length - 2}</span>` : '';
+      html.push(`<button type="button" class="${cls}" data-date="${ds}" aria-pressed="${ds === selected}"
+        aria-label="${d.getMonth() + 1}월 ${d.getDate()}일, 일정 ${evs.length}개"><span class="num">${d.getDate()}</span><span class="chips">${chips}${more}</span></button>`);
+    }
+    $('#days').innerHTML = html.join('');
+  }
+
+  function renderSelected(list) {
+    const d = parseYmd(selected);
+    $('#selLabel').textContent = `${d.getMonth() + 1}월 ${d.getDate()}일 ${WEEK[d.getDay()]}요일`;
+    const diff = dayDiff(ymd(new Date()), selected);
+    $('#selSub').textContent = diff === 0 ? '오늘' : diff === 1 ? '내일' : diff === -1 ? '어제' : diff > 0 ? `${diff}일 후` : `${-diff}일 전`;
+    const evs = eventsOn(list, selected);
+    $('#eventList').innerHTML = evs.length
+      ? evs.map((e) => eventItem(e, selected)).join('')
+      : '<li class="empty">등록된 일정이 없어요.<br>날짜를 더블클릭하거나 “+ 일정 추가”를 눌러 보세요.</li>';
+  }
+
+  function renderUpcoming(list) {
+    const today = new Date();
+    const seen = new Set();
+    const items = [];
+    for (let i = 0; i < UPCOMING_DAYS; i++) {
+      const ds = ymd(addDays(today, i));
+      for (const e of eventsOn(list, ds)) {
+        const k = `${e.source}:${e.id}`;
+        if (seen.has(k)) continue;
+        seen.add(k);
+        items.push(eventItem(e, ds, true));
+      }
+    }
+    $('#upcomingList').innerHTML = items.length
+      ? items.slice(0, 8).join('')
+      : '<li class="empty">앞으로 7일간 일정이 없어요.</li>';
+  }
+
+  function renderGoogleStatus() {
+    let state = 'off', msg = '연결되지 않음', hint = '';
+    if (!CFG.GOOGLE_CLIENT_ID) {
+      msg = 'Google 캘린더 연동 설정 필요';
+      hint = 'Google Cloud에서 OAuth 클라이언트 ID를 발급받아 <code>config.js</code>에 입력하면 연동돼요. 방법은 README.md를 참고하세요. 그 전까지 일정은 이 브라우저에 저장됩니다.';
+    } else if (gcal.loading) {
+      state = 'busy'; msg = '동기화 중…';
+    } else if (isConnected()) {
+      state = 'on'; msg = 'Google 캘린더 연결됨';
+      hint = '여기서 추가·수정·삭제한 Google 일정은 Google 캘린더에 바로 반영돼요.';
+    } else if (gcal.expired) {
+      state = 'warn'; msg = '로그인 만료 · 다시 연결해 주세요';
+    } else if (gcal.loadFailed) {
+      state = 'warn'; msg = 'Google 로그인 모듈을 불러오지 못했어요';
+      hint = '네트워크 또는 광고 차단 확장 프로그램을 확인해 주세요.';
+    }
+    $('#gDot').dataset.state = state;
+    $('#gText').textContent = msg;
+    $('#gHint').innerHTML = hint;
+    $('#gConnect').textContent = isConnected() ? '연결 해제' : gcal.expired ? '다시 연결' : 'Google 계정 연결';
+    $('#gSync').hidden = !isConnected();
+  }
+
+  function renderAll() {
+    const list = allEvents();
+    renderCalendar(list);
+    renderSelected(list);
+    renderUpcoming(list);
+    renderGoogleStatus();
+  }
+
+  function goToMonth(date) {
+    const next = new Date(date.getFullYear(), date.getMonth(), 1);
+    const changed = next.getTime() !== view.getTime();
+    view = next;
+    renderAll();
+    if (changed) syncGoogle();
+  }
+
+  // ---------- 일정 편집 창 ----------
+  const dlg = $('#eventDialog');
+  const form = $('#eventForm');
+  const f = form.elements;
+  let editing = null;
+
+  function defaultTimes(dateStr) {
+    const now = new Date();
+    let h = dateStr === ymd(now) ? Math.min(now.getHours() + 1, 23) : 9;
+    return { start: `${pad(h)}:00`, end: h >= 23 ? '23:59' : `${pad(h + 1)}:00` };
+  }
+
+  function syncTimeInputs() {
+    const off = f.allDay.checked;
+    f.start.disabled = off;
+    f.end.disabled = off;
+    $('#timeRow').classList.toggle('disabled', off);
+  }
+
+  function openDialog(ev = null, date = selected) {
+    editing = ev;
+    form.reset();
+    $('#formError').textContent = '';
+    $('#dlgTitle').textContent = ev ? '일정 수정' : '새 일정';
+    $('#sourceNote').textContent = ev ? (ev.source === 'google' ? 'Google 캘린더' : '이 브라우저에 저장됨') : '';
+    const times = defaultTimes(ev ? ev.date : date);
+    f.title.value = ev ? ev.title : '';
+    f.date.value = ev ? ev.date : date;
+    f.allDay.checked = ev ? ev.allDay : false;
+    f.start.value = (ev && ev.start) || times.start;
+    f.end.value = (ev && ev.end) || times.end;
+    f.memo.value = ev ? ev.memo : '';
+    f.target.value = isConnected() ? 'google' : 'local';
+    $('#targetWrap').hidden = !!ev || !isConnected();
+    $('#deleteBtn').hidden = !ev;
+    const link = $('#openInGoogle');
+    link.hidden = !(ev && ev.link);
+    if (ev && ev.link) link.href = ev.link;
+    syncTimeInputs();
+    dlg.showModal();
+    f.title.focus();
+  }
+
+  function setBusy(busy) {
+    $('#saveBtn').disabled = busy;
+    $('#deleteBtn').disabled = busy;
+    $('#saveBtn').textContent = busy ? '저장 중…' : '저장';
+  }
+
+  f.allDay.addEventListener('change', syncTimeInputs);
+  $('#cancelBtn').addEventListener('click', () => dlg.close());
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const wasEditing = editing;
+    const data = {
+      title: f.title.value.trim(),
+      date: f.date.value,
+      allDay: f.allDay.checked,
+      start: f.allDay.checked ? '' : f.start.value,
+      end: f.allDay.checked ? '' : f.end.value,
+      memo: f.memo.value.trim(),
+    };
+    // 여러 날에 걸친 일정은 날짜를 옮겨도 기간을 유지
+    const span = wasEditing ? Math.max(0, dayDiff(wasEditing.date, wasEditing.endDate || wasEditing.date)) : 0;
+
+    let error = '';
+    if (!data.title) error = '제목을 입력해 주세요.';
+    else if (!data.date) error = '날짜를 선택해 주세요.';
+    else if (!data.allDay && (!data.start || !data.end)) error = '시작/종료 시간을 입력해 주세요.';
+    else if (!data.allDay && span === 0 && data.end <= data.start) error = '종료 시간은 시작 시간보다 늦어야 해요.';
+    if (error) { $('#formError').textContent = error; return; }
+
+    data.endDate = ymd(addDays(parseYmd(data.date), span));
+    const source = wasEditing ? wasEditing.source : f.target.value;
+
+    setBusy(true);
+    try {
+      if (source === 'google') {
+        const body = toGoogle(data);
+        const item = wasEditing
+          ? await api(`${eventsPath()}/${encodeURIComponent(wasEditing.id)}`, { method: 'PATCH', body })
+          : await api(eventsPath(), { method: 'POST', body });
+        gcal.events.set(item.id, fromGoogle(item));
+      } else {
+        localEvents.upsert({ ...data, id: wasEditing ? wasEditing.id : uid(), source: 'local' });
+      }
+      dlg.close();
+      selected = data.date;
+      goToMonth(parseYmd(data.date));
+      toast(wasEditing ? '일정을 수정했어요.' : '일정을 추가했어요.');
+    } catch (err) {
+      $('#formError').textContent = err.message;
+    } finally {
+      setBusy(false);
+    }
+  });
+
+  $('#deleteBtn').addEventListener('click', async () => {
+    if (!editing || !confirm(`“${editing.title}” 일정을 삭제할까요?`)) return;
+    setBusy(true);
+    try {
+      if (editing.source === 'google') {
+        await api(`${eventsPath()}/${encodeURIComponent(editing.id)}`, { method: 'DELETE' });
+        gcal.events.delete(editing.id);
+      } else {
+        localEvents.remove(editing.id);
+      }
+      dlg.close();
+      renderAll();
+      toast('일정을 삭제했어요.');
+    } catch (err) {
+      $('#formError').textContent = err.message;
+    } finally {
+      setBusy(false);
+    }
+  });
+
+  // ---------- 이벤트 연결 ----------
+  $('#days').addEventListener('click', (e) => {
+    const btn = e.target.closest('.day');
+    if (!btn) return;
+    selected = btn.dataset.date;
+    goToMonth(parseYmd(selected));
+  });
+  $('#days').addEventListener('dblclick', (e) => {
+    const btn = e.target.closest('.day');
+    if (btn) openDialog(null, btn.dataset.date);
+  });
+
+  function onListClick(e) {
+    const btn = e.target.closest('.event');
+    if (!btn) return;
+    const { id, source } = btn.dataset;
+    const ev = source === 'google' ? gcal.events.get(id) : localEvents.all().find((x) => x.id === id);
+    if (ev) openDialog(ev);
+  }
+  $('#eventList').addEventListener('click', onListClick);
+  $('#upcomingList').addEventListener('click', onListClick);
+
+  $('#prevMonth').addEventListener('click', () => goToMonth(new Date(view.getFullYear(), view.getMonth() - 1, 1)));
+  $('#nextMonth').addEventListener('click', () => goToMonth(new Date(view.getFullYear(), view.getMonth() + 1, 1)));
+  $('#todayBtn').addEventListener('click', () => { selected = ymd(new Date()); goToMonth(new Date()); });
+  $('#addBtn').addEventListener('click', () => openDialog(null, selected));
+  $('#gConnect').addEventListener('click', () => (isConnected() ? disconnectGoogle() : connectGoogle()));
+  $('#gSync').addEventListener('click', () => syncGoogle());
+
+  // ---------- 시작 ----------
+  tick();
+  setInterval(tick, 1000);
+  renderAll();
+  initGoogle();
+  loadWeather();
+  setInterval(loadWeather, 5 * 60 * 1000); // 15분 지나면 새로 불러옴
+})();
+  </script>
+</body>
+</html>
