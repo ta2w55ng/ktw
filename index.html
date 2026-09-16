@@ -443,6 +443,18 @@ h2 { margin: 0; font-size: 18px; font-weight: 700; }
 .mail-naver .btn { display: inline-block; color: var(--text); }
 .mail-naver p { margin: 0 0 10px; font-size: 12px; line-height: 1.6; color: var(--muted); }
 
+
+/* ---------- 업무 대시보드 (외부 시스템 창) ---------- */
+.main-col { display: grid; gap: 20px; min-width: 0; }
+.work-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.work-head p { margin: 4px 0 0; }
+.work-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.work-open { font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; white-space: nowrap; }
+.work-open:hover { text-decoration: underline; }
+.work-frame { position: relative; height: 680px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.work-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+.work-hint { margin: 10px 0 0; font-size: 12px; line-height: 1.6; color: var(--muted); }
+
 /* ---------- 일정 편집 창 ---------- */
 dialog { width: min(440px, calc(100vw - 32px)); padding: 0; border: 0; border-radius: 20px; background: var(--card); color: var(--text); box-shadow: 0 24px 60px rgba(0, 0, 0, .25); }
 dialog::backdrop { background: rgba(15, 18, 30, .45); backdrop-filter: blur(2px); }
@@ -485,6 +497,7 @@ dialog label.check input { width: 16px; height: 16px; margin: 0; accent-color: v
 @media (max-width: 600px) {
   .app { padding: 16px 16px 36px; }
   .gov-item { flex-direction: column; gap: 8px; }
+  .work-frame { height: 540px; }
   .gov-dday { width: auto; padding: 3px 10px; }
   .gov-links { margin-left: 0; }
   .card { padding: 16px; }
@@ -554,6 +567,7 @@ window.APP_CONFIG = {
     </header>
 
     <main class="grid">
+      <div class="main-col">
       <section class="card calendar-card" aria-label="달력">
         <div class="cal-head">
           <button type="button" class="icon-btn" id="prevMonth" aria-label="이전 달">‹</button>
@@ -566,6 +580,28 @@ window.APP_CONFIG = {
         </div>
         <div class="days" id="days"></div>
       </section>
+
+      <section class="card work-card" aria-labelledby="workTitle">
+        <div class="work-head">
+          <div>
+            <h2 id="workTitle">업무 대시보드</h2>
+            <p class="muted small">사내 시스템 화면을 그대로 보여줘요</p>
+          </div>
+          <div class="work-tools">
+            <div class="seg" role="tablist" aria-label="대시보드 선택">
+              <button type="button" role="tab" id="workTabBid" aria-pressed="true" aria-selected="true" data-work="bid">입찰 관리</button>
+              <button type="button" role="tab" id="workTabNipa" aria-pressed="false" aria-selected="false" data-work="nipa">NIPA 접수현황</button>
+            </div>
+            <a class="work-open" id="workOpen" href="https://bid.modugroup.kr/#dashboard" target="_blank" rel="noopener">새 창으로 열기 ↗</a>
+          </div>
+        </div>
+        <div class="work-frame">
+          <iframe id="workFrameBid" title="입찰 관리 대시보드" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" data-src="https://bid.modugroup.kr/#dashboard"></iframe>
+          <iframe id="workFrameNipa" title="NIPA 접수현황 대시보드" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.smartkosta-eduplus.com/admin" hidden></iframe>
+        </div>
+        <p class="work-hint">처음 한 번은 칸 안에서 로그인해 주세요. 로그인 정보는 이 브라우저에만 남고, 다른 사람에게는 로그인 화면만 보여요. 칸 안에서 로그인이 안 되면 ‘새 창으로 열기’를 이용하세요.</p>
+      </section>
+      </div>
 
       <div class="side">
         <section class="card" aria-labelledby="selLabel">
@@ -1756,6 +1792,27 @@ window.APP_CONFIG = {
   $('#govDue').addEventListener('click', () => { gov.order = 'due'; gov.shown = GOV_PAGE; govPress('#govDue', '#govNew'); renderGov(); });
   $('#govMore').addEventListener('click', () => { gov.shown += GOV_PAGE; renderGov(); });
   $('#mailRefresh').addEventListener('click', () => loadGmail());
+
+  // ---------- 업무 대시보드 (사내 시스템 iframe) ----------
+  const WORK = {
+    bid: { frame: '#workFrameBid', tab: '#workTabBid', url: 'https://bid.modugroup.kr/#dashboard' },
+    nipa: { frame: '#workFrameNipa', tab: '#workTabNipa', url: 'https://www.smartkosta-eduplus.com/admin' },
+  };
+  function showWork(key) {
+    if (!WORK[key]) key = 'bid';
+    for (const [k, w] of Object.entries(WORK)) {
+      const on = k === key;
+      const fr = $(w.frame);
+      if (on && !fr.getAttribute('src')) fr.setAttribute('src', fr.dataset.src);
+      fr.hidden = !on;
+      $(w.tab).setAttribute('aria-pressed', String(on));
+      $(w.tab).setAttribute('aria-selected', String(on));
+    }
+    $('#workOpen').href = WORK[key].url;
+    store.set('home.work.tab', key);
+  }
+  for (const [k, w] of Object.entries(WORK)) $(w.tab).addEventListener('click', () => showWork(k));
+  showWork(store.get('home.work.tab', 'bid'));
 
   // ---------- 시작 ----------
   tick();
