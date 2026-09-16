@@ -394,6 +394,55 @@ h2 { margin: 0; font-size: 18px; font-weight: 700; }
 .g-hint:empty { display: none; }
 .g-hint code { padding: 1px 5px; border-radius: 4px; background: var(--hover); }
 
+
+/* ---------- 정부지원사업 공고 ---------- */
+.gov-card { margin-top: 20px; }
+.gov-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.gov-head p { margin: 4px 0 0; }
+.gov-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg { display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+.seg button { border: 0; background: transparent; padding: 5px 12px; border-radius: 7px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--card); color: var(--text); box-shadow: 0 1px 3px rgba(20, 30, 60, .12); }
+.gov-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.gov-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; }
+.gov-item:hover { background: var(--hover); }
+.gov-item.closed { opacity: .55; }
+.gov-dday { flex-shrink: 0; width: 64px; padding: 5px 0; border-radius: 9px; text-align: center; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; background: var(--hover); color: var(--muted); }
+.gov-dday.lv3 { background: color-mix(in srgb, var(--danger) 14%, transparent); color: var(--danger); }
+.gov-dday.lv2 { background: color-mix(in srgb, var(--warn) 18%, transparent); color: color-mix(in srgb, var(--warn) 70%, var(--text)); }
+.gov-dday.lv1 { background: var(--google-soft); color: var(--google); }
+.gov-dday.note { font-size: 11px; line-height: 1.35; padding: 4px 4px; }
+.gov-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.gov-title { font-size: 15px; font-weight: 600; color: var(--text); text-decoration: none; overflow-wrap: anywhere; }
+.gov-title:hover { color: var(--accent); text-decoration: underline; }
+.gov-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 12px; color: var(--muted); }
+.gov-meta .num { font-variant-numeric: tabular-nums; }
+.gtag { padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 10px; font-weight: 700; }
+.gtag.src { background: var(--hover); color: var(--muted); }
+.gov-note { font-size: 13px; color: var(--muted); }
+.gov-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 12px; }
+.gov-links { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-left: auto; font-size: 13px; }
+.gov-links a, .mail-open { color: var(--accent); text-decoration: none; }
+.gov-links a:hover, .mail-open:hover { text-decoration: underline; }
+
+/* ---------- 받은 메일 ---------- */
+.mail-src { display: flex; align-items: center; gap: 8px; margin: 2px 0 8px; font-size: 13px; font-weight: 700; }
+.mail-src .mail-open { margin-left: auto; font-size: 12px; font-weight: 600; }
+.mdot { width: 8px; height: 8px; border-radius: 50%; background: #ea4335; }
+.mdot.naver { background: #03c75a; }
+.mails { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.mail { display: block; padding: 9px 12px; border: 1px solid var(--line); border-radius: 12px; color: var(--text); text-decoration: none; }
+.mail:hover { background: var(--hover); }
+.mail-top { display: flex; gap: 8px; font-size: 12px; color: var(--muted); }
+.mail-from { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.mail-time { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.mail-subj { margin-top: 1px; font-size: 14px; font-weight: 500; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.mail.unread .mail-subj { font-weight: 700; }
+.mail.unread .mail-from { color: var(--text); font-weight: 600; }
+.mail-naver { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.mail-naver .btn { display: inline-block; color: var(--text); }
+.mail-naver p { margin: 0 0 10px; font-size: 12px; line-height: 1.6; color: var(--muted); }
+
 /* ---------- 일정 편집 창 ---------- */
 dialog { width: min(440px, calc(100vw - 32px)); padding: 0; border: 0; border-radius: 20px; background: var(--card); color: var(--text); box-shadow: 0 24px 60px rgba(0, 0, 0, .25); }
 dialog::backdrop { background: rgba(15, 18, 30, .45); backdrop-filter: blur(2px); }
@@ -435,6 +484,9 @@ dialog label.check input { width: 16px; height: 16px; margin: 0; accent-color: v
 }
 @media (max-width: 600px) {
   .app { padding: 16px 16px 36px; }
+  .gov-item { flex-direction: column; gap: 8px; }
+  .gov-dday { width: auto; padding: 3px 10px; }
+  .gov-links { margin-left: 0; }
   .card { padding: 16px; }
   .scene { min-height: 290px; border-radius: 22px; padding-inline: 16px; }
   .sun-orb { top: 21%; right: 5%; width: 58px; height: 58px; }
@@ -542,8 +594,55 @@ window.APP_CONFIG = {
           </div>
           <p class="g-hint" id="gHint"></p>
         </section>
+
+        <section class="card mail-card" aria-labelledby="mailTitle">
+          <div class="sched-head">
+            <div>
+              <h2 id="mailTitle">받은 메일</h2>
+              <p class="muted" id="mailSub">최근 5건</p>
+            </div>
+            <button type="button" class="btn ghost" id="mailRefresh" hidden>새로고침</button>
+          </div>
+          <div class="mail-src"><span class="mdot" aria-hidden="true"></span>Gmail
+            <a class="mail-open" href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener">받은편지함 ↗</a></div>
+          <ul class="mails" id="gmailList"></ul>
+          <div class="mail-naver">
+            <div class="mail-src"><span class="mdot naver" aria-hidden="true"></span>네이버 메일</div>
+            <p>네이버 메일은 외부 페이지에서 목록을 읽어올 수 있는 공개 API가 없어 바로가기로 연결합니다.</p>
+            <a class="btn" href="https://mail.naver.com/" target="_blank" rel="noopener">네이버 메일 열기 ↗</a>
+          </div>
+        </section>
       </div>
     </main>
+
+    <section class="card gov-card" aria-labelledby="govTitle">
+      <div class="gov-head">
+        <div>
+          <h2 id="govTitle">정부지원사업 공고</h2>
+          <p class="muted small" id="govSub">기업마당 · NIPA · K-Startup</p>
+        </div>
+        <div class="gov-controls">
+          <div class="seg" role="group" aria-label="보기 범위">
+            <button type="button" id="govAll" aria-pressed="true">전체</button>
+            <button type="button" id="govRel" aria-pressed="false">당사 관련</button>
+          </div>
+          <div class="seg" role="group" aria-label="정렬">
+            <button type="button" id="govNew" aria-pressed="true">최신순</button>
+            <button type="button" id="govDue" aria-pressed="false">마감 임박순</button>
+          </div>
+        </div>
+      </div>
+      <ul class="gov-list" id="govList"><li class="empty">공고 목록을 불러오는 중…</li></ul>
+      <div class="gov-foot">
+        <button type="button" class="btn" id="govMore" hidden>더보기</button>
+        <span class="muted small" id="govCount"></span>
+        <div class="gov-links">
+          <a href="https://www.bizinfo.go.kr/web/lay1/bbs/S1T122C128/AS/74/list.do" target="_blank" rel="noopener">기업마당 ↗</a>
+          <a href="https://www.nipa.kr/home/2-2" target="_blank" rel="noopener">NIPA 사업공고 ↗</a>
+          <a href="https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do" target="_blank" rel="noopener">K-Startup ↗</a>
+        </div>
+      </div>
+    </section>
   </div>
 
   <dialog id="eventDialog">
@@ -598,7 +697,10 @@ window.APP_CONFIG = {
   'use strict';
 
   const CFG = Object.assign({ GOOGLE_CLIENT_ID: '', CALENDAR_ID: 'primary' }, window.APP_CONFIG);
-  const SCOPE = 'https://www.googleapis.com/auth/calendar.events';
+  const CAL_SCOPE = 'https://www.googleapis.com/auth/calendar.events';
+  const GMAIL_SCOPE = 'https://www.googleapis.com/auth/gmail.readonly';
+  const SCOPE = `${CAL_SCOPE} ${GMAIL_SCOPE}`;
+  const GMAIL_API = 'https://gmail.googleapis.com/gmail/v1/users/me';
   const API = 'https://www.googleapis.com/calendar/v3';
   const UPCOMING_DAYS = 7;
   const WEEK = ['일', '월', '화', '수', '목', '금', '토'];
@@ -1003,7 +1105,7 @@ window.APP_CONFIG = {
   };
 
   // ---------- Google 캘린더 ----------
-  const gcal = { client: null, token: null, expiresAt: 0, expired: false, loadFailed: false, events: new Map(), loading: 0, seq: 0, pending: null };
+  const gcal = { client: null, token: null, gmail: false, expiresAt: 0, expired: false, loadFailed: false, events: new Map(), loading: 0, seq: 0, pending: null };
   const isConnected = () => !!gcal.token && Date.now() < gcal.expiresAt;
   const eventsPath = () => `/calendars/${encodeURIComponent(CFG.CALENDAR_ID || 'primary')}/events`;
 
@@ -1015,6 +1117,7 @@ window.APP_CONFIG = {
       if (saved && saved.expiresAt > Date.now()) {
         gcal.token = saved.token;
         gcal.expiresAt = saved.expiresAt;
+        gcal.gmail = !!saved.gmail;
         syncGoogle();
       }
     } catch { /* 저장된 토큰 없음 */ }
@@ -1044,14 +1147,15 @@ window.APP_CONFIG = {
   function onToken(resp) {
     const p = gcal.pending; gcal.pending = null;
     if (resp.error) { if (p) p.reject(new Error(resp.error_description || resp.error)); return; }
-    if (!google.accounts.oauth2.hasGrantedAllScopes(resp, SCOPE)) {
+    if (!google.accounts.oauth2.hasGrantedAllScopes(resp, CAL_SCOPE)) {
       if (p) p.reject(new Error('캘린더 접근 권한을 허용해야 연동할 수 있어요.'));
       return;
     }
     gcal.token = resp.access_token;
+    gcal.gmail = google.accounts.oauth2.hasGrantedAllScopes(resp, GMAIL_SCOPE);
     gcal.expiresAt = Date.now() + (Number(resp.expires_in) - 60) * 1000;
     gcal.expired = false;
-    try { sessionStorage.setItem(KEY.token, JSON.stringify({ token: gcal.token, expiresAt: gcal.expiresAt })); } catch { /* 무시 */ }
+    try { sessionStorage.setItem(KEY.token, JSON.stringify({ token: gcal.token, expiresAt: gcal.expiresAt, gmail: gcal.gmail })); } catch { /* 무시 */ }
     if (p) p.resolve();
   }
 
@@ -1073,6 +1177,9 @@ window.APP_CONFIG = {
 
   function clearGoogle() {
     gcal.token = null;
+    gcal.gmail = false;
+    mail.items = [];
+    mail.state = 'idle';
     gcal.expiresAt = 0;
     gcal.events = new Map();
     gcal.seq++;
@@ -1172,6 +1279,7 @@ window.APP_CONFIG = {
   // 현재 보이는 달 + 다가오는 7일 범위를 불러와 교체
   async function syncGoogle() {
     if (!isConnected()) return;
+    loadGmail();
     const seq = ++gcal.seq;
     gcal.loading++;
     renderGoogleStatus();
@@ -1289,7 +1397,7 @@ window.APP_CONFIG = {
       state = 'busy'; msg = '동기화 중…';
     } else if (isConnected()) {
       state = 'on'; msg = 'Google 캘린더 연결됨';
-      hint = '여기서 추가·수정·삭제한 Google 일정은 Google 캘린더에 바로 반영돼요.';
+      hint = '여기서 추가·수정·삭제한 Google 일정은 Google 캘린더에 바로 반영돼요.' + (gcal.gmail ? ' Gmail 받은편지함도 함께 불러와요.' : '');
     } else if (gcal.expired) {
       state = 'warn'; msg = '로그인 만료 · 다시 연결해 주세요';
     } else if (gcal.loadFailed) {
@@ -1301,6 +1409,7 @@ window.APP_CONFIG = {
     $('#gHint').innerHTML = hint;
     $('#gConnect').textContent = isConnected() ? '연결 해제' : gcal.expired ? '다시 연결' : 'Google 계정 연결';
     $('#gSync').hidden = !isConnected();
+    renderMail();
   }
 
   function renderAll() {
@@ -1466,12 +1575,196 @@ window.APP_CONFIG = {
   $('#gConnect').addEventListener('click', () => (isConnected() ? disconnectGoogle() : connectGoogle()));
   $('#gSync').addEventListener('click', () => syncGoogle());
 
+  // ---------- Gmail 받은편지함 (최근 5건, 읽기 전용) ----------
+  const mail = { items: [], state: 'idle', error: '', seq: 0 };
+
+  async function gmailGet(path) {
+    if (!isConnected()) { expireGoogle(); throw new Error('Google 로그인이 만료되었어요. 다시 연결해 주세요.'); }
+    const res = await fetch(GMAIL_API + path, { headers: { Authorization: `Bearer ${gcal.token}` } });
+    if (res.status === 401) { expireGoogle(); throw new Error('Google 로그인이 만료되었어요. 다시 연결해 주세요.'); }
+    if (!res.ok) {
+      let msg = `${res.status} ${res.statusText}`;
+      try { msg = (await res.json()).error.message || msg; } catch { /* 본문 없음 */ }
+      const err = new Error(msg);
+      err.status = res.status;
+      throw err;
+    }
+    return res.json();
+  }
+
+  const decodeHtml = (s) => { const t = document.createElement('textarea'); t.innerHTML = s || ''; return t.value; };
+  function senderName(from) {
+    const m = /^\s*"?([^"<]*?)"?\s*<([^>]+)>/.exec(from || '');
+    if (m) return m[1].trim() || m[2];
+    return (from || '').trim() || '(보낸 사람 없음)';
+  }
+  function mailTime(d) {
+    const now = new Date();
+    if (ymd(d) === ymd(now)) return hm(d);
+    if (d.getFullYear() === now.getFullYear()) return `${d.getMonth() + 1}/${d.getDate()}`;
+    return `${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()}`;
+  }
+
+  async function loadGmail() {
+    if (!isConnected()) { mail.state = 'idle'; renderMail(); return; }
+    if (!gcal.gmail) { mail.state = 'noscope'; renderMail(); return; }
+    const seq = ++mail.seq;
+    mail.state = 'loading';
+    renderMail();
+    try {
+      const list = await gmailGet('/messages?labelIds=INBOX&maxResults=5');
+      const ids = (list.messages || []).map((m) => m.id);
+      const msgs = await Promise.all(ids.map((id) =>
+        gmailGet(`/messages/${id}?format=metadata&metadataHeaders=From&metadataHeaders=Subject`)));
+      if (seq !== mail.seq) return;
+      mail.items = msgs.map((m) => {
+        const h = Object.fromEntries((m.payload && m.payload.headers || []).map((x) => [x.name.toLowerCase(), x.value]));
+        return {
+          from: senderName(h.from),
+          subject: h.subject || '(제목 없음)',
+          snippet: decodeHtml(m.snippet),
+          time: new Date(Number(m.internalDate)),
+          unread: (m.labelIds || []).includes('UNREAD'),
+          link: `https://mail.google.com/mail/u/0/#inbox/${m.threadId}`,
+        };
+      });
+      mail.state = 'ok';
+    } catch (err) {
+      if (seq !== mail.seq) return;
+      mail.error = err.message;
+      mail.state = err.status === 403 && /scope|insufficient/i.test(err.message) ? 'noscope' : 'error';
+    }
+    renderMail();
+  }
+
+  function renderMail() {
+    const el = $('#gmailList');
+    if (!el) return;
+    $('#mailRefresh').hidden = !(isConnected() && gcal.gmail);
+    const unread = mail.items.filter((m) => m.unread).length;
+    $('#mailSub').textContent = mail.state === 'ok' ? `최근 ${mail.items.length}건${unread ? ` · 안 읽음 ${unread}` : ''}` : '최근 5건';
+    let html;
+    if (mail.state === 'ok') {
+      html = mail.items.length ? mail.items.map((m) => `
+        <li><a class="mail${m.unread ? ' unread' : ''}" href="${esc(m.link)}" target="_blank" rel="noopener" title="${esc(m.snippet)}">
+          <div class="mail-top"><span class="mail-from">${esc(m.from)}</span><span class="mail-time">${esc(mailTime(m.time))}</span></div>
+          <div class="mail-subj">${esc(m.subject)}</div>
+        </a></li>`).join('') : '<li class="empty">받은편지함이 비어 있어요.</li>';
+    } else if (mail.state === 'loading') {
+      html = '<li class="empty">메일을 불러오는 중…</li>';
+    } else if (mail.state === 'noscope') {
+      html = '<li class="empty">Gmail 읽기 권한이 없어요.<br>위의 <b>연결 해제</b> 후 다시 연결하면서 Gmail 항목에 체크해 주세요.</li>';
+    } else if (mail.state === 'error') {
+      const disabled = /has not been used|is disabled|not enabled/i.test(mail.error);
+      html = `<li class="empty">${disabled
+        ? 'Google Cloud 콘솔에서 이 프로젝트의 <b>Gmail API</b>를 사용 설정해야 해요.'
+        : `메일을 불러오지 못했어요.<br><span class="small">${esc(mail.error)}</span>`}</li>`;
+    } else {
+      html = '<li class="empty">위의 <b>Google 계정 연결</b>을 누르면<br>받은편지함 최근 5건이 여기에 표시돼요.</li>';
+    }
+    el.innerHTML = html;
+  }
+
+  // ---------- 정부지원사업 공고 (programs.json) ----------
+  const GOV_PAGE = 5;
+  const gov = { items: [], updated: '', rel: false, order: 'new', shown: GOV_PAGE, failed: false };
+  const kstToday = () => new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10);
+  const mdLabel = (s) => (s ? `${+s.slice(5, 7)}/${+s.slice(8, 10)}${s.length > 10 ? ' ' + s.slice(11, 16) : ''}` : '');
+
+  function govDday(s) {
+    if (!s) return null;
+    const ms = Date.parse(`${s.length > 10 ? s : s + 'T23:59'}:00+09:00`);
+    if (Number.isNaN(ms)) return null;
+    const diff = ms - Date.now();
+    if (diff < 0) return { label: '마감', lv: 0, closed: true, diff };
+    const days = Math.round((Date.parse(`${s.slice(0, 10)}T00:00:00+09:00`) - Date.parse(`${kstToday()}T00:00:00+09:00`)) / 86400000);
+    return { label: days <= 0 ? 'D-Day' : `D-${days}`, lv: days <= 3 ? 3 : days <= 7 ? 2 : 1, closed: false, diff, days };
+  }
+
+  function govSorted() {
+    const list = gov.items.filter((it) => !gov.rel || it.relevant);
+    list.sort((a, b) => {
+      if (gov.order === 'due') {
+        const da = govDday(a.deadline), db = govDday(b.deadline);
+        const ka = !da ? 2 : da.closed ? 3 : 0, kb = !db ? 2 : db.closed ? 3 : 0;
+        if (ka !== kb) return ka - kb;
+        if (ka === 0) return da.diff - db.diff;
+      }
+      if (a.posted !== b.posted) return a.posted < b.posted ? 1 : -1;
+      return (b.rank || 0) - (a.rank || 0);
+    });
+    return list;
+  }
+
+  function renderGov() {
+    const el = $('#govList');
+    if (gov.failed) {
+      el.innerHTML = '<li class="empty">공고 목록(programs.json)을 불러오지 못했어요.<br>아래 사이트 바로가기에서 확인해 주세요.</li>';
+      $('#govMore').hidden = true;
+      $('#govCount').textContent = '';
+      return;
+    }
+    const list = govSorted();
+    const shown = list.slice(0, gov.shown);
+    el.innerHTML = shown.length ? shown.map((it) => {
+      const d = govDday(it.deadline);
+      const badge = d
+        ? `<span class="gov-dday lv${d.lv}" title="${esc(mdLabel(it.deadline))} 마감">${d.label}</span>`
+        : `<span class="gov-dday note">${esc(it.deadline_note || '상시')}</span>`;
+      const org = [it.ministry, it.agency].filter(Boolean).join(' · ');
+      return `<li class="gov-item${d && d.closed ? ' closed' : ''}">
+        ${badge}
+        <div class="gov-body">
+          <a class="gov-title" href="${esc(it.url || '#')}" target="_blank" rel="noopener">${esc(it.title)}</a>
+          <div class="gov-meta">
+            ${it.relevant ? '<span class="gtag">당사 관련</span>' : ''}
+            ${org ? `<span>${esc(org)}</span>` : ''}
+            <span class="num">신청 ${esc(it.period || '원문 확인')}</span>
+            <span class="num">등록 ${esc(mdLabel(it.posted))}</span>
+            <span class="gtag src">${esc(it.source || '')}</span>
+          </div>
+          ${it.note ? `<div class="gov-note">${esc(it.note)}</div>` : ''}
+        </div>
+      </li>`;
+    }).join('') : `<li class="empty">${gov.items.length ? '당사 관련으로 표시된 공고가 없어요.' : '표시할 공고가 없어요.'}</li>`;
+    const left = list.length - shown.length;
+    $('#govMore').hidden = left <= 0;
+    $('#govMore').textContent = `더보기 (${Math.min(GOV_PAGE, left)}건)`;
+    $('#govCount').textContent = `${shown.length} / ${list.length}건`;
+  }
+
+  async function loadGov() {
+    try {
+      const res = await fetch(`programs.json?t=${Date.now()}`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      gov.items = (Array.isArray(data.items) ? data.items : []).filter((x) => x && typeof x.title === 'string');
+      gov.updated = data.updated || '';
+      gov.failed = false;
+      const open = gov.items.filter((x) => { const d = govDday(x.deadline); return !d || !d.closed; }).length;
+      $('#govSub').textContent = `기업마당 · NIPA · K-Startup · 접수 중 ${open}건${gov.updated ? ` · ${mdLabel(gov.updated)} 기준` : ''}`;
+    } catch {
+      gov.failed = true;
+    }
+    renderGov();
+  }
+
+  function govPress(on, off) { $(on).setAttribute('aria-pressed', 'true'); $(off).setAttribute('aria-pressed', 'false'); }
+  $('#govAll').addEventListener('click', () => { gov.rel = false; gov.shown = GOV_PAGE; govPress('#govAll', '#govRel'); renderGov(); });
+  $('#govRel').addEventListener('click', () => { gov.rel = true; gov.shown = GOV_PAGE; govPress('#govRel', '#govAll'); renderGov(); });
+  $('#govNew').addEventListener('click', () => { gov.order = 'new'; gov.shown = GOV_PAGE; govPress('#govNew', '#govDue'); renderGov(); });
+  $('#govDue').addEventListener('click', () => { gov.order = 'due'; gov.shown = GOV_PAGE; govPress('#govDue', '#govNew'); renderGov(); });
+  $('#govMore').addEventListener('click', () => { gov.shown += GOV_PAGE; renderGov(); });
+  $('#mailRefresh').addEventListener('click', () => loadGmail());
+
   // ---------- 시작 ----------
   tick();
   setInterval(tick, 1000);
   renderAll();
   initGoogle();
   loadWeather();
+  loadGov();
+  setInterval(renderGov, 60 * 1000);
   setInterval(loadWeather, 5 * 60 * 1000); // 15분 지나면 새로 불러옴
 })();
   </script>
