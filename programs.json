@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-23T10:05",
+ "updated": "2026-09-29T09:11",
  "sources": [
   "기업마당",
   "NIPA",
@@ -8,7 +8,7 @@
  "items": [
   {
    "agency": "창업진흥원",
-   "checked": "2026-09-23",
+   "checked": "2026-09-29",
    "deadline": "2026-10-12",
    "deadline_note": "",
    "field": "사업화",
@@ -347,6 +347,24 @@
    "title": "2026년 4차 성능인증(EPC) 신규신청 접수 공고",
    "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126672",
    "id": "biz-126672"
+  },
+  {
+   "agency": "창업진흥원",
+   "checked": "2026-09-29",
+   "deadline": "2026-10-09T18:00",
+   "deadline_note": "",
+   "field": "글로벌",
+   "first_seen": "2026-09-29",
+   "ministry": "중소벤처기업부",
+   "note": "실리콘밸리 현지 시장진입(GTM) 프로그램 참여 창업기업 모집",
+   "period": "9/18 16:00 ~ 10/9 18:00",
+   "posted": "2026-09-18",
+   "rank": 6700,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026년 실리콘밸리 GTM(Go-To-Market) 프로그램 창업기업 모집공고",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179294",
+   "id": "ks-svgtm-2026"
   },
   {
    "agency": "기초자치단체",
@@ -692,7 +710,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-09-23",
+   "checked": "2026-09-29",
    "deadline": "2026-10-12T14:00",
    "deadline_note": "",
    "field": "해외진출",
@@ -745,24 +763,6 @@
    "id": "biz-126497"
   },
   {
-   "agency": "인천테크노파크",
-   "checked": "2026-09-17",
-   "deadline": "2026-09-18",
-   "deadline_note": "",
-   "field": "기술",
-   "first_seen": "2026-09-16",
-   "ministry": "인천광역시",
-   "note": "인천 소재 기업 대상",
-   "period": "9/14 ~ 9/18",
-   "posted": "2026-09-15",
-   "rank": 79,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "[인천] 2026년 기술도입 실시 지원사업 추가 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126495",
-   "id": "biz-126495"
-  },
-  {
    "agency": "서대문구",
    "checked": "2026-09-17",
    "deadline": null,
@@ -800,7 +800,7 @@
   },
   {
    "agency": "창업진흥원",
-   "checked": "2026-09-23",
+   "checked": "2026-09-29",
    "deadline": "2026-10-06T16:00",
    "deadline_note": "",
    "field": "창업",
@@ -872,7 +872,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-09-23",
+   "checked": "2026-09-29",
    "deadline": "2026-09-30T23:00",
    "deadline_note": "",
    "field": "해외진출",
@@ -890,7 +890,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-09-23",
+   "checked": "2026-09-29",
    "deadline": "2026-09-23T15:00",
    "deadline_note": "",
    "field": "AI",
@@ -907,22 +907,40 @@
    "id": "nipa-16921"
   },
   {
-   "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-09-23",
-   "deadline": "2026-09-17T15:00",
+   "agency": "창업진흥원",
+   "checked": "2026-09-29",
+   "deadline": "2026-12-31T18:00",
    "deadline_note": "",
-   "field": "XR·입주",
-   "first_seen": "2026-09-16",
-   "ministry": "",
-   "note": "XR 콘텐츠 기업 쇼룸 입주 모집",
-   "period": "8/18 14:00 ~ 9/17 15:00",
-   "posted": "2026-08-18",
+   "field": "사업화",
+   "first_seen": "2026-09-29",
+   "ministry": "중소벤처기업부",
+   "note": "TIPS 창업기업 지원계획 수정 공고, 연중 접수",
+   "period": "3/19 09:00 ~ 12/31 18:00",
+   "posted": "2026-03-19",
    "rank": 50,
-   "relevant": true,
-   "source": "NIPA",
-   "title": "2026년 KoVAC XR 쇼룸 입주기업 2차 모집",
-   "url": "https://www.nipa.kr/home/2-2/16900",
-   "id": "nipa-16900"
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026년 팁스(TIPS) 창업기업 지원계획 수정 공고",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=176076",
+   "id": "ks-tips-2026"
+  },
+  {
+   "agency": "창업진흥원",
+   "checked": "2026-09-29",
+   "deadline": "2026-12-31T23:59",
+   "deadline_note": "",
+   "field": "사업화",
+   "first_seen": "2026-09-29",
+   "ministry": "중소벤처기업부",
+   "note": "중앙부처·지자체 창업지원사업 연간 통합공고(참고용)",
+   "period": "2025/12/19 13:00 ~ 12/31 23:59",
+   "posted": "2025-12-19",
+   "rank": 50,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026년 중앙부처 및 지자체 창업지원사업 통합공고",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=175783",
+   "id": "ks-integrated-2026"
   }
  ]
 }
