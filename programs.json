@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-08T10:04",
+ "updated": "2026-10-15T09:16",
  "sources": [
   "기업마당",
   "NIPA",
@@ -7,6 +7,169 @@
  ],
  "items": [
   {
+   "id": "ks-ai-ax-procurement",
+   "agency": "(주)글로벌창업연구소",
+   "checked": "2026-10-15",
+   "deadline": "2026-11-13",
+   "deadline_note": "",
+   "field": "멘토링ㆍ컨설팅ㆍ교육",
+   "first_seen": "2026-10-15",
+   "ministry": "",
+   "note": "산업전문인력 AI역량강화 지원사업 연계 무료 AI 교육과정 참가자 선착순 모집",
+   "period": "10/12 ~ 11/13",
+   "posted": "2026-10-14",
+   "rank": 179497,
+   "relevant": true,
+   "source": "K-Startup",
+   "title": "[무료 AI 역량강화 교육] 글로벌 공공조달 AX 전략 전문가 과정 (선착순 모집)",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179497"
+  },
+  {
+   "id": "ks-women-venture-ceo",
+   "agency": "(사)한국여성벤처협회",
+   "checked": "2026-10-15",
+   "deadline": "2026-11-02",
+   "deadline_note": "",
+   "field": "창업교육",
+   "first_seen": "2026-10-15",
+   "ministry": "",
+   "note": "여성벤처기업 CEO 대상 경영혁신 교육과정 참가자 모집",
+   "period": "10/12 ~ 11/2",
+   "posted": "2026-10-14",
+   "rank": 179462,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026 여성벤처활성화사업 「여성벤처CEO 경영혁신아카데미」",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179462"
+  },
+  {
+   "id": "ks-ydp-livecommerce",
+   "agency": "에이블브릿지",
+   "checked": "2026-10-15",
+   "deadline": "2026-10-30",
+   "deadline_note": "",
+   "field": "멘토링ㆍ컨설팅ㆍ교육",
+   "first_seen": "2026-10-15",
+   "ministry": "",
+   "note": "영등포구 소재 기업 대상 라이브커머스 판로성장 교육ㆍ컨설팅 프로그램",
+   "period": "10/12 ~ 10/30",
+   "posted": "2026-10-14",
+   "rank": 179444,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026 영등포구 라이브커머스 판로성장 프로그램",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179444"
+  },
+  {
+   "id": "ks-supercon-accel",
+   "agency": "(재)대전정보문화산업진흥원",
+   "checked": "2026-10-14",
+   "deadline": "2026-10-14",
+   "deadline_note": "",
+   "field": "멘토링ㆍ컨설팅ㆍ교육",
+   "first_seen": "2026-10-14",
+   "ministry": "",
+   "note": "대전정보문화산업진흥원 엑셀러레이팅 참여기업 모집",
+   "period": "10/12 ~ 10/14",
+   "posted": "2026-10-13",
+   "rank": 179485,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "「2026 슈퍼:콘 엑셀러레이팅」 지원사업 참여기업 모집공고",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179485"
+  },
+  {
+   "id": "ks-project-incubating",
+   "agency": "㈜컴퍼니엑스",
+   "checked": "2026-10-14",
+   "deadline": "2026-10-20",
+   "deadline_note": "",
+   "field": "멘토링ㆍ컨설팅ㆍ교육",
+   "first_seen": "2026-10-14",
+   "ministry": "",
+   "note": "프로젝트 창업 인큐베이팅 참여자 모집",
+   "period": "10/7 ~ 10/20",
+   "posted": "2026-10-13",
+   "rank": 179446,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026년 프로젝트 창업 인큐베이팅 : 2027 모두의 창업 선정 프로젝트",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179446"
+  },
+  {
+   "id": "ks-gm-jumpup-class",
+   "agency": "광명시창업지원센터",
+   "checked": "2026-10-14",
+   "deadline": "2026-10-29",
+   "deadline_note": "",
+   "field": "창업교육",
+   "first_seen": "2026-10-14",
+   "ministry": "",
+   "note": "광명시창업지원센터 창업교육 점프업 클래스 참가자 모집",
+   "period": "10/8 ~ 10/29",
+   "posted": "2026-10-12",
+   "rank": 179473,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026 창업교육 <광명 스타트업 점프업 클래스 모집>",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179473"
+  },
+  {
+   "id": "ks-gangdong-mock-school",
+   "agency": "강동구 청년해냄센터",
+   "checked": "2026-10-14",
+   "deadline": "2026-10-22",
+   "deadline_note": "",
+   "field": "시설ㆍ공간ㆍ보육",
+   "first_seen": "2026-10-14",
+   "ministry": "",
+   "note": "강동구 모의창업스쿨 2차 교육 참가자 모집",
+   "period": "10/8 ~ 10/22",
+   "posted": "2026-10-12",
+   "rank": 179460,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "[강동구 청년해냄센터] 2026 모의창업스쿨 2차 교육 참가자 모집 공고",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179460"
+  },
+  {
+   "id": "ks-quantum-qx-forum",
+   "agency": "㈜블루포인트파트너스",
+   "checked": "2026-10-14",
+   "deadline": "2026-11-10",
+   "deadline_note": "",
+   "field": "행사ㆍ네트워크",
+   "first_seen": "2026-10-14",
+   "ministry": "",
+   "note": "양자산업 QX 네트워킹 포럼 참가자 모집",
+   "period": "10/8 ~ 11/10",
+   "posted": "2026-10-12",
+   "rank": 179455,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026년도 양자산업 QX 네트워킹 포럼 「Quantum Horizon」 참가 모집",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179455"
+  },
+  {
+   "id": "nipa-16967",
+   "agency": "정보통신산업진흥원(NIPA)",
+   "checked": "2026-10-15",
+   "deadline": "2026-10-22T23:00",
+   "deadline_note": "",
+   "field": "해외진출",
+   "first_seen": "2026-10-14",
+   "ministry": "",
+   "note": "하노이 IT지원센터 2026년 하반기 추가 입주기업 모집 (접수중)",
+   "period": "10/8 14:09 ~ 10/22 23:00",
+   "posted": "2026-10-08",
+   "rank": 16967,
+   "relevant": true,
+   "source": "NIPA",
+   "title": "하노이 IT지원센터‘26년 하반기 추가 입주기업 모집 공고",
+   "url": "https://www.nipa.kr/home/2-2/16967"
+  },
+  {
+   "id": "ks-daejeon-leading-6",
    "agency": "대전창조경제혁신센터",
    "checked": "2026-10-08",
    "deadline": "2026-10-26",
@@ -21,10 +184,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "2026년 대전 스타트업스쿨 스타트업 리딩클래스 (6회차 ㅣ 나에게 맞는 투자자 찾는 실전 노하우)",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179440",
-   "id": "ks-daejeon-leading-6"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179440"
   },
   {
+   "id": "ks-seocho-consulting-oct",
    "agency": "(주)오픈놀",
    "checked": "2026-10-08",
    "deadline": "2026-10-23",
@@ -39,10 +202,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "[서초창업스테이션] 10월 1:1 전문 분야 컨설팅 - 지식재산권/특허 전략, 브랜딩 전략",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179434",
-   "id": "ks-seocho-consulting-oct"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179434"
   },
   {
+   "id": "ks-seocho-edu-oct",
    "agency": "(주)오픈놀",
    "checked": "2026-10-08",
    "deadline": "2026-10-26",
@@ -57,10 +220,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "[서초창업스테이션] 10월 창업 교육 프로그램 - 창업아이템 찾기 : 문제에서 시작 된 창업아이템 찾기",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179432",
-   "id": "ks-seocho-edu-oct"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179432"
   },
   {
+   "id": "ks-itaca-lecture",
    "agency": "(재)경기도경제과학진흥원",
    "checked": "2026-10-08",
    "deadline": "2026-10-20",
@@ -75,10 +238,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "이타카앤파트너스 조용민 대표 초청 특강 - 내가 투자한 스타트업과 성공하는 창업가의 3가지 비밀",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179426",
-   "id": "ks-itaca-lecture"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179426"
   },
   {
+   "id": "ks-ddm-makerspace-oct",
    "agency": "서울시립대학교창업보육센터",
    "checked": "2026-10-08",
    "deadline": "2026-10-27",
@@ -93,10 +256,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "[동대문구 창업지원센터] 10월 메이커스페이스(레이저커터, 3D프린팅) 교육 일정",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179420",
-   "id": "ks-ddm-makerspace-oct"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179420"
   },
   {
+   "id": "biz-126975",
    "agency": "한국사회적기업진흥원",
    "checked": "2026-10-06",
    "deadline": "2026-10-20",
@@ -111,10 +274,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 문화체육관광형 예비사회적기업 지정 계획 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126975",
-   "id": "biz-126975"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126975"
   },
   {
+   "id": "biz-126974",
    "agency": "한국에너지기술평가원",
    "checked": "2026-10-06",
    "deadline": "2026-10-30",
@@ -129,10 +292,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 에너지특화기업 지정 신청 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126974",
-   "id": "biz-126974"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126974"
   },
   {
+   "id": "biz-126973",
    "agency": "직접수행",
    "checked": "2026-10-06",
    "deadline": "2026-10-30",
@@ -147,10 +310,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "산업통상부 2023년 12월 최초지정 혁신제품 지정기간 연장(1차 연장) 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126973",
-   "id": "biz-126973"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126973"
   },
   {
+   "id": "biz-126971",
    "agency": "부천산업진흥원",
    "checked": "2026-10-06",
    "deadline": "2026-10-31",
@@ -165,10 +328,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "[경기] 부천시 2026년 10월 유해물질 시험분석 수수료 지원 사업 참여 기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126971",
-   "id": "biz-126971"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126971"
   },
   {
+   "id": "biz-126970",
    "agency": "직접수행",
    "checked": "2026-10-06",
    "deadline": "2026-10-30",
@@ -183,10 +346,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "산업통상부 2022년 12월 최초지정 혁신제품 지정기간 연장(2차 연장) 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126970",
-   "id": "biz-126970"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126970"
   },
   {
+   "id": "biz-126969",
    "agency": "한국청년기업가정신재단",
    "checked": "2026-10-06",
    "deadline": "2026-10-26",
@@ -201,28 +364,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 청년기업인상 포상 신청 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126969",
-   "id": "biz-126969"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126969"
   },
   {
-   "agency": "한국중소벤처기업유통원",
-   "checked": "2026-10-06",
-   "deadline": "2026-10-07",
-   "deadline_note": "",
-   "field": "내수",
-   "first_seen": "2026-10-06",
-   "ministry": "중소벤처기업부",
-   "note": "행복한백화점 입점 중소기업 모집",
-   "period": "10/1 ~ 10/7",
-   "posted": "2026-10-02",
-   "rank": 126967,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "[서울] 2026년 행복한백화점 매장 입점모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126967",
-   "id": "biz-126967"
-  },
-  {
+   "id": "biz-126966",
    "agency": "벤처기업협회",
    "checked": "2026-10-06",
    "deadline": "2026-10-30",
@@ -237,10 +382,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 정보통신 중소기업 발전 유공자 포상 계획 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126966",
-   "id": "biz-126966"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126966"
   },
   {
+   "id": "biz-126965",
    "agency": "소상공인시장진흥공단",
    "checked": "2026-10-06",
    "deadline": null,
@@ -255,10 +400,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 중소벤처기업부 소상공인 정책자금 융자사업 5차 변경 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126965",
-   "id": "biz-126965"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126965"
   },
   {
+   "id": "biz-126963",
    "agency": "범부처통합헬스케어협회",
    "checked": "2026-10-06",
    "deadline": null,
@@ -273,10 +418,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "의료기기ㆍ바이오 부품ㆍ모듈 인증시험 기술지원 참여기업 모집 수정 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126963",
-   "id": "biz-126963"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126963"
   },
   {
+   "id": "biz-126962",
    "agency": "한국인터넷진흥원",
    "checked": "2026-10-06",
    "deadline": "2026-10-23",
@@ -291,10 +436,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 10차 정보보호 인증제품 조달청 벤처나라 추천기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126962",
-   "id": "biz-126962"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126962"
   },
   {
+   "id": "biz-126960",
    "agency": "한국데이터산업진흥원",
    "checked": "2026-10-06",
    "deadline": "2026-10-27",
@@ -309,10 +454,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 제30회 데이터 품질대상 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126960",
-   "id": "biz-126960"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126960"
   },
   {
+   "id": "biz-126951",
    "agency": "직접수행",
    "checked": "2026-10-06",
    "deadline": "2026-10-16",
@@ -327,10 +472,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "[서울] 2026년 외국인 취업채용박람회 참가기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126951",
-   "id": "biz-126951"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126951"
   },
   {
+   "id": "ks-gangbuk-oct-edu",
    "agency": "광운대학교산학협력단",
    "checked": "2026-10-08",
    "deadline": "2026-10-22",
@@ -345,10 +490,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "2026년 강북창업지원센터 10월 창업 교육 및 그룹상담 프로그램 참가자 모집",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
-   "id": "ks-gangbuk-oct-edu"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do"
   },
   {
+   "id": "ks-location-info-edu-6",
    "agency": "(주)아이전스",
    "checked": "2026-10-06",
    "deadline": "2026-10-21",
@@ -363,10 +508,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "2026년 위치정보 보호조치 교육 (6차)",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
-   "id": "ks-location-info-edu-6"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do"
   },
   {
+   "id": "biz-126944",
    "agency": "경기신용보증재단",
    "checked": "2026-10-02",
    "deadline": null,
@@ -381,10 +526,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "[경기] 안산시 2026년 소상공인 특례보증 추가 지원 계획 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126944",
-   "id": "biz-126944"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126944"
   },
   {
+   "id": "biz-126943",
    "agency": "경기신용보증재단",
    "checked": "2026-10-02",
    "deadline": null,
@@ -399,10 +544,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "[경기] 평택시 청년창업 특례보증 및 이차보전 지원 수정 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126943",
-   "id": "biz-126943"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126943"
   },
   {
+   "id": "biz-126931",
    "agency": "한국전자기술연구원",
    "checked": "2026-10-02",
    "deadline": "2026-10-16",
@@ -417,10 +562,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 2차 산업혁신기반구축사업(첨단 방위산업용 고성능ㆍ고신뢰성 시스템반도체 부품 실증 기반구축) 기술지원(설계ㆍ성능 검증, 기술지도) 사업 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126931",
-   "id": "biz-126931"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126931"
   },
   {
+   "id": "biz-126930",
    "agency": "한국표준과학연구원",
    "checked": "2026-10-02",
    "deadline": "2026-12-25",
@@ -435,10 +580,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2027년 한국표준과학연구원(KRISS) 기술홈닥터 지원사업 참여기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126930",
-   "id": "biz-126930"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126930"
   },
   {
+   "id": "biz-126928",
    "agency": "충북창조경제혁신센터",
    "checked": "2026-10-02",
    "deadline": null,
@@ -453,10 +598,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 2차 민관협력 오픈이노베이션 지원 상호 자율탐색형(바이오 분야) 참여기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126928",
-   "id": "biz-126928"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126928"
   },
   {
+   "id": "biz-126927",
    "agency": "중소벤처기업진흥공단",
    "checked": "2026-10-02",
    "deadline": null,
@@ -471,10 +616,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 중소기업 정책자금 융자계획 변경 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126927",
-   "id": "biz-126927"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126927"
   },
   {
+   "id": "biz-126926",
    "agency": "부천산업진흥원",
    "checked": "2026-10-02",
    "deadline": "2026-10-13",
@@ -489,10 +634,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 대구국제기계산업대전 참가지원 모집 공고(생활지원을 위한 서비스로봇 부품 기술지원 기반구축 사업)",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126926",
-   "id": "biz-126926"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126926"
   },
   {
+   "id": "biz-126920",
    "agency": "한양대학교ERICA창업보육센터",
    "checked": "2026-10-02",
    "deadline": "2026-10-16",
@@ -507,10 +652,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "[경기] 2026년 한양대 ERICA-기술보증기금 기술이전 & 투자 IR & 상담회 참여기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126920",
-   "id": "biz-126920"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126920"
   },
   {
+   "id": "biz-126918",
    "agency": "안양산업진흥원",
    "checked": "2026-10-02",
    "deadline": "2026-10-16",
@@ -525,10 +670,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "[경기] 안양시 2026년 유망기업 대중소 상생 판로개척 지원사업 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126918",
-   "id": "biz-126918"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126918"
   },
   {
+   "id": "biz-126916",
    "agency": "한국지식재산보호원",
    "checked": "2026-10-02",
    "deadline": "2026-10-12",
@@ -543,10 +688,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 5차 수출 도전기업 IP위험 대응역량 강화사업 위험대응 유형 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126916",
-   "id": "biz-126916"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126916"
   },
   {
+   "id": "biz-126915",
    "agency": "기초자치단체",
    "checked": "2026-10-02",
    "deadline": "2026-10-23",
@@ -561,12 +706,12 @@
    "relevant": false,
    "source": "기업마당",
    "title": "[경기] 화성시 2026년 2차 스마트 물류비 지원사업 참가기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126915",
-   "id": "biz-126915"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126915"
   },
   {
+   "id": "nipa-16952",
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-10-08",
+   "checked": "2026-10-15",
    "deadline": "2026-10-30T13:00",
    "deadline_note": "",
    "field": "기타",
@@ -579,10 +724,10 @@
    "relevant": false,
    "source": "NIPA",
    "title": "2026년도 고용노동부(안전보건공단) 연계 스마트 안전장비지원 품목 등록 시행계획 공고 2차",
-   "url": "https://www.nipa.kr/home/2-2/16952",
-   "id": "nipa-16952"
+   "url": "https://www.nipa.kr/home/2-2/16952"
   },
   {
+   "id": "ks-gg-deeptech-seminar",
    "agency": "(재)경기도경제과학진흥원",
    "checked": "2026-10-02",
    "deadline": "2026-10-14",
@@ -597,10 +742,10 @@
    "relevant": true,
    "source": "K-Startup",
    "title": "2026년 경기 스타트업 아카데미 딥테크 세미나 참여자 모집 / Future AI Technology - AI 메모리 반도체의 발전과 미래",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179384",
-   "id": "ks-gg-deeptech-seminar"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179384"
   },
   {
+   "id": "ks-yongin-oi-5",
    "agency": "알파브라더스",
    "checked": "2026-10-02",
    "deadline": "2026-10-13",
@@ -615,10 +760,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "[용인시산업진흥원] 「2026년 용인 오픈이노베이션 교류회」 5회차(반도체/피지컬AI)",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179385",
-   "id": "ks-yongin-oi-5"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179385"
   },
   {
+   "id": "ks-ip-free-edu",
    "agency": "한국특허정보원",
    "checked": "2026-10-02",
    "deadline": "2026-10-26",
@@ -633,10 +778,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "2026년 7회차 지식재산 무료 초청교육 수요조사",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179376",
-   "id": "ks-ip-free-edu"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179376"
   },
   {
+   "id": "biz-126903",
    "agency": "한국건강증진개발원",
    "checked": "2026-10-01",
    "deadline": "2026-10-09",
@@ -651,10 +796,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 한국건강증진개발원 ESG 컨설팅 지원 사업 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126903",
-   "id": "biz-126903"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126903"
   },
   {
+   "id": "biz-126897",
    "agency": "한국지식재산보호원",
    "checked": "2026-10-01",
    "deadline": "2026-10-12",
@@ -669,10 +814,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 3차 K-브랜드 정부인증제도 참여기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126897",
-   "id": "biz-126897"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126897"
   },
   {
+   "id": "biz-126896",
    "agency": "한국연구재단",
    "checked": "2026-10-01",
    "deadline": "2026-10-08",
@@ -687,10 +832,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 4차 미래개척융합과학기술개발사업 신규과제 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126896",
-   "id": "biz-126896"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126896"
   },
   {
+   "id": "biz-126893",
    "agency": "한국출판문화산업진흥원",
    "checked": "2026-10-01",
    "deadline": "2026-10-12",
@@ -705,10 +850,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 3차 전자책 제작 지원 사업 신청 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126893",
-   "id": "biz-126893"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126893"
   },
   {
+   "id": "biz-126892",
    "agency": "경기도주식회사",
    "checked": "2026-10-01",
    "deadline": "2026-10-12",
@@ -723,10 +868,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "[경기] 2026년 중소기업 마케팅 지원사업 해외 오프라인 지원기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126892",
-   "id": "biz-126892"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126892"
   },
   {
+   "id": "biz-126890",
    "agency": "한국출판문화산업진흥원",
    "checked": "2026-10-01",
    "deadline": "2026-10-14",
@@ -741,10 +886,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 2차 웹소설 IP 저작화 지원 사업 추가모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126890",
-   "id": "biz-126890"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126890"
   },
   {
+   "id": "biz-126888",
    "agency": "한국환경산업기술원",
    "checked": "2026-10-01",
    "deadline": "2026-10-16",
@@ -759,10 +904,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 해외 환경프로젝트 타당성조사 지원사업 본타당성조사(다년도) 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126888",
-   "id": "biz-126888"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126888"
   },
   {
+   "id": "biz-126878",
    "agency": "연세대학교",
    "checked": "2026-10-01",
    "deadline": null,
@@ -777,10 +922,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "AI기반 Age-Tech 산업 중심의 디지털의료제품 지원 바이오데이터 및 알고리즘 실증 기술서비스 상시모집 공고(산업혁신기반구축ㆍ2차년도)",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126878",
-   "id": "biz-126878"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126878"
   },
   {
+   "id": "biz-126876",
    "agency": "정보통신산업진흥원",
    "checked": "2026-10-01",
    "deadline": "2026-10-10",
@@ -795,30 +940,12 @@
    "relevant": true,
    "source": "기업마당",
    "title": "2026년 한-베트남 AIㆍ디지털 포럼 참가기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126876",
-   "id": "biz-126876"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126876"
   },
   {
-   "agency": "재단법인 관악중소벤처진흥원",
-   "checked": "2026-10-01",
-   "deadline": "2026-10-02",
-   "deadline_note": "",
-   "field": "시설ㆍ공간ㆍ보육",
-   "first_seen": "2026-10-01",
-   "ministry": "",
-   "note": "서울 관악 창업 교육 프로그램 참가자 모집",
-   "period": "9/17 ~ 10/2",
-   "posted": "2026-09-30",
-   "rank": 9100,
-   "relevant": false,
-   "source": "K-Startup",
-   "title": "2026년 관악S밸리 창업 첫걸음 스쿨 모집 공고",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179363",
-   "id": "ks-gwanak-first-step"
-  },
-  {
+   "id": "nipa-16953",
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-10-08",
+   "checked": "2026-10-15",
    "deadline": "2026-10-10T23:00",
    "deadline_note": "",
    "field": "해외진출",
@@ -831,10 +958,10 @@
    "relevant": true,
    "source": "NIPA",
    "title": "2026년도 한-베트남 AI 디지털 포럼 전시 및 비즈니스 매칭 부스 참가기업 모집",
-   "url": "https://www.nipa.kr/home/2-2/16953",
-   "id": "nipa-16953"
+   "url": "https://www.nipa.kr/home/2-2/16953"
   },
   {
+   "id": "ks-ai-allrounder-8",
    "agency": "디지플래닛",
    "checked": "2026-10-01",
    "deadline": "2026-11-16",
@@ -849,10 +976,10 @@
    "relevant": true,
    "source": "K-Startup",
    "title": "AI 올라운더(기획,개발,마케팅) 창업가육성과정 8기 모집",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179353",
-   "id": "ks-ai-allrounder-8"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179353"
   },
   {
+   "id": "ks-gg-esg-edu",
    "agency": "(재)경기도경제과학진흥원",
    "checked": "2026-10-01",
    "deadline": "2026-10-16",
@@ -867,10 +994,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "2026 경기도 ESG 인식확산 교육 (5~7회차) 참여자 모집 안내",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179325",
-   "id": "ks-gg-esg-edu"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179325"
   },
   {
+   "id": "ks-chogyeokcha-2027",
    "agency": "창업진흥원",
    "checked": "2026-10-08",
    "deadline": "2026-10-12",
@@ -885,10 +1012,10 @@
    "relevant": false,
    "source": "K-Startup",
    "title": "2027년도 초격차 스타트업 프로젝트 기술 사업화 및 투자유치 주관기관 모집 공고",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179287",
-   "id": "ks-chogyeokcha-2027"
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179287"
   },
   {
+   "id": "biz-126731",
    "agency": "부산창조경제혁신센터",
    "checked": "2026-09-23",
    "deadline": "2026-10-15",
@@ -903,28 +1030,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "Plug in : Tokyo #15 참여 스타트업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126731",
-   "id": "biz-126731"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126731"
   },
   {
-   "agency": "한국패션협회",
-   "checked": "2026-09-23",
-   "deadline": "2026-10-01",
-   "deadline_note": "",
-   "field": "수출",
-   "first_seen": "2026-09-23",
-   "ministry": "산업통상부",
-   "note": "",
-   "period": "9/21 ~ 10/1",
-   "posted": "2026-09-22",
-   "rank": 1518,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "2026년 K-섬유패션 협력강화 및 글로벌 브랜드 육성 사업 추가 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126729",
-   "id": "biz-126729"
-  },
-  {
+   "id": "biz-126728",
    "agency": "경기도사회적경제원",
    "checked": "2026-09-23",
    "deadline": "2026-10-11",
@@ -939,28 +1048,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "제8회 대한민국 사회연대경제박람회 및 국제컨퍼런스 전시ㆍ체험부스 참가기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126728",
-   "id": "biz-126728"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126728"
   },
   {
-   "agency": "인천테크노파크",
-   "checked": "2026-09-23",
-   "deadline": "2026-10-02",
-   "deadline_note": "",
-   "field": "수출",
-   "first_seen": "2026-09-23",
-   "ministry": "인천광역시",
-   "note": "인천 소재 기업 대상 해외 실증 지원",
-   "period": "9/15 ~ 10/2",
-   "posted": "2026-09-22",
-   "rank": 1514,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "[인천] 2026년 TRYOUT 글로벌실증 사업 참여기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126725",
-   "id": "biz-126725"
-  },
-  {
+   "id": "biz-126723",
    "agency": "한국기상산업기술원",
    "checked": "2026-09-23",
    "deadline": "2026-11-17",
@@ -975,10 +1066,10 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 하반기 기상청 혁신제품 지정 추진계획 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126723",
-   "id": "biz-126723"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126723"
   },
   {
+   "id": "biz-126722",
    "agency": "한국발명진흥회",
    "checked": "2026-09-23",
    "deadline": "2026-10-16",
@@ -993,98 +1084,7 @@
    "relevant": false,
    "source": "기업마당",
    "title": "2026년 공공기술 사업화용 기술평가 지원기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126722",
-   "id": "biz-126722"
-  },
-  {
-   "agency": "기초자치단체",
-   "checked": "2026-09-23",
-   "deadline": "2026-10-08",
-   "deadline_note": "",
-   "field": "경영",
-   "first_seen": "2026-09-23",
-   "ministry": "서울특별시",
-   "note": "",
-   "period": "9/21 ~ 10/8",
-   "posted": "2026-09-22",
-   "rank": 1509,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "[서울] 관악구 2026년 소상공인 원스톱 지원사업 소상공인 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126720",
-   "id": "biz-126720"
-  },
-  {
-   "agency": "한국산업기술진흥원",
-   "checked": "2026-09-23",
-   "deadline": "2027-01-28",
-   "deadline_note": "",
-   "field": "기술",
-   "first_seen": "2026-09-23",
-   "ministry": "산업통상부",
-   "note": "한-스페인 양자 국제공동 R&D",
-   "period": "9/21 ~ 2027-1/28",
-   "posted": "2026-09-22",
-   "rank": 1504,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "2026년 산업기술국제협력(양자-스페인) 접수 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126715",
-   "id": "biz-126715"
-  },
-  {
-   "agency": "국방기술진흥연구소",
-   "checked": "2026-09-23",
-   "deadline": "2026-10-15",
-   "deadline_note": "",
-   "field": "기술",
-   "first_seen": "2026-09-23",
-   "ministry": "방위사업청",
-   "note": "AI 분야이나 국방 로봇 실증 한정",
-   "period": "9/16 ~ 10/15",
-   "posted": "2026-09-22",
-   "rank": 1498,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "[충남] AI 국방 로봇 신속 실증ㆍ시범 개발 지원 사업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126709",
-   "id": "biz-126709"
-  },
-  {
-   "agency": "중소기업기술정보진흥원",
-   "checked": "2026-09-23",
-   "deadline": "2026-10-28",
-   "deadline_note": "",
-   "field": "기술",
-   "first_seen": "2026-09-23",
-   "ministry": "중소벤처기업부",
-   "note": "",
-   "period": "9/21 ~ 10/28",
-   "posted": "2026-09-22",
-   "rank": 1494,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "2026년 3차 중소벤처기업부 혁신제품 지정기간 연장 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126705",
-   "id": "biz-126705"
-  },
-  {
-   "agency": "한국소방산업기술원",
-   "checked": "2026-09-22",
-   "deadline": "2026-10-04",
-   "deadline_note": "",
-   "field": "수출",
-   "first_seen": "2026-09-22",
-   "ministry": "소방청",
-   "note": "소방산업체 해외 마케팅 홍보물 제작경비 지원(전국)",
-   "period": "9/1 ~ 10/4",
-   "posted": "2026-09-21",
-   "rank": 7507,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "2026년 소방산업 해외 마케팅 홍보물 제작경비 지원사업 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126688",
-   "id": "biz-126688"
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126722"
   }
  ]
 }
