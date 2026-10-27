@@ -1,0 +1,1034 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>경영기획팀 정보 데스크</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: 결재판처럼 상단 요약 띠 → 왼쪽 공고 장부(지원사업·입찰) / 오른쪽 일정 달력. 좁은 화면은 한 줄로 쌓음 */
+:root{
+  --paper:#eef2fb; --sheet:#ffffff; --ink:#1f2433; --muted:#6b7385; --line:#e4e8f2;
+  --seal:#d9443a; --seal-soft:#fdecea; --blue:#4a63f2; --blue-soft:#eaeefe; --nat:#1f3b8a;
+  --brand:#4a63f2; --brand-soft:#eaeefe; --brand-ink:#1f2433; --on-brand:#ffffff; --logo:#f5a400; --logo-ink:#3b3b3b;
+  --hero1:#3d7bf6; --hero2:#8fbcfb; --on-hero:#ffffff; --shadow:0 6px 24px rgba(40,70,150,.08);
+  --warn:#b26a00; --warn-soft:#fdf1dc; --ok:#2c7a4b; --ok-soft:#e4f3ea; --closed:#9aa3af;
+  --f-display:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f1422; --sheet:#171d2e; --ink:#e6eaf5; --muted:#98a2b8; --line:#283049;
+  --seal:#ff7a6e; --seal-soft:#3a1f22; --blue:#8ea2ff; --blue-soft:#222c52; --nat:#b9c6ff;
+  --brand:#8ea2ff; --brand-soft:#222c52; --brand-ink:#e6eaf5; --on-brand:#0f1422; --logo:#ffb81c; --logo-ink:#e6eaf5;
+  --hero1:#22418f; --hero2:#3e6cc4; --on-hero:#ffffff; --shadow:0 6px 24px rgba(0,0,0,.35);
+  --warn:#f0b04a; --warn-soft:#3a2d16; --ok:#6fcf97; --ok-soft:#173023; --closed:#6b7482; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f1422; --sheet:#171d2e; --ink:#e6eaf5; --muted:#98a2b8; --line:#283049;
+  --seal:#ff7a6e; --seal-soft:#3a1f22; --blue:#8ea2ff; --blue-soft:#222c52; --nat:#b9c6ff;
+  --brand:#8ea2ff; --brand-soft:#222c52; --brand-ink:#e6eaf5; --on-brand:#0f1422; --logo:#ffb81c; --logo-ink:#e6eaf5;
+  --hero1:#22418f; --hero2:#3e6cc4; --on-hero:#ffffff; --shadow:0 6px 24px rgba(0,0,0,.35);
+  --warn:#f0b04a; --warn-soft:#3a2d16; --ok:#6fcf97; --ok-soft:#173023; --closed:#6b7482; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--blue-soft) 0,var(--paper) 420px) var(--paper);background-color:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:14px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+header.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;background:linear-gradient(135deg,var(--hero1),var(--hero2));color:var(--on-hero);border-radius:24px;padding:22px 28px 46px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+header.top::after{content:"";position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.14);pointer-events:none}
+.hero-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px;position:relative;z-index:1}
+.wx{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);white-space:nowrap}
+.wx b{font-family:var(--f-mono);font-size:13px}
+.wx .dot{opacity:.6}
+.searchbar{position:relative;z-index:2;margin:-34px auto 0;width:min(640px,100%);display:flex;align-items:center;gap:6px;background:var(--sheet);border-radius:999px;padding:6px 6px 6px 18px;box-shadow:0 8px 28px rgba(40,70,150,.14)}
+.searchbar select{border:0;background:transparent;font-weight:600;color:var(--muted);padding:6px 2px;cursor:pointer;flex:none}
+.searchbar input{flex:1 1 auto;min-width:0;border:0;background:transparent;padding:8px 6px;font-size:14.5px;outline:none}
+.searchbar .go{flex:none;background:var(--blue);color:var(--on-brand);text-decoration:none;font-weight:600;border-radius:999px;padding:9px 22px}
+.searchbar .go:hover{filter:brightness(1.05)}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:34px;height:34px;flex:none;display:block}
+.brand{position:relative;z-index:1}
+.brand .grp{font-size:12.5px;font-weight:600;opacity:.9;letter-spacing:.02em}
+.mark-bg{width:48px;height:48px;border-radius:14px;background:#fff;display:grid;place-items:center;flex:none}
+h1{font-family:var(--f-display);font-size:27px;font-weight:700;margin:0;letter-spacing:-.02em;color:var(--on-hero);text-wrap:balance}
+.sub{color:var(--on-hero);opacity:.85;font-size:12.5px;margin:2px 0 0}
+.stamp{font-size:11.5px;opacity:.9;text-align:right}
+.stamp b{font-weight:600}
+
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;background:var(--sheet);border-radius:18px;box-shadow:var(--shadow)}
+.strip>div{padding:12px 16px;border-left:1px solid var(--line);min-width:0}
+.strip>div:first-child{border-left:0}
+.strip .k{font-size:12px;color:var(--muted);letter-spacing:.02em}
+.strip .v{font-family:var(--f-mono);font-size:24px;font-weight:600;line-height:1.2}
+.strip .v small{font-family:var(--f-body);font-size:12px;color:var(--muted);font-weight:400;margin-left:4px}
+.strip .hot .v{color:var(--seal)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
+.panel{background:var(--sheet);border-radius:18px;box-shadow:var(--shadow);min-width:0;overflow:hidden}
+.panel>.ph{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;padding:18px 20px 12px;border-bottom:1px solid var(--line)}
+h2{font-family:var(--f-display);font-size:17.5px;font-weight:700;margin:0;letter-spacing:-.01em}
+.ph .meta{font-size:12px;color:var(--muted)}
+.main-col{display:flex;flex-direction:column;gap:18px;min-width:0}
+
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line)}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:3px 11px;font-size:12.5px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--brand);color:var(--on-brand);border-color:var(--brand);font-weight:600}
+.search{flex:1 1 180px;min-width:0;border:1px solid var(--line);background:var(--paper);border-radius:4px;padding:5px 10px}
+.toggle{font-size:12.5px;color:var(--muted);display:flex;gap:5px;align-items:center;cursor:pointer}
+
+.list{list-style:none;margin:0;padding:0}
+.row{display:grid;grid-template-columns:64px minmax(0,1fr) 34px;gap:12px;padding:12px 16px;border-top:1px solid var(--line);align-items:start}
+.row:first-child{border-top:0}
+.dd{font-family:var(--f-mono);font-size:13px;font-weight:600;text-align:center;border-radius:4px;padding:4px 0;line-height:1.25}
+.dd small{display:block;font-family:var(--f-body);font-size:10.5px;font-weight:500;opacity:.85}
+.dd.crit{background:var(--seal-soft);color:var(--seal)}
+.dd.soon{background:var(--warn-soft);color:var(--warn)}
+.dd.open{background:var(--ok-soft);color:var(--ok)}
+.dd.always{background:var(--blue-soft);color:var(--blue)}
+.dd.done{background:transparent;color:var(--closed);border:1px dashed var(--line)}
+.ttl{font-weight:600;font-size:14.5px;text-decoration:none;display:inline}
+.ttl:hover{text-decoration:underline;text-underline-offset:3px}
+.info{font-size:12.5px;color:var(--muted);margin-top:3px;display:flex;flex-wrap:wrap;gap:4px 12px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tag{font-size:11px;padding:1px 7px;border-radius:3px;background:var(--paper);border:1px solid var(--line);color:var(--muted)}
+.star{width:32px;height:32px;border:1px solid var(--line);border-radius:4px;background:transparent;cursor:pointer;color:var(--muted);display:grid;place-items:center}
+.star[aria-pressed="true"]{color:var(--brand);border-color:var(--brand);background:var(--brand-soft)}
+.star svg{width:16px;height:16px}
+.row.is-done .ttl{color:var(--muted);font-weight:500}
+.rg{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:3px;margin-right:6px;vertical-align:2px;white-space:nowrap}
+.rg.nat{background:var(--nat);color:var(--sheet)}
+.rg.metro{background:var(--brand);color:var(--on-brand)}
+.rg.unk{border:1px dashed var(--muted);color:var(--muted)}
+.rg.local{border:1px solid var(--line);color:var(--muted);font-weight:500}
+.row.is-local{opacity:.62}
+.row.is-local:hover{opacity:1}
+.kwline{flex-basis:100%;font-size:11.5px;color:var(--muted);line-height:1.7}
+.kwline span span{display:inline-block;margin:0 2px;padding:0 6px;border:1px solid var(--line);border-radius:3px;font-family:var(--f-mono);font-size:11px}
+.tag.kw{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
+.brief{display:flex;flex-direction:column}
+.brief .ph .meta b{color:var(--ink);font-weight:600}
+.bgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
+.bcol{padding:12px 16px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.bcol+.bcol{border-left:1px solid var(--line)}
+.bh{font-size:11.5px;letter-spacing:.04em;color:var(--muted);font-weight:600}
+.iss{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;font-size:13px}
+.iss .n{font-family:var(--f-mono);color:var(--brand);font-weight:600}
+.iss .c{font-size:11px;color:var(--muted)}
+.idea{border:1px solid var(--line);border-radius:5px;padding:9px 11px;display:flex;flex-direction:column;gap:3px;font-size:12.5px}
+.idea b{font-size:13.5px}
+.idea .tg{display:inline-block;font-size:10.5px;padding:0 6px;border-radius:3px;background:var(--blue-soft);color:var(--blue);margin-right:4px}
+.idea .m{color:var(--muted)}
+.bfoot{border-top:1px solid var(--line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;align-items:baseline}
+.bfoot .act{display:flex;gap:6px;align-items:baseline;min-width:0}
+.bfoot .act::before{content:"▸";color:var(--brand)}
+.kwc{display:flex;flex-wrap:wrap;gap:4px}
+.kwc span{font-size:11px;padding:1px 7px;border-radius:3px;border:1px solid var(--line);color:var(--muted)}
+.bempty{padding:16px;color:var(--muted);font-size:13px;line-height:1.7}
+@media (max-width:720px){.bgrid{grid-template-columns:minmax(0,1fr)}.bcol+.bcol{border-left:0;border-top:1px solid var(--line)}}
+.rkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);padding:8px 16px 0;align-items:center}
+.empty{padding:22px 16px;color:var(--muted);font-size:13px}
+.note{font-size:12px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line)}
+
+/* 일정 */
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:flex;flex-direction:column;gap:18px}
+.cal-h{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 6px}
+.cal-h b{font-family:var(--f-mono);font-size:15px}
+.nav{border:1px solid var(--line);background:transparent;border-radius:4px;width:30px;height:28px;cursor:pointer}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;padding:4px 12px 12px}
+.cal .wd{font-size:11px;color:var(--muted);text-align:center;padding:4px 0}
+.cal .wd:first-child{color:var(--seal)}
+.day{aspect-ratio:1/1;max-width:100%;border:1px solid transparent;border-radius:4px;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:5px;gap:3px;font-family:var(--f-mono);font-size:12.5px}
+.day.out{color:var(--closed)}
+.day.today{border-color:var(--ink);font-weight:600}
+.day.sel{background:var(--blue-soft);border-color:var(--blue)}
+.dots{display:flex;gap:2px}
+.dots i{width:5px;height:5px;border-radius:50%;display:block}
+.dots .e{background:var(--blue)}.dots .s{background:var(--brand)}
+.legend{display:flex;gap:12px;font-size:11.5px;color:var(--muted);padding:0 16px 10px}
+.legend span::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;vertical-align:1px;background:var(--c)}
+.agenda{border-top:1px solid var(--line);padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.agenda h3{margin:0;font-size:13px;font-weight:600}
+.ev{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:8px;align-items:start;font-size:13px;padding:6px 0;border-top:1px dashed var(--line)}
+.ev:first-of-type{border-top:0}
+.ev .t{font-family:var(--f-mono);color:var(--muted);font-size:12px}
+.ev .k{font-size:11px;color:var(--muted)}
+.ev.dl .t{color:var(--brand)}
+.ev.done-ev .nm{text-decoration:line-through;color:var(--muted)}
+.mini{border:1px solid var(--line);background:transparent;border-radius:3px;font-size:11.5px;padding:1px 6px;cursor:pointer;color:var(--muted)}
+form.add{border-top:1px solid var(--line);padding:12px 16px 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+form.add label{font-size:11.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px;min-width:0}
+form.add .full{grid-column:1/-1}
+form.add input,form.add select{border:1px solid var(--line);background:var(--paper);border-radius:4px;padding:6px 8px;min-width:0;width:100%}
+.btn{border:0;background:var(--blue);color:var(--on-brand);border-radius:999px;padding:8px 12px;font-weight:600;cursor:pointer}
+.status{font-size:12px;color:var(--muted);grid-column:1/-1;min-height:1em}
+.upcoming{padding:12px 16px;display:flex;flex-direction:column;gap:2px}
+
+@media (max-width:960px){.grid{grid-template-columns:minmax(0,1fr)}.side{position:static}}
+@media (max-width:560px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}.strip>div:nth-child(3){border-left:0}.strip>div:nth-child(n+3){border-top:1px solid var(--line)}
+  .row{grid-template-columns:54px minmax(0,1fr) 32px;gap:10px;padding:12px}h1{font-size:22px}header.top{padding:18px 18px 44px}.hero-r{align-items:flex-start}.stamp{text-align:left}}
+@media (prefers-reduced-motion:no-preference){.row{transition:background .15s}.row:hover{background:var(--paper)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="mark-bg"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="2" fill="var(--logo)"/><rect x="22" y="2" width="16" height="4.6" rx="1.5" fill="var(--logo)"/><rect x="22" y="7.7" width="16" height="4.6" rx="1.5" fill="var(--logo)"/><rect x="22" y="13.4" width="10" height="4.6" rx="1.5" fill="var(--logo)"/><circle cx="10" cy="30" r="8" fill="var(--logo)"/><path d="M23 22 L38 30 L23 38 Z" fill="#3b3b3b"/></svg></div>
+      <div>
+        <div class="grp">모두의교육그룹 경영기획팀</div><h1>정보 데스크</h1>
+        <p class="sub">중소기업 교육·HRD·AI/AX·산업안전 지원사업 · 나라장터 용역 입찰 · 내 업무 일정</p>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="wx" id="wx" hidden aria-live="polite"></div>
+      <div class="stamp">공고 기준일 <b class="num" id="asOf">2026-10-27</b> · <span id="srcNote">평일 매일 자동 갱신</span></div>
+    </div>
+  </header>
+  <form class="searchbar" id="sForm" role="search" autocomplete="off">
+    <select id="sEng" aria-label="검색 엔진"><option value="google">Google</option><option value="naver">Naver</option><option value="perplexity">Perplexity</option><option value="chatgpt">ChatGPT</option></select>
+    <input id="sQ" type="search" placeholder="검색어를 입력하세요" aria-label="검색어">
+    <a class="go" id="sGo" href="https://www.google.com/" target="_blank" rel="noopener">검색</a>
+  </form>
+
+  <section class="strip" aria-label="요약">
+    <div class="hot"><div class="k">7일 내 마감</div><div class="v" id="sHot">0<small>건</small></div></div>
+    <div><div class="k">접수 중 지원사업 <span id="sMetro"></span></div><div class="v" id="sGrant">0<small>건</small></div></div>
+    <div><div class="k">용역 입찰·사전규격</div><div class="v" id="sBid">0<small>건</small></div></div>
+    <div><div class="k">이번 주 내 일정</div><div class="v" id="sWeek">0<small>건</small></div></div>
+  </section>
+
+  <div class="grid">
+    <div class="main-col">
+      <section class="panel brief" aria-labelledby="h-brief">
+        <div class="ph"><h2 id="h-brief">오늘의 신사업 아이디어 브리핑</h2><span class="meta" id="bMeta">일일 신사업 아이디어 Briefing 보고서 요약 · 평일 08:30</span></div>
+        <div id="bBody"><div class="bempty">브리핑 요약을 불러오는 중입니다.</div></div>
+      </section>
+
+      <section class="panel" aria-labelledby="h-grant">
+        <div class="ph"><h2 id="h-grant">정부지원사업 공고</h2><span class="meta">과기정통부 · 행정안전부 · 고용노동부 · NIPA · NIA · 기업마당 · 산업인력공단 · 안전보건공단 등</span></div>
+        <div class="tools">
+          <div id="gChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+          <select class="search" id="gMin" aria-label="소관부처" style="flex:0 1 170px"><option value="">소관부처 전체</option></select>
+          <input class="search" id="gSearch" type="search" placeholder="사업명·기관 검색" aria-label="지원사업 검색">
+          <label class="toggle"><input type="checkbox" id="gHide" checked> 마감 숨김</label>
+          <label class="toggle"><input type="checkbox" id="gMine"> 전국·수도권만</label>
+        </div>
+        <div class="rkey">우리 회사(서울) 기준: <span><span class="rg nat">전국</span>전국 단위</span><span><span class="rg metro">수도권</span>서울·경기·인천</span><span><span class="rg unk">지역 확인</span>공고문 확인 필요</span><span><span class="rg local">타 지역</span>흐리게 표시</span></div>
+        <ul class="list" id="gList"></ul>
+        <div class="note">신청기간·자격은 반드시 원문 공고에서 다시 확인하세요. ☆를 누르면 마감일이 오른쪽 일정에 표시됩니다.</div>
+      </section>
+
+      <section class="panel" aria-labelledby="h-bid">
+        <div class="ph"><h2 id="h-bid">나라장터 용역 입찰공고</h2><span class="meta">키워드 검색 적용 용역 입찰</span></div>
+        <div class="tools">
+          <div id="bChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+          <div class="kwline">검색 키워드 <span id="kwList"></span></div>
+          <input class="search" id="bSearch" type="search" placeholder="공고명·발주기관 검색" aria-label="입찰공고 검색">
+          <label class="toggle"><input type="checkbox" id="bMine"> 전국·수도권만</label>
+        </div>
+        <ul class="list" id="bList"></ul>
+        <div class="note">마감일은 수집 시점의 D-day로 계산한 값입니다. 투찰 마감 시각·참가자격 등록 마감은 나라장터 공고문 기준입니다.</div>
+      </section>
+    </div>
+
+    <aside class="side">
+      <section class="panel" aria-labelledby="h-cal">
+        <div class="ph"><h2 id="h-cal">업무 일정</h2><span class="meta" id="saveState">일정 불러오는 중…</span></div>
+        <div class="cal-h">
+          <button class="nav" id="prevM" aria-label="이전 달">‹</button>
+          <b id="monthLbl">2026.10</b>
+          <button class="nav" id="nextM" aria-label="다음 달">›</button>
+        </div>
+        <div class="cal" id="cal"></div>
+        <div class="legend"><span style="--c:var(--blue)">내 일정</span><span style="--c:var(--brand)">관심 공고 마감</span></div>
+        <div class="agenda" id="agenda"></div>
+        <form class="add" id="addForm" autocomplete="off">
+          <label class="full">일정 제목<input id="fTitle" required maxlength="80" placeholder="예: AI훈련확산센터 신청서 작성"></label>
+          <label>날짜<input id="fDate" type="date" required></label>
+          <label>시간<input id="fTime" type="time"></label>
+          <label>구분<select id="fKind"><option>업무</option><option>제안서</option><option>교육 운영</option><option>회의</option><option>제출·마감</option></select></label>
+          <label>메모<input id="fMemo" maxlength="120" placeholder="선택"></label>
+          <button class="btn full" type="submit">일정 추가</button>
+          <div class="status" id="fStatus" role="status"></div>
+        </form>
+      </section>
+      <section class="panel" aria-labelledby="h-up">
+        <div class="ph"><h2 id="h-up">다가오는 14일</h2></div>
+        <div class="upcoming" id="upcoming"></div>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script>
+/* GitHub Pages용: Claude 저장소가 없을 때 브라우저 저장소(localStorage)와 같은 폴더의 JSON 파일을 대신 사용 */
+const LocalDB=(()=>{const K="desk:",subs={};
+ const remote={"feed/current":"desk-feed.json","briefing/latest":"desk-briefing.json","weather/today":"desk-weather.json"};
+ const read=p=>{try{return JSON.parse(localStorage.getItem(K+p))}catch(e){return null}};
+ const write=(p,v)=>{try{localStorage.setItem(K+p,JSON.stringify(v))}catch(e){throw{code:"unavailable"}}};
+ const emit=k=>(subs[k]||[]).forEach(f=>f());
+ const snap=(id,d)=>({id,exists:d!=null,data:()=>d,metadata:{fromCache:false,hasPendingWrites:false}});
+ const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+ function idx(c,id,add){const l=read("idx:"+c)||[];const i=l.indexOf(id);if(add&&i<0)l.push(id);if(!add&&i>=0)l.splice(i,1);write("idx:"+c,l)}
+ function doc(p){const parts=p.split("/"),id=parts.pop(),c=parts.join("/");
+  return{id,path:p,
+   onSnapshot(next){if(remote[p]){fetch(remote[p],{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>next(snap(id,d))).catch(()=>next(snap(id,null)));return()=>{}}
+     const f=()=>next(snap(id,read(p)));(subs[p]=subs[p]||[]).push(f);f();return()=>{}},
+   async set(d){if(remote[p])throw{code:"invalid_argument"};write(p,d);idx(c,id,true);emit(p);emit("col:"+c)},
+   async update(d){const cur=read(p);if(!cur)throw{code:"invalid_argument"};write(p,{...cur,...d});emit(p);emit("col:"+c)},
+   async delete(){try{localStorage.removeItem(K+p)}catch(e){};idx(c,id,false);emit(p);emit("col:"+c)}}}
+ function collection(c){return{path:c,doc:id=>doc(c+"/"+(id||newId())),
+   async add(v){const d=doc(c+"/"+newId());await d.set(v);return d},
+   onSnapshot(next){const f=()=>{const docs=(read("idx:"+c)||[]).map(i=>snap(i,read(c+"/"+i))).filter(x=>x.exists);next({docs,size:docs.length,empty:!docs.length,docChanges:()=>[],metadata:{fromCache:false,hasPendingWrites:false}})};(subs["col:"+c]=subs["col:"+c]||[]).push(f);f();return()=>{}}}}
+ return{doc,collection};
+})();
+/* 2026-10-27 기준 수집 스냅샷. 자동 갱신 작업이 저장소의 feed/current 문서를 덮어쓰면 그 값이 우선합니다. */
+const SNAPSHOT = {
+ "updatedAt": "2026-10-27",
+ "source": "기업마당·NIPA·NIA·HRD4U·행정안전부·전자신문·오늘지원(나라장터 수집) 2026-10-27 수집",
+ "grants": [
+  {
+   "id": "g01",
+   "title": "2026년 기업훈련 탄력운영제 참여기업 모집",
+   "org": "고용노동부 · 한국산업인력공단",
+   "start": "2026-01-02",
+   "end": "2026-11-30",
+   "cat": [
+    "교육·HRD"
+   ],
+   "note": "신기술 29개 분야 훈련비 기준단가 최대 300% 지원, 예산 소진 시 종료",
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000116853",
+   "region": "전국",
+   "ministry": "고용노동부"
+  },
+  {
+   "id": "g02",
+   "title": "2026년 체계적 현장훈련(S-OJT) 일반유형 참여기업 모집",
+   "org": "한국산업인력공단",
+   "start": "2026-01-02",
+   "end": "2026-10-30",
+   "cat": [
+    "교육·HRD"
+   ],
+   "note": "우선지원대상기업 상시 접수",
+   "url": "https://www.hrd4u.or.kr/hrd4u_new/bbs/view/B0000051/210.do?menuNo=0401",
+   "region": "전국",
+   "ministry": "고용노동부"
+  },
+  {
+   "id": "g03",
+   "title": "[충남·충북·대전·세종] 2026년 중소기업 AI훈련확산센터 참여기업 모집",
+   "org": "고용노동부",
+   "start": "2026-08-21",
+   "end": "2026-12-31",
+   "cat": [
+    "교육·HRD",
+    "AI·AX"
+   ],
+   "note": "서울·인천·경기·강원권은 별도 공고로 모집 — 수도권용 공고를 확인하세요",
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "충남·충북·대전·세종",
+   "ministry": "고용노동부"
+  },
+  {
+   "id": "g04",
+   "title": "고용노동부(안전보건공단) 연계 스마트 안전장비지원 품목 등록 시행계획",
+   "org": "과학기술정보통신부 · NIPA · 안전보건공단",
+   "start": "2026-10-01",
+   "end": "2026-10-30",
+   "cat": [
+    "산업안전",
+    "AI·AX"
+   ],
+   "note": "과기정통부 지원 과제 중 스마트 안전장비 보유 기업",
+   "url": "https://www.nipa.kr/home/2-2",
+   "region": "전국",
+   "ministry": "과학기술정보통신부"
+  },
+  {
+   "id": "g05",
+   "title": "2026년 중소사업장 유해화학물질 취급시설 안전관리 지원",
+   "org": "기후에너지환경부 · 한국환경공단",
+   "start": "2026-06-25",
+   "end": "2026-10-30",
+   "cat": [
+    "화학물질",
+    "산업안전"
+   ],
+   "note": "무상 지원, 수요에 따라 조기 마감 가능",
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전국",
+   "ministry": "기후에너지환경부"
+  },
+  {
+   "id": "g06",
+   "title": "2026년 생활화학제품 안전관리 컨설팅 지원사업 참여기업 모집",
+   "org": "기후에너지환경부",
+   "start": null,
+   "end": "2026-10-30",
+   "cat": [
+    "화학물질",
+    "바우처·컨설팅"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전국",
+   "ministry": "기후에너지환경부"
+  },
+  {
+   "id": "g07",
+   "title": "2026년 3차 안전일터 조성지원 사업(수정 공고)",
+   "org": "고용노동부 · 한국산업안전보건공단",
+   "start": null,
+   "end": null,
+   "cat": [
+    "산업안전"
+   ],
+   "note": "50인 미만 등, 사업주당 최대 3,000만원(70%) · 세부사업별 접수기간 상이",
+   "url": "https://www.kosha.or.kr/",
+   "region": "전국",
+   "ministry": "고용노동부"
+  },
+  {
+   "id": "g08",
+   "title": "[울산] 2026년 5차 소규모사업장 노후 안전시설 개선 지원 상시 모집",
+   "org": "울산광역시",
+   "start": "2026-09-17",
+   "end": "2026-12-31",
+   "cat": [
+    "산업안전"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "울산",
+   "ministry": "지자체"
+  },
+  {
+   "id": "g09",
+   "title": "[경북] 구미 국가산단 스마트 안전솔루션 서비스 수혜기업 모집",
+   "org": "경상북도",
+   "start": "2026-10-16",
+   "end": "2026-12-31",
+   "cat": [
+    "산업안전",
+    "AI·AX"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "경북",
+   "ministry": "지자체"
+  },
+  {
+   "id": "g10",
+   "title": "2026년 철강·금속 인공지능전환(AX) 실증센터 기업지원 기초단계 모집",
+   "org": "산업통상부 · 한국산업기술시험원",
+   "start": "2026-10-22",
+   "end": "2026-10-30",
+   "cat": [
+    "AI·AX"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": null,
+   "ministry": "산업통상부"
+  },
+  {
+   "id": "g11",
+   "title": "[전남광주] 아태 AI 특화지구(AHAP) 올인원 AI 허브 제조 AX 실증 수행기업 모집",
+   "org": "전남광주통합특별시",
+   "start": "2026-10-22",
+   "end": "2026-10-29",
+   "cat": [
+    "AI·AX"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전남광주",
+   "ministry": "지자체"
+  },
+  {
+   "id": "g12",
+   "title": "2026년 중소기업기술개발지원사업 모의평가 프로그램 접수",
+   "org": "중소벤처기업부",
+   "start": "2026-10-29",
+   "end": "2026-11-05",
+   "cat": [
+    "바우처·컨설팅"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전국",
+   "ministry": "중소벤처기업부"
+  },
+  {
+   "id": "g13",
+   "title": "[충북] 청주시 시제품 고도화 바우처 지원 프로그램 참여기업 모집",
+   "org": "충북대학교",
+   "start": "2026-10-22",
+   "end": "2026-11-03",
+   "cat": [
+    "바우처·컨설팅"
+   ],
+   "url": "https://thevc.kr/grants",
+   "region": "충북",
+   "ministry": "지자체"
+  },
+  {
+   "id": "g14",
+   "title": "[전북] 2026년 3차 중소기업 정보보호 지원 사업 수요기업 모집",
+   "org": "전북특별자치도",
+   "start": "2026-10-23",
+   "end": "2026-11-06",
+   "cat": [
+    "바우처·컨설팅"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전북",
+   "ministry": "지자체"
+  },
+  {
+   "id": "g15",
+   "title": "2026년 중소사업자 개인정보 안전조치 모니터링 지원",
+   "org": "개인정보 분야(기업마당 게시)",
+   "start": "2026-04-06",
+   "end": "2026-12-31",
+   "cat": [
+    "바우처·컨설팅",
+    "법정교육"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전국",
+   "ministry": "기타"
+  },
+  {
+   "id": "g16",
+   "title": "2026년 7차 재취업지원서비스 기업컨설팅 지원 사업장 모집",
+   "org": "고용 분야(기업마당 게시)",
+   "start": "2026-10-14",
+   "end": "2026-11-02",
+   "cat": [
+    "고용·인력",
+    "바우처·컨설팅"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전국",
+   "ministry": "기타"
+  },
+  {
+   "id": "g17",
+   "title": "[경기] 상생 노무컨설팅 참여 사업장 모집",
+   "org": "경기도",
+   "start": "2026-10-22",
+   "end": "2026-11-20",
+   "cat": [
+    "고용·인력",
+    "바우처·컨설팅"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "경기",
+   "ministry": "지자체"
+  },
+  {
+   "id": "g18",
+   "title": "2026년 우수인재 연계 기업인턴십 참여기업 수시모집",
+   "org": "기업마당 게시",
+   "start": "2026-08-12",
+   "end": "2026-11-06",
+   "cat": [
+    "고용·인력"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전국",
+   "ministry": "기타"
+  },
+  {
+   "id": "g19",
+   "title": "2026년 제2차 고용노동부 예비사회적기업 지정 계획",
+   "org": "고용노동부",
+   "start": "2026-09-28",
+   "end": "2026-11-06",
+   "cat": [
+    "고용·인력"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "전국",
+   "ministry": "고용노동부"
+  },
+  {
+   "id": "g20",
+   "title": "[부산] 2026년 스마트공장 사전사후 컨설팅사업",
+   "org": "부산광역시",
+   "start": "2026-09-28",
+   "end": "2026-11-30",
+   "cat": [
+    "AI·AX",
+    "바우처·컨설팅"
+   ],
+   "url": "https://www.bizinfo.go.kr/",
+   "region": "부산",
+   "ministry": "지자체"
+  },
+  {
+   "id": "g21",
+   "title": "2026년 중소기업 정보보호 지원사업 수요기업 모집",
+   "org": "과학기술정보통신부 · 인천테크노파크",
+   "ministry": "과학기술정보통신부",
+   "region": "인천",
+   "start": "2026-06-30",
+   "end": "2026-11-30",
+   "cat": [
+    "바우처·컨설팅"
+   ],
+   "note": "정보보호 컨설팅·보안 솔루션 비용 80% 지원, 예산 소진 시 조기 마감 · 서울 소재는 서울 지역정보보호지원센터 공고도 확인",
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000123800"
+  },
+  {
+   "id": "g22",
+   "title": "6G 서비스 시나리오 공모전 (기업부문 · 6G 시연 기획 트랙)",
+   "org": "과학기술정보통신부 · 정보통신기획평가원",
+   "ministry": "과학기술정보통신부",
+   "region": "전국",
+   "start": "2026-10-08",
+   "end": "2026-11-08",
+   "cat": [
+    "AI·AX"
+   ],
+   "note": "시연 기획 선정 2건은 2027년부터 2년간 과제당 3억 원 이내 개발 지원",
+   "url": "https://m.etnews.com/20261015000405"
+  },
+  {
+   "id": "g23",
+   "title": "2026년도 미래개척융합과학기술개발사업(한계돌파 R&D) 신규과제 공모",
+   "org": "과학기술정보통신부 · 한국연구재단",
+   "ministry": "과학기술정보통신부",
+   "region": "전국",
+   "start": "2026-10-26",
+   "end": "2026-11-13",
+   "cat": [
+    "R&D"
+   ],
+   "note": "대학·출연연·기업 단독 또는 컨소시엄 신청",
+   "url": "https://www.bizinfo.go.kr/"
+  },
+  {
+   "id": "g24",
+   "title": "2026년 AI 기반 주파수 간섭분석 및 전파예측기술 개발사업 신규지원 대상과제",
+   "org": "과학기술정보통신부(전파 분야 R&D)",
+   "ministry": "과학기술정보통신부",
+   "region": "전국",
+   "start": "2026-11-03",
+   "end": "2026-11-16",
+   "cat": [
+    "R&D",
+    "AI·AX"
+   ],
+   "url": "https://www.bizinfo.go.kr/"
+  },
+  {
+   "id": "g25",
+   "title": "2026년 안전교육 전문인력 등록계획 공고",
+   "org": "행정안전부 · 국민안전교육플랫폼",
+   "ministry": "행정안전부",
+   "region": "전국",
+   "start": null,
+   "end": null,
+   "period": "확인",
+   "cat": [
+    "교육·HRD",
+    "산업안전",
+    "법정교육"
+   ],
+   "note": "안전교육 강사 등 전문인력 등록 · 접수기간은 공고문에서 확인",
+   "url": "https://www.mois.go.kr/frt/bbs/type013/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000006&nttId=128558"
+  },
+  {
+   "id": "g26",
+   "title": "2026년도 3차 국민생활안전 긴급대응연구(2단계) 기술개발 및 실증 신규과제 공모",
+   "org": "행정안전부",
+   "ministry": "행정안전부",
+   "region": "전국",
+   "start": null,
+   "end": null,
+   "period": "확인",
+   "cat": [
+    "R&D",
+    "산업안전"
+   ],
+   "note": "접수기간은 공고문에서 확인",
+   "url": "https://www.mois.go.kr/frt/bbs/type013/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000006&nttId=127761"
+  }
+ ],
+ "bids": [
+  {
+   "id": "b02",
+   "title": "교육 AX 대전환 웰컴투 NEW 경기교육 행사 용역",
+   "org": "경기도교육청",
+   "amount": "1.6억 원",
+   "end": "2026-11-07",
+   "stage": "입찰",
+   "cat": [
+    "교육 운영",
+    "AI·AX"
+   ],
+   "url": "https://todayjiwon.co.kr/procurement/84f2f418-2103-432f-9f00-0fbf5c7ec431",
+   "region": "경기"
+  },
+  {
+   "id": "b05",
+   "title": "26년도 PIM인공지능반도체 핵심기술개발사업 효과분석 및 산업동향조사 연구",
+   "org": "정보통신기획평가원",
+   "amount": "1.1억 원",
+   "end": "2026-11-11",
+   "stage": "입찰",
+   "cat": [
+    "연구·컨설팅",
+    "AI·AX"
+   ],
+   "url": "https://todayjiwon.co.kr/procurement/7f4a508b-895b-434b-bdf8-a8657e479581",
+   "region": "전국"
+  },
+  {
+   "id": "b06",
+   "title": "2027년 과학기술정보 AI 학습데이터 및 학술정보 DB구축",
+   "org": "한국과학기술정보연구원",
+   "amount": "12.6억 원",
+   "end": "2026-11-28",
+   "stage": "입찰",
+   "cat": [
+    "AI·AX"
+   ],
+   "url": "https://todayjiwon.co.kr/procurement/d84316a9-f3ab-440c-af35-c3ad696b58be",
+   "region": "전국"
+  },
+  {
+   "id": "b07",
+   "title": "2027년 공공기관 폭력예방교육 현장점검 및 컨설팅 운영",
+   "org": "조달청 서울지방조달청",
+   "amount": "공고문 확인",
+   "end": null,
+   "stage": "입찰",
+   "posted": "2026-10-22",
+   "cat": [
+    "안전·법정교육",
+    "연구·컨설팅"
+   ],
+   "url": "https://www.modoobid.co.kr/eps/g2b",
+   "region": "전국",
+   "kw": [
+    "법정의무교육"
+   ],
+   "note": "폭력예방교육은 법정의무교육 항목"
+  },
+  {
+   "id": "b09",
+   "title": "국민체감 성과 확산을 위한 공공 AI 서비스 성과관리 용역",
+   "org": "한국지능정보사회진흥원(NIA)",
+   "amount": "공고문 확인",
+   "end": null,
+   "stage": "사전규격",
+   "posted": "2026-10-22",
+   "cat": [
+    "AI·AX",
+    "연구·컨설팅"
+   ],
+   "url": "https://www.nia.or.kr/site/nia_kor/ex/bbs/List.do?cbIdx=78336",
+   "region": null
+  },
+  {
+   "id": "b11",
+   "title": "AI 맞춤형 교수학습 플랫폼 고도화 사업 위탁감리",
+   "org": "한국지능정보사회진흥원(NIA)",
+   "amount": "공고문 확인",
+   "end": null,
+   "stage": "사전규격",
+   "posted": "2026-10-19",
+   "cat": [
+    "AI·AX"
+   ],
+   "url": "https://www.nia.or.kr/site/nia_kor/ex/bbs/List.do?cbIdx=78336",
+   "region": null,
+   "kw": [
+    "디지털 교육"
+   ]
+  },
+  {
+   "id": "b13",
+   "title": "빅데이터혁신융합대학 사업_AI&Bigdata 게임개발 프로그램 운영 용역",
+   "org": "경기과학기술대학교 산학협력단",
+   "region": "전국",
+   "amount": "7,000만 원",
+   "end": "2026-11-07",
+   "stage": "입찰",
+   "posted": "2026-10-26",
+   "cat": [
+    "교육 운영",
+    "AI·AX"
+   ],
+   "url": "https://todayjiwon.co.kr/procurement/426ed029-5247-43ba-b572-3a2784601e0f"
+  },
+  {
+   "id": "b14",
+   "title": "광양만권 철강·금속 기업 AX 기술지원(기초단계) 용역",
+   "org": "한국산업기술시험원",
+   "region": "전국",
+   "amount": "1.4억 원",
+   "end": "2026-11-07",
+   "stage": "입찰",
+   "posted": "2026-10-26",
+   "cat": [
+    "AI·AX"
+   ],
+   "url": "https://todayjiwon.co.kr/procurement/af8e3f84-313f-4caa-87dc-34d42d5039a7"
+  },
+  {
+   "id": "b15",
+   "title": "AX서비스 개발환경 구축 용역",
+   "org": "한국남동발전(주)",
+   "region": "전국",
+   "amount": "7.8억 원",
+   "end": "2026-11-07",
+   "stage": "입찰",
+   "posted": "2026-10-26",
+   "cat": [
+    "AI·AX"
+   ],
+   "url": "https://todayjiwon.co.kr/procurement/a3e0d8d2-c43b-4b34-ac02-d6a09b88268f"
+  },
+  {
+   "id": "b16",
+   "title": "AX-Sprint 300 - AI 기반 수면다원검사 판독자동화 의료기기 승인 컨설팅 용역",
+   "org": "(주)허니냅스",
+   "region": "전국",
+   "amount": "5,500만 원",
+   "end": "2026-11-07",
+   "stage": "입찰",
+   "posted": "2026-10-26",
+   "cat": [
+    "AI·AX",
+    "연구·컨설팅"
+   ],
+   "url": "https://todayjiwon.co.kr/procurement/451517ef-0787-445c-9ad9-8f7b63b1bf9a"
+  }
+ ],
+ "bidKeywords": [
+  "온라인교육",
+  "온라인연수",
+  "원격교육",
+  "법정교육",
+  "법정의무교육",
+  "산업안전보건교육",
+  "관리감독자",
+  "사이버연수",
+  "이러닝",
+  "e-learning",
+  "외국인",
+  "다국어",
+  "콘텐츠",
+  "AI",
+  "AI agent",
+  "AI 에이전트",
+  "AX",
+  "디지털 교육"
+ ]
+};
+
+const GCATS=["전체","교육·HRD","AI·AX","산업안전","화학물질","바우처·컨설팅","고용·인력","법정교육","R&D"];
+const MINS=["과학기술정보통신부","행정안전부","고용노동부","중소벤처기업부","산업통상부","기후에너지환경부","지자체","기타"];
+const KW_GROUPS=[
+ {name:"온라인·이러닝",terms:["온라인교육","온라인 교육","온라인연수","온라인 연수","원격교육","원격 교육","원격연수","사이버연수","사이버 연수","사이버교육","이러닝","e-learning","elearning"]},
+ {name:"법정·안전보건교육",terms:["법정교육","법정의무교육","의무교육","산업안전보건교육","안전보건교육","관리감독자"]},
+ {name:"외국인·다국어",terms:["외국인","다국어"]},
+ {name:"콘텐츠",terms:["콘텐츠","컨텐츠"]},
+ {name:"AI·에이전트",terms:["AI","인공지능","AI agent","AI 에이전트","AI에이전트","에이전트"]},
+ {name:"AX",terms:["AX"]},
+ {name:"디지털 교육",terms:["디지털 교육","디지털교육","디지털배움터","디지털 역량"]}
+];
+const BCATS=["전체",...KW_GROUPS.map(g=>g.name)];
+function hasTerm(text,t){if(/^[A-Za-z]+$/.test(t)){return new RegExp("(^|[^A-Za-z])"+t+"([^A-Za-z]|$)","i").test(text)}return text.toLowerCase().includes(t.toLowerCase())}
+function kwGroups(it){const text=it.title+" "+(it.kw||[]).join(" ");return KW_GROUPS.filter(g=>g.terms.some(t=>hasTerm(text,t))).map(g=>g.name)}
+let feed=SNAPSHOT, stars=new Set(), events=[], db=null, dbReady=false;
+let gCat="전체", bCat="전체";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function ymd(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function parse(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
+const TODAY=(()=>{const t=new Date();return new Date(t.getFullYear(),t.getMonth(),t.getDate())})();
+function dleft(s){return s?Math.round((parse(s)-TODAY)/864e5):null}
+function fmt(s){if(!s)return"";const d=parse(s);return (d.getMonth()+1)+"."+d.getDate()}
+
+function badge(item){
+  if(item.start && dleft(item.start)>0) return {cls:"open",txt:"예정",sub:fmt(item.start)+" 시작"};
+  const n=dleft(item.end);
+  if(item.period==="확인") return {cls:"always",txt:"확인",sub:"기간 공고 확인"};
+  if(n===null) return {cls:"always",txt:"상시",sub:item.posted?fmt(item.posted)+" 게시":"공고 확인"};
+  if(n<0) return {cls:"done",txt:"마감",sub:fmt(item.end)};
+  if(n===0) return {cls:"crit",txt:"D-day",sub:"오늘 마감"};
+  return {cls:n<=7?"crit":n<=14?"soon":"open",txt:"D-"+n,sub:fmt(item.end)+" 마감"};
+}
+function scope(r){if(!r)return"unk";if(/전국/.test(r))return"nat";if(/^(서울|경기|인천|수도권)/.test(r)||/수도권/.test(r))return"metro";return"local"}
+function rgPill(r){const k=scope(r);const t=k==="nat"?"전국":k==="metro"?(r==="수도권"?"수도권":"수도권 · "+r):k==="unk"?"지역 확인":r;return `<span class="rg ${k}"${k==="local"?' title="서울 소재 기업은 대상이 아닐 수 있습니다"':""}>${esc(t)}</span>`}
+const mine=it=>{const k=scope(it.region);return k==="nat"||k==="metro"||k==="unk"};
+const starSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z"/></svg>';
+
+function chips(el,cats,cur,set){
+  el.innerHTML=cats.map(c=>`<button class="chip" type="button" aria-pressed="${c===cur}">${esc(c)}</button>`).join("");
+  [...el.children].forEach((b,i)=>b.onclick=()=>{set(cats[i]);render()});
+}
+function sortKey(it){const n=dleft(it.end);if(n===null)return 900;if(n<0)return 2000-n;return n}
+function rowHtml(it,kind){
+  const b=badge(it),on=stars.has(it.id);
+  const period=kind==="g"
+    ? (it.start||it.end?`<span class="num">${it.start?esc(it.start):"—"} ~ ${it.end?esc(it.end):"상시"}</span>`:`<span>접수기간 공고 확인</span>`)
+    : `<span>${esc(it.stage)}</span><span class="num">${esc(it.amount)}</span>`+(it.end?`<span class="num">마감 ${esc(it.end)}</span>`:"");
+  return `<li class="row${b.cls==="done"?" is-done":""}${scope(it.region)==="local"?" is-local":""}">
+    <div class="dd ${b.cls}">${b.txt}<small>${esc(b.sub)}</small></div>
+    <div style="min-width:0">${rgPill(it.region)}<a class="ttl" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>
+      <div class="info"><span>${esc(it.org)}</span>${period}</div>
+      ${it.note?`<div class="info">${esc(it.note)}</div>`:""}
+      <div class="tags">${kind==="b"?kwGroups(it).map(c=>`<span class="tag kw">${esc(c)}</span>`).join(""):(it.cat||[]).map(c=>`<span class="tag">${esc(c)}</span>`).join("")}</div></div>
+    <button class="star" type="button" data-id="${esc(it.id)}" aria-pressed="${on}" aria-label="관심 공고 ${on?"해제":"지정"}" title="관심 공고(마감일을 일정에 표시)">${starSvg}</button>
+  </li>`;
+}
+function renderLists(){
+  const gq=$("gSearch").value.trim(), bq=$("bSearch").value.trim(), hide=$("gHide").checked;
+  let g=feed.grants.filter(it=>(gCat==="전체"||it.cat.includes(gCat))&&(!gq||(it.title+it.org).includes(gq))&&(!hide||!(dleft(it.end)<0))&&(!$("gMine").checked||mine(it))&&(!$("gMin").value||(it.ministry||"기타")===$("gMin").value));
+  g.sort((a,b)=>sortKey(a)-sortKey(b));
+  $("gList").innerHTML=g.length?g.map(it=>rowHtml(it,"g")).join(""):`<li class="empty">조건에 맞는 공고가 없습니다. 분야를 '전체'로 바꾸거나 검색어를 지워 보세요.</li>`;
+  let bl=feed.bids.filter(it=>(bCat==="전체"||kwGroups(it).includes(bCat))&&(!bq||(it.title+it.org).includes(bq))&&!(dleft(it.end)<0)&&(!$("bMine").checked||mine(it)));
+  bl.sort((a,b)=>sortKey(a)-sortKey(b));
+  $("bList").innerHTML=bl.length?bl.map(it=>rowHtml(it,"b")).join(""):`<li class="empty">조건에 맞는 입찰공고가 없습니다.</li>`;
+  document.querySelectorAll(".star").forEach(btn=>btn.onclick=()=>toggleStar(btn.dataset.id));
+}
+function renderStrip(){
+  const all=[...feed.grants,...feed.bids];
+  const hot=all.filter(it=>{const n=dleft(it.end);return n!==null&&n>=0&&n<=7&&!(it.start&&dleft(it.start)>0)}).length;
+  $("sHot").innerHTML=hot+"<small>건</small>";
+  $("sGrant").innerHTML=feed.grants.filter(it=>!(dleft(it.end)<0)&&!(it.start&&dleft(it.start)>0)).length+"<small>건</small>";
+  const openG=feed.grants.filter(it=>!(dleft(it.end)<0)&&!(it.start&&dleft(it.start)>0));
+  $("sMetro").textContent="(전국·수도권 "+openG.filter(it=>["nat","metro"].includes(scope(it.region))).length+")";
+  $("sBid").innerHTML=feed.bids.filter(it=>!(dleft(it.end)<0)).length+"<small>건</small>";
+  const wk=allItems().filter(x=>{const n=dleft(x.date);return n>=0&&n<=7}).length;
+  $("sWeek").innerHTML=wk+"<small>건</small>";
+  $("asOf").textContent=feed.updatedAt;
+}
+
+/* 일정: 내 일정 + 관심 공고 마감일 */
+function allItems(){
+  const dl=[...feed.grants,...feed.bids].filter(it=>stars.has(it.id)&&it.end).map(it=>({id:"dl-"+it.id,date:it.end,time:"",title:it.title,kind:"공고 마감",dl:true,url:it.url}));
+  return [...events.map(e=>({...e,dl:false})),...dl].sort((a,b)=>(a.date+(a.time||"99")).localeCompare(b.date+(b.time||"99")));
+}
+let viewY=TODAY.getFullYear(), viewM=TODAY.getMonth(), sel=ymd(TODAY);
+function renderCal(){
+  $("monthLbl").textContent=viewY+"."+String(viewM+1).padStart(2,"0");
+  const items=allItems(), by={};
+  items.forEach(x=>{(by[x.date]=by[x.date]||[]).push(x)});
+  const first=new Date(viewY,viewM,1), startDow=first.getDay();
+  let html=["일","월","화","수","목","금","토"].map(w=>`<div class="wd">${w}</div>`).join("");
+  for(let i=0;i<42;i++){
+    const d=new Date(viewY,viewM,1-startDow+i), k=ymd(d), list=by[k]||[];
+    const cls=["day",d.getMonth()!==viewM?"out":"",k===ymd(TODAY)?"today":"",k===sel?"sel":""].join(" ");
+    const dots=(list.some(x=>!x.dl)?'<i class="e"></i>':"")+(list.some(x=>x.dl)?'<i class="s"></i>':"");
+    html+=`<button type="button" class="${cls}" data-d="${k}" aria-label="${k} 일정 ${list.length}건">${d.getDate()}<span class="dots">${dots}</span></button>`;
+  }
+  $("cal").innerHTML=html;
+  $("cal").querySelectorAll(".day").forEach(b=>b.onclick=()=>{sel=b.dataset.d;$("fDate").value=sel;renderCal()});
+  const day=by[sel]||[], sd=parse(sel);
+  $("agenda").innerHTML=`<h3>${sd.getMonth()+1}월 ${sd.getDate()}일 (${"일월화수목금토"[sd.getDay()]})</h3>`+
+    (day.length?day.map(evHtml).join(""):`<div class="k" style="font-size:12.5px;color:var(--muted)">이날 일정이 없습니다. 아래에서 추가하세요.</div>`);
+  bindEv($("agenda"));
+  const up=items.filter(x=>{const n=dleft(x.date);return n>=0&&n<=14});
+  $("upcoming").innerHTML=up.length?up.map(x=>evHtml(x,true)).join(""):`<div style="color:var(--muted);font-size:12.5px">14일 안에 잡힌 일정이 없습니다. 관심 공고에 ☆를 누르면 마감일이 여기에 뜹니다.</div>`;
+  bindEv($("upcoming"));
+}
+function evHtml(x,withDate){
+  const t=withDate?`<span class="num">${fmt(x.date)}</span>${x.time?" "+esc(x.time):""}`:(x.time?esc(x.time):(x.dl?"마감":"종일"));
+  const name=x.dl?`<a href="${esc(x.url)}" target="_blank" rel="noopener" style="text-decoration:none">${esc(x.title)}</a>`:esc(x.title);
+  const act=x.dl?"":`<span style="display:flex;gap:4px"><button class="mini" data-act="done" data-id="${esc(x.id)}">${x.done?"되돌림":"완료"}</button><button class="mini" data-act="del" data-id="${esc(x.id)}" aria-label="삭제">✕</button></span>`;
+  return `<div class="ev${x.dl?" dl":""}${x.done?" done-ev":""}"><span class="t">${t}</span><div style="min-width:0"><div class="nm">${name}</div><div class="k">${esc(x.kind)}${x.memo?" · "+esc(x.memo):""}</div></div>${act}</div>`;
+}
+function bindEv(root){
+  root.querySelectorAll("button.mini").forEach(b=>b.onclick=async()=>{
+    const id=b.dataset.id, ev=events.find(e=>e.id===id); if(!ev)return;
+    if(!dbReady){$("fStatus").textContent="저장소에 연결되지 않아 변경할 수 없습니다.";return}
+    try{
+      if(b.dataset.act==="del"){ if(b.dataset.armed!=="1"){b.dataset.armed="1";b.textContent="삭제?";setTimeout(()=>{b.dataset.armed="";b.textContent="✕"},2500);return}
+        await db.collection("events").doc(id).delete(); }
+      else await db.collection("events").doc(id).update({done:!ev.done});
+    }catch(e){$("fStatus").textContent="변경하지 못했습니다. 잠시 후 다시 시도하세요."}
+  });
+}
+async function toggleStar(id){
+  stars.has(id)?stars.delete(id):stars.add(id);
+  render();
+  if(dbReady){try{await db.doc("prefs/stars").set({ids:[...stars]})}catch(e){$("saveState").textContent="관심 공고 저장 실패"}}
+}
+function renderKw(){const k=(feed.bidKeywords&&feed.bidKeywords.length?feed.bidKeywords:SNAPSHOT.bidKeywords)||[];$("kwList").innerHTML=k.map(t=>`<span>${esc(t)}</span>`).join("")}
+let brief=null;
+function renderBrief(){
+  const el=$("bBody");
+  if(!brief){el.innerHTML='<div class="bempty">아직 요약이 없습니다. 평일 08:30 「일일 신사업 아이디어 Briefing 보고서」 작업이 끝나면 핵심 이슈 3건, 신사업 아이디어, 이번 주 추진 과제가 여기에 표시됩니다. 원본 한글 파일은 조간보고 폴더에 저장됩니다.</div>';return}
+  const d=parse(brief.date),dl=dleft(brief.date);
+  $("bMeta").innerHTML=`<b class="num">${esc(brief.date)}</b> 보고서${dl<0?` · ${-dl}일 전`:""}${brief.file?` · ${esc(brief.file)}`:""}`;
+  const iss=(brief.issues||[]).slice(0,3).map((x,i)=>`<div class="iss"><span class="n">${i+1}</span><div style="min-width:0"><div>${esc(x.title)}</div><div class="c">${esc([x.cat,x.summary].filter(Boolean).join(" · "))}</div></div></div>`).join("");
+  const kw=[...(brief.keywords?.policy||[]),...(brief.keywords?.social||[]),...(brief.keywords?.tech||[])].slice(0,12).map(k=>`<span>${esc(k)}</span>`).join("");
+  const ideas=(brief.ideas||[]).slice(0,3).map(x=>`<div class="idea"><b>${esc(x.name)}</b><div>${(x.target?`<span class="tg">${esc(x.target)}</span>`:"")}${esc(x.problem||"")}</div>${x.model?`<div class="m">수익: ${esc(x.model)}</div>`:""}${x.policy?`<div class="m">연계: ${esc(x.policy)}</div>`:""}</div>`).join("");
+  const acts=(brief.actions||[]).slice(0,2).map(a=>`<span class="act"><span>${esc(a)}</span></span>`).join("");
+  el.innerHTML=`<div class="bgrid"><div class="bcol"><div class="bh">핫 이슈 · 정부 정책</div>${iss||'<div class="iss"><span></span><div class="c">이슈 없음</div></div>'}${kw?`<div class="bh" style="margin-top:4px">추천 키워드</div><div class="kwc">${kw}</div>`:""}</div><div class="bcol"><div class="bh">신사업 아이디어</div>${ideas}</div></div>${acts?`<div class="bfoot"><span class="bh">이번 주 추진</span>${acts}</div>`:""}`;
+}
+function render(){renderKw();renderBrief();chips($("gChips"),GCATS,gCat,c=>gCat=c);chips($("bChips"),BCATS,bCat,c=>bCat=c);renderLists();renderCal();renderStrip()}
+
+$("gSearch").oninput=renderLists;$("bSearch").oninput=renderLists;$("gMin").innerHTML+=MINS.map(m=>`<option>${m}</option>`).join("");$("gMin").onchange=renderLists;
+$("gHide").onchange=renderLists;$("gMine").onchange=renderLists;$("bMine").onchange=renderLists;
+$("prevM").onclick=()=>{viewM--;if(viewM<0){viewM=11;viewY--}renderCal()};
+$("nextM").onclick=()=>{viewM++;if(viewM>11){viewM=0;viewY++}renderCal()};
+$("fDate").value=sel;
+$("addForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!dbReady){$("fStatus").textContent="저장소에 연결되지 않았습니다. 로그인 상태로 페이지를 열어 주세요.";return}
+  const body={title:$("fTitle").value.trim(),date:$("fDate").value,time:$("fTime").value||"",kind:$("fKind").value,memo:$("fMemo").value.trim(),done:false,created:new Date().toISOString()};
+  if(!body.title||!body.date)return;
+  try{await db.collection("events").add(body);$("fStatus").textContent="일정을 추가했습니다.";$("fTitle").value="";$("fMemo").value="";$("fTime").value="";
+    const d=parse(body.date);viewY=d.getFullYear();viewM=d.getMonth();sel=body.date;renderCal()}
+  catch(err){$("fStatus").textContent=err&&err.code==="quota_exceeded"?"저장 공간이 가득 찼습니다. 지난 일정을 삭제해 주세요.":"추가하지 못했습니다. 잠시 후 다시 시도하세요."}
+});
+
+render();
+
+/* 검색창 */
+const ENG={google:q=>"https://www.google.com/search?q="+q,naver:q=>"https://search.naver.com/search.naver?query="+q,perplexity:q=>"https://www.perplexity.ai/search?q="+q,chatgpt:q=>"https://chatgpt.com/?q="+q};
+const HOME={google:"https://www.google.com/",naver:"https://www.naver.com/",perplexity:"https://www.perplexity.ai/",chatgpt:"https://chatgpt.com/"};
+function syncSearch(){const e=$("sEng").value,q=$("sQ").value.trim();$("sGo").href=q?ENG[e](encodeURIComponent(q)):HOME[e]}
+$("sQ").addEventListener("input",syncSearch);$("sEng").addEventListener("change",()=>{syncSearch();try{localStorage.setItem("desk:eng",$("sEng").value)}catch(e){}});
+try{const e=localStorage.getItem("desk:eng");if(e&&ENG[e])$("sEng").value=e}catch(e){}
+syncSearch();
+$("sForm").addEventListener("submit",ev=>{ev.preventDefault();syncSearch();$("sGo").click()});
+
+/* 날씨 (서울 금천구) */
+const WX_URL="https://api.open-meteo.com/v1/forecast?latitude=37.4569&longitude=126.8955&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FSeoul&forecast_days=1";
+function wxDesc(c){c=Number(c);if(c===0)return["☀","맑음"];if(c===1)return["🌤","대체로 맑음"];if(c===2)return["⛅","구름 조금"];if(c===3)return["☁","흐림"];if(c===45||c===48)return["🌫","안개"];if(c>=51&&c<=57)return["🌦","이슬비"];if(c>=61&&c<=67)return["🌧","비"];if(c>=71&&c<=77)return["🌨","눈"];if(c>=80&&c<=82)return["🌦","소나기"];if(c===85||c===86)return["🌨","눈"];if(c>=95)return["⛈","뇌우"];return["🌡",""]}
+function showWx(w){if(!w||(w.temp==null&&w.max==null))return;const [ic,ds]=wxDesc(w.code);const r=v=>v==null?"–":Math.round(v)+"°";
+  $("wx").innerHTML=`<span aria-hidden="true">${ic}</span>${w.temp==null?"":`<b>${r(w.temp)}</b>`}<span>${esc(w.desc||ds)}</span><span class="dot">·</span><span>최고 ${r(w.max)} / 최저 ${r(w.min)}</span><span class="dot">·</span><span>${esc(w.place||"서울 금천구")}</span>${w.live?"":`<span class="dot">·</span><span>${esc(w.at||"")} 기준</span>`}`;
+  $("wx").hidden=false}
+let wxLive=false;
+fetch(WX_URL).then(r=>r.ok?r.json():Promise.reject()).then(j=>{wxLive=true;showWx({temp:j.current.temperature_2m,code:j.current.weather_code,max:j.daily.temperature_2m_max[0],min:j.daily.temperature_2m_min[0],live:true})}).catch(()=>{});
+
+(async()=>{
+  try{db=await window.claude?.use?.("db")}catch(e){db=null}
+  let local=false;
+  if(!db){db=LocalDB;local=true}
+  if(!db){$("saveState").textContent="저장소 미연결 · 보기 전용";$("bBody").innerHTML='<div class="bempty">저장소에 연결되지 않아 브리핑 요약을 불러올 수 없습니다.</div>';return}
+  dbReady=true;$("saveState").textContent=local?"이 브라우저에 저장됨":"자동 저장됨";
+  db.doc("feed/current").onSnapshot(s=>{
+    if(!s.exists)return;const d=s.data();
+    if(d&&Array.isArray(d.grants)&&Array.isArray(d.bids)&&(d.updatedAt||"")>=SNAPSHOT.updatedAt){feed=d;$("srcNote").textContent="평일 매일 07시 자동 갱신";render()}
+  },()=>{});
+  db.doc("weather/today").onSnapshot(s=>{if(!wxLive&&s.exists)showWx(s.data())},()=>{});
+  db.doc("briefing/latest").onSnapshot(s=>{brief=s.exists?s.data():null;renderBrief()},()=>{});
+  db.doc("prefs/stars").onSnapshot(s=>{stars=new Set(s.exists&&Array.isArray(s.data().ids)?s.data().ids:[]);render()},()=>{});
+  db.collection("events").onSnapshot(q=>{events=q.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{$("saveState").textContent="일정 동기화 중단 · 새로고침 필요"});
+})();
+</script>
+
+</body>
+</html>
