@@ -259,7 +259,7 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
         </form>
       </section>
       <section class="panel" aria-labelledby="h-up">
-        <div class="ph"><h2 id="h-up">다가오는 14일</h2></div>
+        <div class="ph"><h2 id="h-up">다가오는 일정</h2><span class="meta">14일 내 일정 + ☆ 관심 공고 전체</span></div>
         <div class="upcoming" id="upcoming"></div>
       </section>
     </aside>
@@ -915,7 +915,7 @@ function renderStrip(){
 
 /* 일정: 내 일정 + 관심 공고 마감일 */
 function allItems(){
-  const dl=[...feed.grants,...feed.bids].filter(it=>stars.has(it.id)&&it.end).map(it=>({id:"dl-"+it.id,date:it.end,time:"",title:it.title,kind:"공고 마감",dl:true,url:it.url}));
+  const dl=[...feed.grants,...feed.bids].filter(it=>stars.has(it.id)&&it.end).map(it=>({id:"dl-"+it.id,date:it.end,time:"",title:it.title,kind:(String(it.id).startsWith("g")?"지원사업 마감":"입찰 마감"),dl:true,url:it.url}));
   return [...events.map(e=>({...e,dl:false})),...dl].sort((a,b)=>(a.date+(a.time||"99")).localeCompare(b.date+(b.time||"99")));
 }
 let viewY=TODAY.getFullYear(), viewM=TODAY.getMonth(), sel=ymd(TODAY);
@@ -937,15 +937,15 @@ function renderCal(){
   $("agenda").innerHTML=`<h3>${sd.getMonth()+1}월 ${sd.getDate()}일 (${"일월화수목금토"[sd.getDay()]})</h3>`+
     (day.length?day.map(evHtml).join(""):`<div class="k" style="font-size:12.5px;color:var(--muted)">이날 일정이 없습니다. 아래에서 추가하세요.</div>`);
   bindEv($("agenda"));
-  const up=items.filter(x=>{const n=dleft(x.date);return n>=0&&n<=14});
-  $("upcoming").innerHTML=up.length?up.map(x=>evHtml(x,true)).join(""):`<div style="color:var(--muted);font-size:12.5px">14일 안에 잡힌 일정이 없습니다. 관심 공고에 ☆를 누르면 마감일이 여기에 뜹니다.</div>`;
+  const up=items.filter(x=>{const n=dleft(x.date);return n>=0&&(x.dl||n<=14)});
+  $("upcoming").innerHTML=up.length?up.map(x=>evHtml(x,true)).join(""):`<div style="color:var(--muted);font-size:12.5px">14일 안에 잡힌 일정이 없습니다. 지원사업·입찰 공고에 ☆를 누르면 마감일이 기간과 상관없이 여기에 뜹니다.</div>`;
   bindEv($("upcoming"));
 }
 function evHtml(x,withDate){
   const t=withDate?`<span class="num">${fmt(x.date)}</span>${x.time?" "+esc(x.time):""}`:(x.time?esc(x.time):(x.dl?"마감":"종일"));
   const name=x.dl?`<a href="${esc(x.url)}" target="_blank" rel="noopener" style="text-decoration:none">${esc(x.title)}</a>`:esc(x.title);
   const act=x.dl?"":`<span style="display:flex;gap:4px"><button class="mini" data-act="done" data-id="${esc(x.id)}">${x.done?"되돌림":"완료"}</button><button class="mini" data-act="del" data-id="${esc(x.id)}" aria-label="삭제">✕</button></span>`;
-  return `<div class="ev${x.dl?" dl":""}${x.done?" done-ev":""}"><span class="t">${t}</span><div style="min-width:0"><div class="nm">${name}</div><div class="k">${esc(x.kind)}${x.memo?" · "+esc(x.memo):""}</div></div>${act}</div>`;
+  return `<div class="ev${x.dl?" dl":""}${x.done?" done-ev":""}"><span class="t">${t}</span><div style="min-width:0"><div class="nm">${name}</div><div class="k">${esc(x.kind)}${x.dl&&withDate?` · D-${dleft(x.date)===0?"day":dleft(x.date)}`:""}${x.memo?" · "+esc(x.memo):""}</div></div>${act}</div>`;
 }
 function bindEv(root){
   root.querySelectorAll("button.mini").forEach(b=>b.onclick=async()=>{
