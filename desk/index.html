@@ -147,6 +147,9 @@ h2{font-family:var(--f-display);font-size:17.5px;font-weight:700;margin:0;letter
 .tag.kw{border-color:var(--blue);color:var(--blue);background:var(--blue-soft)}
 .brief{display:flex;flex-direction:column}
 .brief .ph .meta b{color:var(--ink);font-weight:600}
+.brief .ph .bsel{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.brief .ph select{font:inherit;font-size:12px;color:var(--ink);background:var(--card,transparent);border:1px solid var(--line);border-radius:8px;padding:3px 6px;max-width:100%}
+.brief .ph select[hidden]{display:none}
 .bgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
 .bcol{padding:12px 16px;min-width:0;display:flex;flex-direction:column;gap:8px}
 .bcol+.bcol{border-left:1px solid var(--line)}
@@ -272,7 +275,7 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
   <div class="grid">
     <div class="main-col">
       <section class="panel brief" aria-labelledby="h-brief">
-        <div class="ph"><h2 id="h-brief">오늘의 신사업 아이디어 브리핑</h2><span class="meta" id="bMeta">일일 신사업 아이디어 Briefing 보고서 요약 · 평일 08:30</span></div>
+        <div class="ph"><h2 id="h-brief">오늘의 신사업 아이디어 브리핑</h2><span class="bsel"><span class="meta" id="bMeta">일일 신사업 아이디어 Briefing 보고서 요약 · 평일 09:13</span><select id="bDate" aria-label="지난 브리핑 날짜 선택" hidden></select></span></div>
         <div id="bBody"><div class="bempty">브리핑 요약을 불러오는 중입니다.</div></div>
       </section>
 
@@ -338,7 +341,7 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
 /* GitHub Pages용: Claude 저장소가 없을 때 브라우저 저장소(localStorage)와 같은 폴더의 JSON 파일을 대신 사용 */
 const LocalDB=(()=>{const K="desk:",subs={};
  const remote={"feed/current":"desk-feed.json","briefing/latest":"desk-briefing.json","company/profile":"desk-company.json"};
- const remoteCol={"assess":"desk-assess.json"};
+ const remoteCol={"assess":"desk-assess.json","briefings":"desk-briefings.json"};
  const read=p=>{try{return JSON.parse(localStorage.getItem(K+p))}catch(e){return null}};
  const write=(p,v)=>{try{localStorage.setItem(K+p,JSON.stringify(v))}catch(e){throw{code:"unavailable"}}};
  const emit=k=>(subs[k]||[]).forEach(f=>f());
@@ -1554,10 +1557,21 @@ async function toggleStar(id){
   if(dbReady){try{await db.doc("prefs/stars").set({ids:[...stars]})}catch(e){$("saveState").textContent="관심 공고 저장 실패"}}
 }
 function renderKw(){const k=(feed.bidKeywords&&feed.bidKeywords.length?feed.bidKeywords:SNAPSHOT.bidKeywords)||[];$("kwList").innerHTML=k.map(t=>`<span>${esc(t)}</span>`).join("")}
-let brief=null;
+let brief=null,briefs={},briefSel="";
+function renderBriefDates(){
+  const sel=$("bDate"),t=new Date();t.setDate(t.getDate()-31);const cut=t.toISOString().slice(0,10);
+  const all=new Set(Object.keys(briefs));if(brief&&brief.date)all.add(brief.date);
+  const ds=[...all].filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(d)&&d>=cut).sort().reverse();
+  if(ds.length<2){sel.hidden=true;return}
+  const W="일월화수목금토";
+  sel.innerHTML=ds.map((d,i)=>`<option value="${i?d:""}"${(briefSel||"")===(i?d:"")?" selected":""}>${i?"":"최신 · "}${+d.slice(5,7)}/${+d.slice(8)}(${W[parse(d).getDay()]})</option>`).join("");
+  sel.hidden=false;
+}
 function renderBrief(){
+  renderBriefDates();
   const el=$("bBody");
-  if(!brief){el.innerHTML='<div class="bempty">아직 요약이 없습니다. 평일 08:30 「일일 신사업 아이디어 Briefing 보고서」 작업이 끝나면 핵심 이슈 3건, 신사업 아이디어, 이번 주 추진 과제가 여기에 표시됩니다. 원본 한글 파일은 조간보고 폴더에 저장됩니다.</div>';return}
+  const brief=(briefSel&&briefs[briefSel])||window.__brief0;
+  if(!brief){el.innerHTML='<div class="bempty">아직 요약이 없습니다. 평일 09:13 「일일 신사업 아이디어 Briefing 보고서」 작업이 끝나면 핵심 이슈 3건, 신사업 아이디어, 이번 주 추진 과제가 여기에 표시됩니다. 원본 한글 파일은 조간보고 폴더에 저장됩니다.</div>';return}
   const d=parse(brief.date),dl=dleft(brief.date);
   $("bMeta").innerHTML=`<b class="num">${esc(brief.date)}</b> 보고서${dl<0?` · ${-dl}일 전`:""}${brief.file?` · ${esc(brief.file)}`:""}`;
   const iss=(brief.issues||[]).slice(0,3).map((x,i)=>`<div class="iss"><span class="n">${i+1}</span><div style="min-width:0"><div>${esc(x.title)}</div><div class="c">${esc([x.cat,x.summary].filter(Boolean).join(" · "))}</div></div></div>`).join("");
@@ -1568,6 +1582,7 @@ function renderBrief(){
 }
 function render(){renderKw();renderBrief();chips($("gChips"),GCATS,gCat,c=>gCat=c);chips($("bChips"),BCATS,bCat,c=>bCat=c);renderLists();renderCal();renderStrip()}
 
+$("bDate").onchange=e=>{briefSel=e.target.value;renderBrief()};
 $("gSearch").oninput=renderLists;$("bSearch").oninput=renderLists;$("gMin").innerHTML+=MINS.map(m=>`<option>${m}</option>`).join("");$("gMin").onchange=renderLists;
 $("gHide").onchange=renderLists;$("gMine").onchange=renderLists;$("bMine").onchange=renderLists;
 $("prevM").onclick=()=>{viewM--;if(viewM<0){viewM=11;viewY--}renderCal()};
@@ -1654,7 +1669,8 @@ fetch(WX_URL).then(r=>r.ok?r.json():Promise.reject()).then(j=>{wxLive=true;showW
     if(d&&Array.isArray(d.grants)&&Array.isArray(d.bids)&&(d.updatedAt||"")>=SNAPSHOT.updatedAt){feed=d;$("srcNote").textContent="평일 매일 07시 자동 갱신";render()}
   },()=>{});
   db.doc("weather/today").onSnapshot(s=>{if(!wxLive&&s.exists)showWx(s.data())},()=>{});
-  db.doc("briefing/latest").onSnapshot(s=>{brief=s.exists?s.data():null;renderBrief()},()=>{});
+  db.doc("briefing/latest").onSnapshot(s=>{brief=window.__brief0=s.exists?s.data():null;renderBrief()},()=>{});
+  db.collection("briefings").onSnapshot(s=>{const o={};s.docs.forEach(d=>{const v=d.data();if(v)o[d.id]=v});briefs=o;renderBrief()},()=>{});
   db.doc("prefs/stars").onSnapshot(s=>{stars=new Set(s.exists&&Array.isArray(s.data().ids)?s.data().ids:[]);render()},()=>{});
   db.collection("assess").onSnapshot(q=>{assess={};q.docs.forEach(d=>assess[d.id]=d.data());renderLists()},()=>{});
   db.collection("decisions").onSnapshot(q=>{decisions={};q.docs.forEach(d=>decisions[d.id]=d.data());if(!document.activeElement||!document.activeElement.matches(".dec input"))renderLists();else renderGngMeta()},()=>{});
