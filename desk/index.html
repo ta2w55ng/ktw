@@ -40,10 +40,45 @@ button,input,select,textarea{font:inherit;color:inherit}
 .num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 
 header.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;background:linear-gradient(135deg,var(--hero1),var(--hero2));color:var(--on-hero);border-radius:24px;padding:22px 28px 46px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
-header.top::after{content:"";position:absolute;right:-40px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.14);pointer-events:none}
-.hero-r{display:flex;flex-direction:column;align-items:flex-end;gap:8px;position:relative;z-index:1}
-.wx{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;padding:4px 11px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);white-space:nowrap}
-.wx b{font-family:var(--f-mono);font-size:13px}
+header.top{transition:background .6s}
+header.top[data-sky="clear"]{background:linear-gradient(120deg,#2f6fe8,#6fb6fb 70%,#a9dcff)}
+header.top[data-sky="partly"]{background:linear-gradient(120deg,#3a72e6,#79aef2 70%,#b3cff3)}
+header.top[data-sky="cloudy"]{background:linear-gradient(120deg,#56709c,#8297b8 70%,#a7b6cc)}
+header.top[data-sky="fog"]{background:linear-gradient(120deg,#5f6f86,#8593a6 70%,#a6b1bf)}
+header.top[data-sky="rain"]{background:linear-gradient(120deg,#3c4f72,#5f7598 70%,#7f93b3)}
+header.top[data-sky="snow"]{background:linear-gradient(120deg,#4f6d9c,#7f9ccb 70%,#a8bfe0)}
+header.top[data-sky="storm"]{background:linear-gradient(120deg,#2b3349,#4a5571 70%,#606b86)}
+header.top.night{background:linear-gradient(120deg,#16224f,#2c3f7f 70%,#4a5b9a)}
+header.top.night[data-sky="cloudy"],header.top.night[data-sky="fog"],header.top.night[data-sky="rain"],header.top.night[data-sky="snow"],header.top.night[data-sky="storm"]{background:linear-gradient(120deg,#1d2438,#323d5a 70%,#46526f)}
+.sky{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.sky svg{position:absolute;inset:0;width:100%;height:100%}
+.wxart{width:214px;height:126px;flex:none}.wxart svg{width:100%;height:100%;overflow:visible}
+
+.brand{text-shadow:0 1px 3px rgba(0,0,0,.15)}
+.sky::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.10),transparent 45%)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sky::after{content:"";position:absolute;inset:0;background:rgba(8,12,28,.22)}}
+:root[data-theme="dark"] .sky::after{content:"";position:absolute;inset:0;background:rgba(8,12,28,.22)}
+.sky .drift{animation:drift 38s ease-in-out infinite alternate}.sky .drift.b{animation-duration:52s;animation-delay:-12s}
+.sky .spin{transform-box:fill-box;transform-origin:center;animation:spin 60s linear infinite}
+.sky .fall{animation:fall 0.9s linear infinite}.sky .fall.s2{animation-delay:-.45s}
+.sky .flake{animation:flake 7s linear infinite}.sky .flake.s2{animation-delay:-3.5s}
+.sky .tw{animation:tw 3.2s ease-in-out infinite}.sky .tw.s2{animation-delay:-1.6s}
+.sky .bolt{animation:bolt 6s steps(1) infinite}
+.sky .band{animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateX(-18px)}to{transform:translateX(18px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fall{from{transform:translate(0,-40px)}to{transform:translate(-10px,40px)}}
+@keyframes flake{from{transform:translate(0,-170px)}to{transform:translate(-20px,0)}}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes bolt{0%,88%,94%,100%{opacity:0}90%,96%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.sky *{animation:none!important}}
+.hero-r{display:flex;flex-direction:row;align-items:center;gap:6px;position:relative;z-index:1}
+.wx{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right;text-shadow:0 1px 4px rgba(0,20,60,.35);margin-right:0;min-width:150px}
+.wx .wt{display:flex;align-items:baseline;gap:8px}
+.wx .wt b{font-family:var(--f-mono);font-size:40px;font-weight:600;line-height:1}
+.wx .wt span{font-size:15px;font-weight:600}
+.wx .wm{font-size:11.5px;opacity:.95}
+
 .wx .dot{opacity:.6}
 .searchbar{position:relative;z-index:2;margin:-34px auto 0;width:min(640px,100%);display:flex;align-items:center;gap:6px;background:var(--sheet);border-radius:999px;padding:6px 6px 6px 18px;box-shadow:0 8px 28px rgba(40,70,150,.14)}
 .searchbar select{border:0;background:transparent;font-weight:600;color:var(--muted);padding:6px 2px;cursor:pointer;flex:none}
@@ -57,7 +92,7 @@ header.top::after{content:"";position:absolute;right:-40px;top:-60px;width:220px
 .mark-bg{width:48px;height:48px;border-radius:14px;background:#fff;display:grid;place-items:center;flex:none}
 h1{font-family:var(--f-display);font-size:27px;font-weight:700;margin:0;letter-spacing:-.02em;color:var(--on-hero);text-wrap:balance}
 .sub{color:var(--on-hero);opacity:.85;font-size:12.5px;margin:2px 0 0}
-.stamp{font-size:11.5px;opacity:.9;text-align:right}
+.stamp{font-size:11.5px;opacity:.92;margin-top:6px}
 .stamp b{font-weight:600}
 
 .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;background:var(--sheet);border-radius:18px;box-shadow:var(--shadow)}
@@ -131,6 +166,37 @@ h2{font-family:var(--f-display);font-size:17.5px;font-weight:700;margin:0;letter
 .bempty{padding:16px;color:var(--muted);font-size:13px;line-height:1.7}
 @media (max-width:720px){.bgrid{grid-template-columns:minmax(0,1fr)}.bcol+.bcol{border-left:0;border-top:1px solid var(--line)}}
 .rkey{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);padding:8px 16px 0;align-items:center}
+.gng{margin-top:8px;border:1px solid var(--line);border-radius:6px;background:var(--paper)}
+.gng>summary{list-style:none;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;padding:7px 10px;cursor:pointer;font-size:12.5px}
+.gng>summary::-webkit-details-marker{display:none}
+.gng>summary::after{content:"근거 ▾";margin-left:auto;font-size:11.5px;color:var(--muted)}
+.gng[open]>summary::after{content:"접기 ▴"}
+.vd{font-weight:700;font-size:11.5px;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.vd.go{background:var(--ok-soft);color:var(--ok)}.vd.chk{background:var(--warn-soft);color:var(--warn)}.vd.no{background:var(--seal-soft);color:var(--seal)}
+.gng .sum{flex:1 1 200px;min-width:0;color:var(--ink)}
+.gng .sc{font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.my{font-size:11.5px;padding:1px 8px;border-radius:999px;border:1px solid var(--ink);font-weight:600;white-space:nowrap}
+.my.wait{border:1px dashed var(--muted);color:var(--muted);font-weight:400}
+.my.go{border-color:var(--ok);color:var(--ok)}.my.no{border-color:var(--seal);color:var(--seal)}.my.hold{border-color:var(--warn);color:var(--warn)}
+.gbody{padding:10px 12px 12px;border-top:1px solid var(--line);display:grid;gap:12px;font-size:12.5px}
+.gh{font-size:11.5px;font-weight:600;color:var(--muted);letter-spacing:.03em;margin-bottom:4px}
+.ck{display:grid;grid-template-columns:16px 70px minmax(0,1fr);gap:6px;align-items:baseline;padding:2px 0}
+.ck i{font-style:normal;font-weight:700;text-align:center}.ck i.y{color:var(--ok)}.ck i.n{color:var(--seal)}.ck i.q{color:var(--warn)}
+.ck b{font-weight:500;color:var(--muted)}
+.sr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1px 12px;padding:5px 0;border-top:1px dashed var(--line)}
+.sr .n{font-family:var(--f-mono);white-space:nowrap;text-align:right}.sr .sb{grid-column:1/-1;color:var(--muted);font-size:12px}
+.sr.tot{border-top:1px solid var(--line);font-weight:600}.sr.tot .sb{font-weight:400}
+.gmeta{display:flex;flex-wrap:wrap;gap:3px 14px;color:var(--muted)}.gmeta b{color:var(--ink);font-weight:500}
+.risk{color:var(--warn)}
+.dec{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.dec .lb{font-weight:600;margin-right:2px}
+.dec button{border:1px solid var(--line);background:var(--sheet);border-radius:4px;padding:4px 12px;font-size:12.5px;cursor:pointer;color:var(--ink);font-family:inherit}
+.dec button[aria-pressed="true"].go{background:var(--ok);border-color:var(--ok);color:var(--sheet)}
+.dec button[aria-pressed="true"].no{background:var(--seal);border-color:var(--seal);color:var(--sheet)}
+.dec button[aria-pressed="true"].hold{background:var(--warn);border-color:var(--warn);color:var(--sheet)}
+.dec input{flex:1 1 160px;min-width:0;border:1px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:4px;padding:5px 8px;font:inherit}
+.dec .st{font-size:11.5px;color:var(--muted)}
+.vsel{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:4px;padding:3px 6px;font:inherit;font-size:12.5px}
 .empty{padding:22px 16px;color:var(--muted);font-size:13px}
 .note{font-size:12px;color:var(--muted);padding:10px 16px;border-top:1px solid var(--line)}
 
@@ -170,24 +236,24 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
 
 @media (max-width:960px){.grid{grid-template-columns:minmax(0,1fr)}.side{position:static}}
 @media (max-width:560px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}.strip>div:nth-child(3){border-left:0}.strip>div:nth-child(n+3){border-top:1px solid var(--line)}
-  .row{grid-template-columns:54px minmax(0,1fr) 32px;gap:10px;padding:12px}h1{font-size:22px}header.top{padding:18px 18px 44px}.hero-r{align-items:flex-start}.stamp{text-align:left}}
+  .row{grid-template-columns:54px minmax(0,1fr) 32px;gap:10px;padding:12px}h1{font-size:22px}header.top{padding:18px 18px 44px}.hero-r{align-self:stretch;justify-content:flex-end}.wxart{width:130px;height:78px}.wx .wt b{font-size:30px}.wx{min-width:0}}
 @media (prefers-reduced-motion:no-preference){.row{transition:background .15s}.row:hover{background:var(--paper)}}
 </style>
-</head>
-<body>
 
 <div class="wrap">
   <header class="top">
+    <div class="sky" id="sky" aria-hidden="true"></div>
     <div class="brand">
       <div class="mark-bg"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="2" width="16" height="16" rx="2" fill="var(--logo)"/><rect x="22" y="2" width="16" height="4.6" rx="1.5" fill="var(--logo)"/><rect x="22" y="7.7" width="16" height="4.6" rx="1.5" fill="var(--logo)"/><rect x="22" y="13.4" width="10" height="4.6" rx="1.5" fill="var(--logo)"/><circle cx="10" cy="30" r="8" fill="var(--logo)"/><path d="M23 22 L38 30 L23 38 Z" fill="#3b3b3b"/></svg></div>
       <div>
         <div class="grp">모두의교육그룹 경영기획팀</div><h1>정보 데스크</h1>
         <p class="sub">중소기업 교육·HRD·AI/AX·산업안전 지원사업 · 나라장터 용역 입찰 · 내 업무 일정</p>
+        <div class="stamp">공고 기준일 <b class="num" id="asOf">2026-10-27</b> · <span id="srcNote">평일 매일 자동 갱신</span></div>
       </div>
     </div>
     <div class="hero-r">
+      <div class="wxart" id="wxArt" aria-hidden="true"></div>
       <div class="wx" id="wx" hidden aria-live="polite"></div>
-      <div class="stamp">공고 기준일 <b class="num" id="asOf">2026-10-27</b> · <span id="srcNote">평일 매일 자동 갱신</span></div>
     </div>
   </header>
   <form class="searchbar" id="sForm" role="search" autocomplete="off">
@@ -225,13 +291,15 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
       </section>
 
       <section class="panel" aria-labelledby="h-bid">
-        <div class="ph"><h2 id="h-bid">나라장터 용역 입찰공고</h2><span class="meta">키워드 검색 적용 용역 입찰</span></div>
+        <div class="ph"><h2 id="h-bid">나라장터 용역 입찰공고</h2><span class="meta" id="bMetaTxt">키워드 검색 적용 용역 입찰</span></div>
         <div class="tools">
           <div id="bChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
           <div class="kwline">검색 키워드 <span id="kwList"></span></div>
           <input class="search" id="bSearch" type="search" placeholder="공고명·발주기관 검색" aria-label="입찰공고 검색">
           <label class="toggle"><input type="checkbox" id="bMine"> 전국·수도권만</label>
+          <label class="toggle" id="bVerWrap" hidden>AI 판단 <select class="vsel" id="bVerdict"><option value="">전체</option><option>Go</option><option>검토</option><option>No Go</option><option value="wait">내 결정 전</option><option value="mine">내가 Go 결정</option></select></label>
         </div>
+        <div class="rkey" id="gLegend" hidden>AI 판단: <span><span class="vd go">Go</span> 자격 충족</span><span><span class="vd chk">검토</span> 확인할 조건 있음</span><span><span class="vd no">No Go</span> 참가 불가</span><span>· 공고서·제안요청서의 업종·자격·정량 배점을 회사 자료와 대조한 결과입니다. 투입인력 조건은 충족 가능으로 보고, 최종 결정은 '내 결정'으로 직접 하세요.</span></div>
         <ul class="list" id="bList"></ul>
         <div class="note">마감일은 수집 시점의 D-day로 계산한 값입니다. 투찰 마감 시각·참가자격 등록 마감은 나라장터 공고문 기준입니다.</div>
       </section>
@@ -269,7 +337,7 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
 <script>
 /* GitHub Pages용: Claude 저장소가 없을 때 브라우저 저장소(localStorage)와 같은 폴더의 JSON 파일을 대신 사용 */
 const LocalDB=(()=>{const K="desk:",subs={};
- const remote={"feed/current":"desk-feed.json","briefing/latest":"desk-briefing.json","weather/today":"desk-weather.json"};
+ const remote={"feed/current":"desk-feed.json","briefing/latest":"desk-briefing.json"};
  const read=p=>{try{return JSON.parse(localStorage.getItem(K+p))}catch(e){return null}};
  const write=(p,v)=>{try{localStorage.setItem(K+p,JSON.stringify(v))}catch(e){throw{code:"unavailable"}}};
  const emit=k=>(subs[k]||[]).forEach(f=>f());
@@ -290,441 +358,6 @@ const LocalDB=(()=>{const K="desk:",subs={};
 })();
 /* 2026-10-27 기준 수집 스냅샷. 자동 갱신 작업이 저장소의 feed/current 문서를 덮어쓰면 그 값이 우선합니다. */
 const SNAPSHOT = {
- "updatedAt": "2026-10-27",
- "source": "기업마당·NIPA·NIA·HRD4U·행정안전부·전자신문·오늘지원(나라장터 수집) 2026-10-27 수집",
- "grants": [
-  {
-   "id": "g01",
-   "title": "2026년 기업훈련 탄력운영제 참여기업 모집",
-   "org": "고용노동부 · 한국산업인력공단",
-   "start": "2026-01-02",
-   "end": "2026-11-30",
-   "cat": [
-    "교육·HRD"
-   ],
-   "note": "신기술 29개 분야 훈련비 기준단가 최대 300% 지원, 예산 소진 시 종료",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000116853",
-   "region": "전국",
-   "ministry": "고용노동부"
-  },
-  {
-   "id": "g02",
-   "title": "2026년 체계적 현장훈련(S-OJT) 일반유형 참여기업 모집",
-   "org": "한국산업인력공단",
-   "start": "2026-01-02",
-   "end": "2026-10-30",
-   "cat": [
-    "교육·HRD"
-   ],
-   "note": "우선지원대상기업 상시 접수",
-   "url": "https://www.hrd4u.or.kr/hrd4u_new/bbs/view/B0000051/210.do?menuNo=0401",
-   "region": "전국",
-   "ministry": "고용노동부"
-  },
-  {
-   "id": "g03",
-   "title": "[충남·충북·대전·세종] 2026년 중소기업 AI훈련확산센터 참여기업 모집",
-   "org": "고용노동부",
-   "start": "2026-08-21",
-   "end": "2026-12-31",
-   "cat": [
-    "교육·HRD",
-    "AI·AX"
-   ],
-   "note": "서울·인천·경기·강원권은 별도 공고로 모집 — 수도권용 공고를 확인하세요",
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "충남·충북·대전·세종",
-   "ministry": "고용노동부"
-  },
-  {
-   "id": "g04",
-   "title": "고용노동부(안전보건공단) 연계 스마트 안전장비지원 품목 등록 시행계획",
-   "org": "과학기술정보통신부 · NIPA · 안전보건공단",
-   "start": "2026-10-01",
-   "end": "2026-10-30",
-   "cat": [
-    "산업안전",
-    "AI·AX"
-   ],
-   "note": "과기정통부 지원 과제 중 스마트 안전장비 보유 기업",
-   "url": "https://www.nipa.kr/home/2-2",
-   "region": "전국",
-   "ministry": "과학기술정보통신부"
-  },
-  {
-   "id": "g05",
-   "title": "2026년 중소사업장 유해화학물질 취급시설 안전관리 지원",
-   "org": "기후에너지환경부 · 한국환경공단",
-   "start": "2026-06-25",
-   "end": "2026-10-30",
-   "cat": [
-    "화학물질",
-    "산업안전"
-   ],
-   "note": "무상 지원, 수요에 따라 조기 마감 가능",
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전국",
-   "ministry": "기후에너지환경부"
-  },
-  {
-   "id": "g06",
-   "title": "2026년 생활화학제품 안전관리 컨설팅 지원사업 참여기업 모집",
-   "org": "기후에너지환경부",
-   "start": null,
-   "end": "2026-10-30",
-   "cat": [
-    "화학물질",
-    "바우처·컨설팅"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전국",
-   "ministry": "기후에너지환경부"
-  },
-  {
-   "id": "g07",
-   "title": "2026년 3차 안전일터 조성지원 사업(수정 공고)",
-   "org": "고용노동부 · 한국산업안전보건공단",
-   "start": null,
-   "end": null,
-   "cat": [
-    "산업안전"
-   ],
-   "note": "50인 미만 등, 사업주당 최대 3,000만원(70%) · 세부사업별 접수기간 상이",
-   "url": "https://www.kosha.or.kr/",
-   "region": "전국",
-   "ministry": "고용노동부"
-  },
-  {
-   "id": "g08",
-   "title": "[울산] 2026년 5차 소규모사업장 노후 안전시설 개선 지원 상시 모집",
-   "org": "울산광역시",
-   "start": "2026-09-17",
-   "end": "2026-12-31",
-   "cat": [
-    "산업안전"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "울산",
-   "ministry": "지자체"
-  },
-  {
-   "id": "g09",
-   "title": "[경북] 구미 국가산단 스마트 안전솔루션 서비스 수혜기업 모집",
-   "org": "경상북도",
-   "start": "2026-10-16",
-   "end": "2026-12-31",
-   "cat": [
-    "산업안전",
-    "AI·AX"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "경북",
-   "ministry": "지자체"
-  },
-  {
-   "id": "g10",
-   "title": "2026년 철강·금속 인공지능전환(AX) 실증센터 기업지원 기초단계 모집",
-   "org": "산업통상부 · 한국산업기술시험원",
-   "start": "2026-10-22",
-   "end": "2026-10-30",
-   "cat": [
-    "AI·AX"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": null,
-   "ministry": "산업통상부"
-  },
-  {
-   "id": "g11",
-   "title": "[전남광주] 아태 AI 특화지구(AHAP) 올인원 AI 허브 제조 AX 실증 수행기업 모집",
-   "org": "전남광주통합특별시",
-   "start": "2026-10-22",
-   "end": "2026-10-29",
-   "cat": [
-    "AI·AX"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전남광주",
-   "ministry": "지자체"
-  },
-  {
-   "id": "g12",
-   "title": "2026년 중소기업기술개발지원사업 모의평가 프로그램 접수",
-   "org": "중소벤처기업부",
-   "start": "2026-10-29",
-   "end": "2026-11-05",
-   "cat": [
-    "바우처·컨설팅"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전국",
-   "ministry": "중소벤처기업부"
-  },
-  {
-   "id": "g13",
-   "title": "[충북] 청주시 시제품 고도화 바우처 지원 프로그램 참여기업 모집",
-   "org": "충북대학교",
-   "start": "2026-10-22",
-   "end": "2026-11-03",
-   "cat": [
-    "바우처·컨설팅"
-   ],
-   "url": "https://thevc.kr/grants",
-   "region": "충북",
-   "ministry": "지자체"
-  },
-  {
-   "id": "g14",
-   "title": "[전북] 2026년 3차 중소기업 정보보호 지원 사업 수요기업 모집",
-   "org": "전북특별자치도",
-   "start": "2026-10-23",
-   "end": "2026-11-06",
-   "cat": [
-    "바우처·컨설팅"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전북",
-   "ministry": "지자체"
-  },
-  {
-   "id": "g15",
-   "title": "2026년 중소사업자 개인정보 안전조치 모니터링 지원",
-   "org": "개인정보 분야(기업마당 게시)",
-   "start": "2026-04-06",
-   "end": "2026-12-31",
-   "cat": [
-    "바우처·컨설팅",
-    "법정교육"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전국",
-   "ministry": "기타"
-  },
-  {
-   "id": "g16",
-   "title": "2026년 7차 재취업지원서비스 기업컨설팅 지원 사업장 모집",
-   "org": "고용 분야(기업마당 게시)",
-   "start": "2026-10-14",
-   "end": "2026-11-02",
-   "cat": [
-    "고용·인력",
-    "바우처·컨설팅"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전국",
-   "ministry": "기타"
-  },
-  {
-   "id": "g17",
-   "title": "[경기] 상생 노무컨설팅 참여 사업장 모집",
-   "org": "경기도",
-   "start": "2026-10-22",
-   "end": "2026-11-20",
-   "cat": [
-    "고용·인력",
-    "바우처·컨설팅"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "경기",
-   "ministry": "지자체"
-  },
-  {
-   "id": "g18",
-   "title": "2026년 우수인재 연계 기업인턴십 참여기업 수시모집",
-   "org": "기업마당 게시",
-   "start": "2026-08-12",
-   "end": "2026-11-06",
-   "cat": [
-    "고용·인력"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전국",
-   "ministry": "기타"
-  },
-  {
-   "id": "g19",
-   "title": "2026년 제2차 고용노동부 예비사회적기업 지정 계획",
-   "org": "고용노동부",
-   "start": "2026-09-28",
-   "end": "2026-11-06",
-   "cat": [
-    "고용·인력"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "전국",
-   "ministry": "고용노동부"
-  },
-  {
-   "id": "g20",
-   "title": "[부산] 2026년 스마트공장 사전사후 컨설팅사업",
-   "org": "부산광역시",
-   "start": "2026-09-28",
-   "end": "2026-11-30",
-   "cat": [
-    "AI·AX",
-    "바우처·컨설팅"
-   ],
-   "url": "https://www.bizinfo.go.kr/",
-   "region": "부산",
-   "ministry": "지자체"
-  },
-  {
-   "id": "g21",
-   "title": "2026년 중소기업 정보보호 지원사업 수요기업 모집",
-   "org": "과학기술정보통신부 · 인천테크노파크",
-   "ministry": "과학기술정보통신부",
-   "region": "인천",
-   "start": "2026-06-30",
-   "end": "2026-11-30",
-   "cat": [
-    "바우처·컨설팅"
-   ],
-   "note": "정보보호 컨설팅·보안 솔루션 비용 80% 지원, 예산 소진 시 조기 마감 · 서울 소재는 서울 지역정보보호지원센터 공고도 확인",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000123800"
-  },
-  {
-   "id": "g22",
-   "title": "6G 서비스 시나리오 공모전 (기업부문 · 6G 시연 기획 트랙)",
-   "org": "과학기술정보통신부 · 정보통신기획평가원",
-   "ministry": "과학기술정보통신부",
-   "region": "전국",
-   "start": "2026-10-08",
-   "end": "2026-11-08",
-   "cat": [
-    "AI·AX"
-   ],
-   "note": "시연 기획 선정 2건은 2027년부터 2년간 과제당 3억 원 이내 개발 지원",
-   "url": "https://m.etnews.com/20261015000405"
-  },
-  {
-   "id": "g23",
-   "title": "2026년도 미래개척융합과학기술개발사업(한계돌파 R&D) 신규과제 공모",
-   "org": "과학기술정보통신부 · 한국연구재단",
-   "ministry": "과학기술정보통신부",
-   "region": "전국",
-   "start": "2026-10-26",
-   "end": "2026-11-13",
-   "cat": [
-    "R&D"
-   ],
-   "note": "대학·출연연·기업 단독 또는 컨소시엄 신청",
-   "url": "https://www.bizinfo.go.kr/"
-  },
-  {
-   "id": "g24",
-   "title": "2026년 AI 기반 주파수 간섭분석 및 전파예측기술 개발사업 신규지원 대상과제",
-   "org": "과학기술정보통신부(전파 분야 R&D)",
-   "ministry": "과학기술정보통신부",
-   "region": "전국",
-   "start": "2026-11-03",
-   "end": "2026-11-16",
-   "cat": [
-    "R&D",
-    "AI·AX"
-   ],
-   "url": "https://www.bizinfo.go.kr/"
-  },
-  {
-   "id": "g25",
-   "title": "2026년 안전교육 전문인력 등록계획 공고",
-   "org": "행정안전부 · 국민안전교육플랫폼",
-   "ministry": "행정안전부",
-   "region": "전국",
-   "start": null,
-   "end": null,
-   "period": "확인",
-   "cat": [
-    "교육·HRD",
-    "산업안전",
-    "법정교육"
-   ],
-   "note": "안전교육 강사 등 전문인력 등록 · 접수기간은 공고문에서 확인",
-   "url": "https://www.mois.go.kr/frt/bbs/type013/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000006&nttId=128558"
-  },
-  {
-   "id": "g26",
-   "title": "2026년도 3차 국민생활안전 긴급대응연구(2단계) 기술개발 및 실증 신규과제 공모",
-   "org": "행정안전부",
-   "ministry": "행정안전부",
-   "region": "전국",
-   "start": null,
-   "end": null,
-   "period": "확인",
-   "cat": [
-    "R&D",
-    "산업안전"
-   ],
-   "note": "접수기간은 공고문에서 확인",
-   "url": "https://www.mois.go.kr/frt/bbs/type013/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000006&nttId=127761"
-  }
- ],
- "bids": [
-  {
-   "id": "b02",
-   "title": "교육 AX 대전환 웰컴투 NEW 경기교육 행사 용역",
-   "org": "경기도교육청",
-   "amount": "1.6억 원",
-   "end": "2026-11-07",
-   "stage": "입찰",
-   "cat": [
-    "교육 운영",
-    "AI·AX"
-   ],
-   "url": "https://todayjiwon.co.kr/procurement/84f2f418-2103-432f-9f00-0fbf5c7ec431",
-   "region": "경기"
-  },
-  {
-   "id": "b07",
-   "title": "2027년 공공기관 폭력예방교육 현장점검 및 컨설팅 운영",
-   "org": "조달청 서울지방조달청",
-   "amount": "공고문 확인",
-   "end": null,
-   "stage": "입찰",
-   "posted": "2026-10-22",
-   "cat": [
-    "안전·법정교육",
-    "연구·컨설팅"
-   ],
-   "url": "https://www.modoobid.co.kr/eps/g2b",
-   "region": "전국",
-   "kw": [
-    "법정의무교육"
-   ],
-   "note": "폭력예방교육은 법정의무교육 항목"
-  },
-  {
-   "id": "b11",
-   "title": "AI 맞춤형 교수학습 플랫폼 고도화 사업 위탁감리",
-   "org": "한국지능정보사회진흥원(NIA)",
-   "amount": "공고문 확인",
-   "end": null,
-   "stage": "사전규격",
-   "posted": "2026-10-19",
-   "cat": [
-    "AI·AX"
-   ],
-   "url": "https://www.nia.or.kr/site/nia_kor/ex/bbs/List.do?cbIdx=78336",
-   "region": null,
-   "kw": [
-    "디지털 교육"
-   ]
-  },
-  {
-   "id": "b16",
-   "title": "AX-Sprint 300 - AI 기반 수면다원검사 판독자동화 의료기기 승인 컨설팅 용역",
-   "org": "(주)허니냅스",
-   "region": "전국",
-   "amount": "5,500만 원",
-   "end": "2026-11-07",
-   "stage": "입찰",
-   "posted": "2026-10-26",
-   "cat": [
-    "AI·AX",
-    "연구·컨설팅"
-   ],
-   "url": "https://todayjiwon.co.kr/procurement/451517ef-0787-445c-9ad9-8f7b63b1bf9a"
-  }
- ],
  "bidKeywords": [
   "온라인교육",
   "온라인연수",
@@ -747,7 +380,974 @@ const SNAPSHOT = {
   "AX 컨설팅",
   "AX 교육",
   "디지털 교육"
- ]
+ ],
+ "bids": [
+  {
+   "amount": "1.49억 원(배정 1.64억)",
+   "cat": [
+    "AI·AX",
+    "교육 운영"
+   ],
+   "end": "2026-11-06",
+   "id": "b02",
+   "kw": [
+    "AX 교육"
+   ],
+   "note": "11-06 10:00 마감",
+   "org": "경기도교육청",
+   "posted": "2026-10-26",
+   "region": "경기",
+   "stage": "입찰",
+   "title": "교육 AX 대전환 웰컴투 NEW 경기교육 행사 용역",
+   "url": "https://todayjiwon.co.kr/procurement/84f2f418-2103-432f-9f00-0fbf5c7ec431"
+  },
+  {
+   "amount": "5,000만 원(배정 5,500만)",
+   "cat": [
+    "AI·AX",
+    "연구·컨설팅"
+   ],
+   "end": "2026-11-06",
+   "id": "b16",
+   "kw": [
+    "AX 컨설팅"
+   ],
+   "note": "의료기기 인허가 컨설팅",
+   "org": "(주)허니냅스",
+   "posted": "2026-10-26",
+   "region": "전국",
+   "stage": "입찰",
+   "title": "AX-Sprint 300 - AI 기반 수면다원검사 판독자동화 의료기기 승인 컨설팅 용역",
+   "url": "https://todayjiwon.co.kr/procurement/451517ef-0787-445c-9ad9-8f7b63b1bf9a"
+  },
+  {
+   "amount": "8,329만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-03",
+   "id": "b17",
+   "kw": [
+    "이러닝"
+   ],
+   "note": "참가업종 이러닝서비스업·이러닝콘텐츠업",
+   "org": "서울특별시 인재개발원",
+   "posted": "2026-10-22",
+   "region": null,
+   "stage": "입찰",
+   "title": "2027년 U-지식여행 서비스 용역",
+   "url": "https://www.sankun.com/bid-info/gDxRND5z--DLrGeYDQmaPPLQVhJ61rZyH9OqxlgY-_w"
+  },
+  {
+   "amount": "4,520만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-12-01",
+   "id": "b18",
+   "kw": [
+    "사이버연수",
+    "온라인교육",
+    "콘텐츠"
+   ],
+   "note": "협상계약, 입찰 개시 11-27",
+   "org": "국민건강보험공단",
+   "posted": "2026-10-21",
+   "region": null,
+   "stage": "입찰",
+   "title": "2027~2028년 요양병원 퇴원환자지원 기본교육 사이버 연수원 운영 및 콘텐츠 개발",
+   "url": "https://www.sankun.com/bid-info/wXuyHFyLmI1k9IWWrv9X0ArJiPQz9Ha4jhxNzV0qlnE"
+  },
+  {
+   "amount": "9,091만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-03",
+   "id": "b19",
+   "kw": [
+    "온라인교육",
+    "콘텐츠",
+    "이러닝"
+   ],
+   "org": "서울대학교 반도체공동연구소",
+   "posted": "2026-10-20",
+   "region": null,
+   "stage": "입찰",
+   "title": "국립대학 권역별 반도체공동연구소 연합교육과정 온라인 교육컨텐츠 개발·운영 용역",
+   "url": "https://www.sankun.com/bid-info/8o5hltrlyysq9w3xIgxhQxT17Auw-pS87aZzMwmGg8Y"
+  },
+  {
+   "amount": "3.27억 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-09",
+   "id": "b20",
+   "kw": [
+    "이러닝",
+    "온라인교육"
+   ],
+   "org": "경기도시장상권진흥원",
+   "posted": "2026-10-19",
+   "region": null,
+   "stage": "입찰",
+   "title": "2027년 경기도자영업아카데미 소상공인 이러닝 교육 임차·운영 용역",
+   "url": "https://www.sankun.com/bid-info/vyFwZIFFcKVHWhTIz5d0poNGpjuspSKIGSnMxpC8dUA"
+  },
+  {
+   "amount": "4,000만 원",
+   "cat": [
+    "교육 운영",
+    "AI·AX"
+   ],
+   "end": "2026-11-06",
+   "id": "b21",
+   "kw": [
+    "콘텐츠",
+    "교육 영상",
+    "AI 교육"
+   ],
+   "note": "지역제한 서울",
+   "org": "숭의여자대학 산학협력단",
+   "posted": "2026-10-26",
+   "region": "서울",
+   "stage": "입찰",
+   "title": "숭의여대 AI·DX 교양교과목 온라인 학습콘텐츠 촬영 및 편집 위탁 용역",
+   "url": "https://www.sankun.com/bid-info/ltUBNZw5M-v3ydqs6KetxhmEox0RWz26M0UCyJzOZvo"
+  },
+  {
+   "amount": "1.92억 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-03",
+   "id": "b22",
+   "kw": [
+    "원격교육",
+    "원격",
+    "콘텐츠"
+   ],
+   "note": "재공고",
+   "org": "대구과학대학 산학협력단",
+   "posted": "2026-10-26",
+   "region": null,
+   "stage": "입찰",
+   "title": "전문대학 혁신지원 사업 AI에듀테크기반 원격교육지원(원격 콘텐츠 개발) 업체 선정",
+   "url": "https://www.sankun.com/bid-info/IzKpfgRMU_kp3qMt3t6x67t8JvbxCfN3ib1f8gKec5w"
+  },
+  {
+   "amount": "3,636만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-02",
+   "id": "b23",
+   "kw": [
+    "콘텐츠"
+   ],
+   "note": "지역제한 서울, 17:00 마감",
+   "org": "중앙대학교",
+   "posted": "2026-10-22",
+   "region": "서울",
+   "stage": "입찰",
+   "title": "중앙대학교 2026학년도 전공 디딤돌 마이크로 콘텐츠 개발",
+   "url": "https://www.sankun.com/bid-info/Z00I0b_ilwU6W0o4asD30MblkaGzPMTKippO2YSUVvY"
+  },
+  {
+   "amount": "4,835만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-10-30",
+   "id": "b24",
+   "kw": [
+    "콘텐츠",
+    "이러닝",
+    "온라인교육"
+   ],
+   "note": "참가업종 이러닝콘텐츠업",
+   "org": "한국산업기술시험원",
+   "posted": "2026-10-19",
+   "region": null,
+   "stage": "입찰",
+   "title": "재공고 2027년 국가기간 전략산업 직종훈련 제약품질 온라인콘텐츠 대여",
+   "url": "https://www.sankun.com/bid-info/_7VOREF6MaUQ_nis5k6QZxIThWqPm5bgE61QaK8L_Ck"
+  },
+  {
+   "amount": "1.28억 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-10",
+   "id": "b25",
+   "kw": [
+    "온라인교육",
+    "원격"
+   ],
+   "note": "참가업종 평생교육시설(원격)",
+   "org": "대법원",
+   "posted": "2026-10-26",
+   "region": null,
+   "stage": "입찰",
+   "title": "2027년 사법부 온라인 교육과정",
+   "url": "https://www.sankun.com/bid-info/NXv0m8ODah4TzktPZ2LQRs5R9Qsb4TPtXn2EOBtEjWY"
+  },
+  {
+   "amount": "3.25억 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-18",
+   "id": "b26",
+   "kw": [
+    "사이버연수",
+    "원격",
+    "온라인교육"
+   ],
+   "note": "참가업종 평생교육시설(원격)",
+   "org": "대한무역투자진흥공사",
+   "posted": "2026-10-07",
+   "region": "전국",
+   "stage": "입찰",
+   "title": "2027-2028년 KOTRA 사이버교육 운영 위탁",
+   "url": "https://www.sankun.com/bid-info/Z0KFIuqzsf8gjmm3OTYvCJEFYgse3dOh9wen2Fh4e14"
+  },
+  {
+   "amount": "3.39억 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-18",
+   "id": "b27",
+   "kw": [
+    "이러닝",
+    "원격"
+   ],
+   "note": "참가업종 이러닝서비스업·평생교육시설(원격)",
+   "org": "인천항만공사",
+   "posted": "2026-10-08",
+   "region": null,
+   "stage": "입찰",
+   "title": "2027~2028년 IPA 교육훈련 위탁용역",
+   "url": "https://www.sankun.com/bid-info/B0HAR3hwJ2mczraFti1YUW9w10sqO8wJ3Zn80uHqJgw"
+  },
+  {
+   "amount": "3.03억 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-03",
+   "id": "b28",
+   "kw": [
+    "e-learning",
+    "이러닝"
+   ],
+   "org": "서울대학교병원",
+   "posted": "2026-09-22",
+   "region": null,
+   "stage": "입찰",
+   "title": "SNUH e-Learning 위탁운영 용역",
+   "url": "https://www.sankun.com/bid-info/4aOuSPnr1_fd-g9g06u9e2MHJ5EO_kgu7ZxtTOQvyrY"
+  },
+  {
+   "amount": "8,182만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-06",
+   "id": "b29",
+   "kw": [
+    "콘텐츠"
+   ],
+   "org": "대한상공회의소",
+   "posted": "2026-10-26",
+   "region": null,
+   "stage": "입찰",
+   "title": "2027년 직업공통능력 인증 멀티미디어 자료 개발",
+   "url": "https://www.sankun.com/bid-info/Hf_V-WEdPmZFyBsldkWGQ4c0gBwbrg6GKRwPj5KWP3Y"
+  },
+  {
+   "amount": "6,597만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-06",
+   "id": "b30",
+   "kw": [
+    "교육 영상"
+   ],
+   "org": "국방부 국방홍보원",
+   "posted": "2026-10-26",
+   "region": null,
+   "stage": "입찰",
+   "title": "민주주의와 헌법수호 영상교재 제작 용역",
+   "url": "https://www.sankun.com/bid-info/5_M1qvlZshLDwVPZjkjhnwYHoaRsQtAlzJ5UrZn6S1Y"
+  },
+  {
+   "amount": "3,636만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-09",
+   "id": "b31",
+   "kw": [
+    "원격"
+   ],
+   "note": "참가업종 평생교육시설(원격)",
+   "org": "중앙선거관리위원회 선거연수원",
+   "posted": "2026-10-27",
+   "region": "전국",
+   "stage": "입찰",
+   "title": "2027년도 전화외국어교육 위탁운영사업",
+   "url": "https://todayjiwon.co.kr/procurement/42826676-006c-46e4-ba1b-88a4956720b7"
+  },
+  {
+   "amount": "6,364만 원",
+   "cat": [
+    "AI·AX",
+    "교육 운영"
+   ],
+   "end": "2026-11-06",
+   "id": "b32",
+   "kw": [
+    "AI 교육"
+   ],
+   "org": "경기과학기술대학교 산학협력단",
+   "posted": "2026-10-26",
+   "region": "전국",
+   "stage": "입찰",
+   "title": "AI&Bigdata 게임개발 프로그램 운영 용역(빅데이터혁신융합대학)",
+   "url": "https://www.sankun.com/bid-info/nOjYvL3I2U0RPu2FAJ-hrFs7Q4X5lyOoUmh5YhYM9N0"
+  },
+  {
+   "amount": "3,636만 원",
+   "cat": [
+    "교육 운영",
+    "안전·법정교육"
+   ],
+   "end": "2026-11-03",
+   "id": "b33",
+   "kw": [
+    "콘텐츠",
+    "온라인교육"
+   ],
+   "org": "울산과학대학 산학협력단",
+   "posted": "2026-10-21",
+   "region": null,
+   "stage": "입찰",
+   "title": "(앵커) 재난안전분야 온라인 교육컨텐츠(K-MOOC) 개발",
+   "url": "https://www.sankun.com/bid-info/6nTEJsSIuyqusk-oG2RkCKnjMJKxbOgnUq3fvZR_NRE"
+  },
+  {
+   "amount": "2.15억 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-11",
+   "id": "b34",
+   "kw": [
+    "콘텐츠",
+    "교육 영상"
+   ],
+   "note": "지역제한 전남광주",
+   "org": "전남대학교 산학협력단",
+   "posted": "2026-10-27",
+   "region": "전남광주",
+   "stage": "입찰",
+   "title": "2026학년도 G-RISE 공유대학 콘텐츠 개발 용역",
+   "url": "https://www.sankun.com/bid-info/ZWYlHZzWkIZwj0o_qeGXUEgm2f7DtkxPaaBTmbzvwOw"
+  },
+  {
+   "amount": "7,273만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-03",
+   "id": "b35",
+   "kw": [
+    "콘텐츠",
+    "교육 영상"
+   ],
+   "org": "동서대학교",
+   "posted": "2026-10-13",
+   "region": null,
+   "stage": "입찰",
+   "title": "고품질 온라인 강의 교과목 개발 용역",
+   "url": "https://www.sankun.com/bid-info/QuUZFMpWdDja2DAYZWnBcMnJRF5cB5XR8EZEFTOLQnM"
+  },
+  {
+   "amount": "7,145만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-06",
+   "id": "b36",
+   "kw": [
+    "콘텐츠",
+    "교육 영상"
+   ],
+   "org": "수성대학교 산학협력단",
+   "posted": "2026-10-22",
+   "region": null,
+   "stage": "입찰",
+   "title": "수성대학교 2026년 앵커사업 온라인 강의콘텐츠 개발",
+   "url": "https://www.sankun.com/bid-info/Nm9KhkYdP5DE3FFTMs81ede6_SLcPowtDAub7m_ooFc"
+  },
+  {
+   "amount": "6,309만 원",
+   "cat": [
+    "교육 운영"
+   ],
+   "end": "2026-11-02",
+   "id": "b37",
+   "kw": [
+    "콘텐츠",
+    "교육 영상"
+   ],
+   "org": "마산대학 산학협력단",
+   "posted": "2026-10-19",
+   "region": null,
+   "stage": "입찰",
+   "title": "마산대학교 앵커사업 스마트팜과 전공 교과목 동영상 콘텐츠 개발 용역",
+   "url": "https://www.sankun.com/bid-info/RVg8Q__wREOVAvC-Bp9fYxDyqAS6sYFnyvRHTTaijSM"
+  },
+  {
+   "amount": "3,455만 원",
+   "cat": [
+    "연구·컨설팅"
+   ],
+   "end": "2026-11-09",
+   "id": "b38",
+   "kw": [
+    "외국인"
+   ],
+   "note": "교육이 아닌 상담·자문 체계 구축 — 참고",
+   "org": "신라대학교 산학협력단",
+   "posted": "2026-10-26",
+   "region": "전국",
+   "stage": "입찰",
+   "title": "외국인유학생 정주지원 전문가 상담자문체계 구축 용역",
+   "url": "https://todayjiwon.co.kr/procurement/427e7dfb-8bf6-4117-af8d-792dae2ad488"
+  }
+ ],
+ "grants": [
+  {
+   "cat": [
+    "교육·HRD"
+   ],
+   "end": "2026-11-30",
+   "id": "g01",
+   "ministry": "고용노동부",
+   "note": "신기술 분야 훈련비 기준단가 상향 지원, 예산 소진 시 종료",
+   "org": "한국산업인력공단",
+   "region": "전국",
+   "start": "2026-01-02",
+   "title": "2026년 기업훈련 탄력운영제 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/22677"
+  },
+  {
+   "cat": [
+    "교육·HRD"
+   ],
+   "end": "2026-10-30",
+   "id": "g02",
+   "ministry": "고용노동부",
+   "note": "우선지원대상기업 대상 · 유형2(AX 현장훈련)는 마감",
+   "org": "한국산업인력공단",
+   "region": "전국",
+   "start": "2026-01-02",
+   "title": "2026년 체계적 현장훈련(S-OJT) 일반유형 참여기업 모집",
+   "url": "https://www.hrd4u.or.kr/hrd4u_new/bbs/view/B0000051/210.do?menuNo=0401"
+  },
+  {
+   "cat": [
+    "AI·AX",
+    "교육·HRD",
+    "바우처·컨설팅"
+   ],
+   "end": null,
+   "id": "g03",
+   "ministry": "고용노동부",
+   "note": "예산 소진 시까지 · 컨설팅비 100%(최대 783만원), 20인 이상 우선",
+   "org": "대한상공회의소 경기인력개발원 중소기업AI훈련확산센터",
+   "period": "확인",
+   "region": "수도권",
+   "start": null,
+   "title": "[서울·경기·인천·강원] 중소기업 AI활용 도입을 위한 AI훈련 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/29056"
+  },
+  {
+   "cat": [
+    "AI·AX",
+    "교육·HRD",
+    "바우처·컨설팅"
+   ],
+   "end": null,
+   "id": "g27",
+   "ministry": "고용노동부",
+   "note": "예산 소진 시까지 · AI 맞춤 컨설팅 100%, AI 훈련코치 매칭",
+   "org": "캐럿글로벌(고용노동부·산업인력공단 협력)",
+   "period": "확인",
+   "region": "수도권",
+   "start": null,
+   "title": "[서울·인천·경기·강원] 2026년 중소기업 AI훈련확산센터 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/28579"
+  },
+  {
+   "cat": [
+    "산업안전",
+    "AI·AX"
+   ],
+   "end": "2026-10-30",
+   "id": "g04",
+   "ministry": "과학기술정보통신부",
+   "note": "10-30 13:00 마감",
+   "org": "정보통신산업진흥원(NIPA)",
+   "region": "전국",
+   "start": "2026-10-01",
+   "title": "고용노동부(안전보건공단) 연계 스마트 안전장비지원 품목 등록 시행계획 2차",
+   "url": "https://www.nipa.kr/home/2-2"
+  },
+  {
+   "cat": [
+    "화학물질",
+    "산업안전"
+   ],
+   "end": "2026-10-30",
+   "id": "g05",
+   "ministry": "기후에너지환경부",
+   "note": "무상 지원, 수요에 따라 조기 마감 가능",
+   "org": "한국환경공단",
+   "region": "전국",
+   "start": "2026-06-25",
+   "title": "2026년 중소사업장 유해화학물질 취급시설 안전관리 지원",
+   "url": "https://seenthis.kr/bizinfo/29095"
+  },
+  {
+   "cat": [
+    "화학물질",
+    "바우처·컨설팅"
+   ],
+   "end": "2026-10-30",
+   "id": "g06",
+   "ministry": "기후에너지환경부",
+   "note": "생활화학제품 제조·수입 중소기업 대상",
+   "org": "한국환경산업기술원",
+   "region": "전국",
+   "start": "2026-05-07",
+   "title": "2026년 생활화학제품 안전관리 컨설팅 지원사업 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/27367"
+  },
+  {
+   "cat": [
+    "산업안전"
+   ],
+   "end": null,
+   "id": "g07",
+   "ministry": "고용노동부",
+   "note": "세부사업별 접수기간 상이 · 산재보험 가입 중소기업",
+   "org": "한국산업안전보건공단",
+   "period": "확인",
+   "region": "전국",
+   "start": null,
+   "title": "2026년 3차 안전일터 조성지원 사업(수정 공고)",
+   "url": "https://seenthis.kr/bizinfo/30911"
+  },
+  {
+   "cat": [
+    "산업안전"
+   ],
+   "end": null,
+   "id": "g28",
+   "ministry": "고용노동부",
+   "note": "예산 소진 시까지 · 50인 미만 사업장",
+   "org": "한국산업안전보건공단",
+   "period": "확인",
+   "region": "전국",
+   "start": null,
+   "title": "2026년 2차 안전동행 지원사업(수정 공고)",
+   "url": "https://seenthis.kr/bizinfo/30907"
+  },
+  {
+   "cat": [
+    "산업안전"
+   ],
+   "end": null,
+   "id": "g08",
+   "ministry": "지자체",
+   "note": "모집 완료 시까지 · 울산 50인 미만 사업장 한정",
+   "org": "울산광역시·울산테크노파크",
+   "period": "확인",
+   "region": "울산",
+   "start": null,
+   "title": "[울산] 2026년 5차 소규모사업장 노후 안전시설 개선 지원 상시 모집",
+   "url": "https://seenthis.kr/bizinfo/31943"
+  },
+  {
+   "cat": [
+    "산업안전",
+    "AI·AX"
+   ],
+   "end": null,
+   "id": "g09",
+   "ministry": "지자체",
+   "note": "예산 소진 시까지 · 구미국가산단 입주기업 한정",
+   "org": "구미전자정보기술원",
+   "period": "확인",
+   "region": "경북",
+   "start": null,
+   "title": "[경북] 구미 국가산단 스마트 안전솔루션 서비스 수혜기업 모집",
+   "url": "https://seenthis.kr/bizinfo/32526"
+  },
+  {
+   "cat": [
+    "AI·AX"
+   ],
+   "end": "2026-10-29",
+   "id": "g11",
+   "ministry": "과학기술정보통신부",
+   "note": "과기정통부·NIPA 사업, 전남광주 소재 기업 한정",
+   "org": "광주정보문화산업진흥원",
+   "region": "전남광주",
+   "start": "2026-10-22",
+   "title": "[전남광주] 아태 AI 특화지구(AHAP) 올인원 AI 허브 제조 AX 실증 수행기업 모집",
+   "url": "https://seenthis.kr/bizinfo/32653"
+  },
+  {
+   "cat": [
+    "R&D",
+    "바우처·컨설팅"
+   ],
+   "end": "2026-11-05",
+   "id": "g12",
+   "ministry": "중소벤처기업부",
+   "note": "2027년 중기 R&D 참여 희망기업 대상",
+   "org": "중소기업기술정보진흥원",
+   "region": "전국",
+   "start": "2026-10-29",
+   "title": "2026년 중소기업기술개발지원사업 모의평가 프로그램 접수",
+   "url": "https://seenthis.kr/bizinfo/32528"
+  },
+  {
+   "cat": [
+    "바우처·컨설팅"
+   ],
+   "end": "2026-11-06",
+   "id": "g14",
+   "ministry": "지자체",
+   "org": "전북 지역정보보호지원센터",
+   "region": "전북",
+   "start": "2026-10-23",
+   "title": "[전북] 2026년 3차 중소기업 정보보호 지원 사업 수요기업 모집",
+   "url": "https://seenthis.kr/bizinfo"
+  },
+  {
+   "cat": [
+    "바우처·컨설팅",
+    "법정교육"
+   ],
+   "end": null,
+   "id": "g15",
+   "ministry": "기타",
+   "note": "상시 접수 · 개인정보보호위원회 사업",
+   "org": "개인정보보호협회",
+   "region": "전국",
+   "start": null,
+   "title": "2026년 중소사업자 개인정보 안전조치 모니터링 지원",
+   "url": "https://seenthis.kr/bizinfo/27598"
+  },
+  {
+   "cat": [
+    "고용·인력",
+    "바우처·컨설팅"
+   ],
+   "end": "2026-11-02",
+   "id": "g16",
+   "ministry": "고용노동부",
+   "org": "노사발전재단",
+   "region": "전국",
+   "start": "2026-10-14",
+   "title": "2026년 7차 재취업지원서비스 기업컨설팅 지원 사업장 모집",
+   "url": "https://seenthis.kr/bizinfo/32475"
+  },
+  {
+   "cat": [
+    "고용·인력",
+    "바우처·컨설팅"
+   ],
+   "end": "2026-11-20",
+   "id": "g17",
+   "ministry": "지자체",
+   "note": "경기도 내 5~30인 미만 사업장",
+   "org": "경기도",
+   "region": "경기",
+   "start": "2026-10-22",
+   "title": "[경기] 상생 노무컨설팅 참여 사업장 모집",
+   "url": "https://seenthis.kr/bizinfo/32637"
+  },
+  {
+   "cat": [
+    "고용·인력"
+   ],
+   "end": "2026-11-06",
+   "id": "g18",
+   "ministry": "기타",
+   "org": "한국콘텐츠진흥원",
+   "region": "전국",
+   "start": "2026-08-12",
+   "title": "2026년 우수인재 연계 기업인턴십 참여기업 수시모집",
+   "url": "https://seenthis.kr/bizinfo/30732"
+  },
+  {
+   "cat": [
+    "고용·인력"
+   ],
+   "end": "2026-11-06",
+   "id": "g19",
+   "ministry": "고용노동부",
+   "org": "한국사회적기업진흥원",
+   "region": "전국",
+   "start": "2026-09-28",
+   "title": "2026년 제2차 고용노동부 예비사회적기업 지정 계획",
+   "url": "https://seenthis.kr/bizinfo/32103"
+  },
+  {
+   "cat": [
+    "바우처·컨설팅",
+    "고용·인력",
+    "교육·HRD"
+   ],
+   "end": "2026-11-30",
+   "id": "g29",
+   "ministry": "고용노동부",
+   "note": "20인 이상 사업장, 임금·직무·평가체계 무료 컨설팅",
+   "org": "한국능률협회컨설팅",
+   "region": "전국",
+   "start": "2026-02-01",
+   "title": "2026년 일터혁신 상생컨설팅 지원사업 기업 모집",
+   "url": "https://seenthis.kr/bizinfo/25325"
+  },
+  {
+   "cat": [
+    "교육·HRD",
+    "AI·AX"
+   ],
+   "end": "2026-12-31",
+   "id": "g30",
+   "ministry": "고용노동부",
+   "note": "우선지원대상기업 재직자 국비 무료교육(AI 과정 포함)",
+   "org": "한국폴리텍대학 서울정수캠퍼스",
+   "region": "서울",
+   "start": "2026-03-01",
+   "title": "2026년 지역·산업 맞춤형 인력양성사업 무료교육 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/25233"
+  },
+  {
+   "cat": [
+    "바우처·컨설팅"
+   ],
+   "end": "2026-11-30",
+   "id": "g31",
+   "ministry": "기타",
+   "note": "무료 컨설팅",
+   "org": "한국발명진흥회",
+   "region": "전국",
+   "start": "2026-01-05",
+   "title": "2026년 하반기 직무발명제도 컨설팅 신청",
+   "url": "https://seenthis.kr/bizinfo/31749"
+  },
+  {
+   "cat": [
+    "고용·인력"
+   ],
+   "end": "2026-11-30",
+   "id": "g32",
+   "ministry": "중소벤처기업부",
+   "org": "한국경영혁신중소기업협회",
+   "region": "전국",
+   "start": "2026-09-15",
+   "title": "2026년 중소기업 특성화고 인력양성사업 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/31852"
+  },
+  {
+   "cat": [
+    "고용·인력"
+   ],
+   "end": "2026-10-31",
+   "id": "g33",
+   "ministry": "고용노동부",
+   "note": "피보험자 10인 이상 기업",
+   "org": "㈜중소기업키움센터(운영기관)",
+   "region": "전국",
+   "start": "2026-08-18",
+   "title": "2026년 미래내일 일경험(인턴형) 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/30761"
+  },
+  {
+   "cat": [
+    "고용·인력"
+   ],
+   "end": "2026-12-31",
+   "id": "g34",
+   "ministry": "고용노동부",
+   "org": "(주)국제커리어",
+   "region": "전국",
+   "start": "2026-03-16",
+   "title": "2026년 인재채움뱅크 대체인력 채용지원 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/25022"
+  },
+  {
+   "cat": [
+    "고용·인력"
+   ],
+   "end": null,
+   "id": "g35",
+   "ministry": "지자체",
+   "note": "예산 소진 시까지",
+   "org": "서울시50플러스재단",
+   "period": "확인",
+   "region": "수도권",
+   "start": null,
+   "title": "[서울·인천·경기] 2026년 중장년 경력인재 지원(직무체험형) 참여기업 모집",
+   "url": "https://seenthis.kr/bizinfo/24079"
+  },
+  {
+   "cat": [
+    "바우처·컨설팅",
+    "교육·HRD"
+   ],
+   "end": null,
+   "id": "g36",
+   "ministry": "기타",
+   "note": "예산 소진 시까지 · 10인 이상, 여성근로자 30% 이상",
+   "org": "종로여성인력개발센터",
+   "period": "확인",
+   "region": "서울",
+   "start": null,
+   "title": "[서울] 2026년 여유컨설팅(조직문화 심화편) 참여사업장 모집",
+   "url": "https://seenthis.kr/bizinfo/32085"
+  },
+  {
+   "cat": [
+    "바우처·컨설팅"
+   ],
+   "end": "2026-11-30",
+   "id": "g21",
+   "ministry": "과학기술정보통신부",
+   "note": "비용 80% 지원, 예산 소진 시 조기 마감 · 서울 소재는 서울 지역정보보호지원센터 공고 확인",
+   "org": "과학기술정보통신부 · 인천테크노파크",
+   "region": "인천",
+   "start": "2026-06-30",
+   "title": "2026년 중소기업 정보보호 지원사업 수요기업 모집",
+   "url": "https://grantshopping.co.kr/grants/46899-2026%EB%85%84-%EC%A4%91%EC%86%8C%EA%B8%B0%EC%97%85-%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8-%EC%A7%80%EC%9B%90%EC%82%AC%EC%97%85-%EC%88%98%EC%9A%94%EA%B8%B0%EC%97%85-%EB%AA%A8%EC%A7%91-%EA%B3%B5%EA%B3%A0"
+  },
+  {
+   "cat": [
+    "AI·AX"
+   ],
+   "end": "2026-11-08",
+   "id": "g22",
+   "ministry": "과학기술정보통신부",
+   "note": "사업자등록 기업이면 규모 무관",
+   "org": "과학기술정보통신부 · 정보통신기획평가원",
+   "region": "전국",
+   "start": null,
+   "title": "6G 서비스 시나리오 공모전 (기업부문)",
+   "url": "https://m.etnews.com/20261015000405"
+  },
+  {
+   "cat": [
+    "R&D"
+   ],
+   "end": "2026-11-13",
+   "id": "g23",
+   "ministry": "과학기술정보통신부",
+   "note": "IRIS 접수, 기관 승인 11-13 18:00",
+   "org": "과학기술정보통신부 · 한국연구재단",
+   "region": "전국",
+   "start": "2026-10-26",
+   "title": "2026년도 미래개척융합과학기술개발사업(한계돌파 R&D) 신규과제 공모",
+   "url": "https://www.syu.ac.kr/rnd/%ED%95%9C%EA%B5%AD%EC%97%B0%EA%B5%AC%EC%9E%AC%EB%8B%A8-2026%EB%85%84%EB%8F%84-%EB%AF%B8%EB%9E%98%EA%B0%9C%EC%B2%99%EC%9C%B5%ED%95%A9%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EA%B0%9C%EB%B0%9C%EC%82%AC-2/"
+  },
+  {
+   "cat": [
+    "R&D",
+    "AI·AX"
+   ],
+   "end": "2026-11-16",
+   "id": "g24",
+   "ministry": "과학기술정보통신부",
+   "note": "연장 안내 있음 — 마감 변동 여부 확인",
+   "org": "과학기술정보통신부(IRIS 접수)",
+   "region": "전국",
+   "start": "2026-11-03",
+   "title": "2026년 AI 기반 주파수 간섭분석 및 전파예측기술 개발사업 신규지원 대상과제",
+   "url": "https://www.syu.ac.kr/rnd/%EA%B3%BC%ED%95%99%EA%B8%B0%EC%88%A0%EC%A0%95%EB%B3%B4%ED%86%B5%EC%8B%A0%EB%B6%80-2026%EB%85%84%EB%8F%84-ai-%EA%B8%B0%EB%B0%98-%EC%A3%BC%ED%8C%8C%EC%88%98-%EA%B0%84%EC%84%AD%EB%B6%84%EC%84%9D/"
+  },
+  {
+   "cat": [
+    "교육·HRD",
+    "AI·AX"
+   ],
+   "end": "2026-11-06",
+   "id": "g37",
+   "ministry": "과학기술정보통신부",
+   "note": "11-06 16:00 마감, 1개 기관 4,900만원 · 신청자격(학교법인·연구소 등) 확인 필요",
+   "org": "한국과학창의재단",
+   "region": "전국",
+   "start": "2026-10-23",
+   "title": "과학교과 연계 AI 교수·학습 자료 개발 수행기관 모집",
+   "url": "https://www.syu.ac.kr/rnd/%ED%95%9C%EA%B5%AD%EA%B3%BC%ED%95%99%EC%B0%BD%EC%9D%98%EC%9E%AC%EB%8B%A8-%EA%B3%BC%ED%95%99%EA%B5%90%EA%B3%BC-%EC%97%B0%EA%B3%84-ai-%EA%B5%90%EC%88%98%C2%B7%ED%95%99%EC%8A%B5-%EC%9E%90%EB%A3%8C/"
+  },
+  {
+   "cat": [
+    "AI·AX"
+   ],
+   "end": "2026-10-28",
+   "id": "g38",
+   "ministry": "과학기술정보통신부",
+   "note": "10-28 15:00 마감",
+   "org": "정보통신산업진흥원(NIPA)",
+   "region": "전국",
+   "start": "2026-10-23",
+   "title": "2026년 첨단 GPU 활용 지원 사업 베타서비스 참여자 모집",
+   "url": "https://www.nipa.kr/home/2-2"
+  },
+  {
+   "cat": [
+    "교육·HRD",
+    "산업안전",
+    "법정교육"
+   ],
+   "end": null,
+   "id": "g25",
+   "ministry": "행정안전부",
+   "note": "안전교육 강사 등 전문인력 등록 · 접수기간은 공고문에서 확인",
+   "org": "행정안전부 · 국민안전교육플랫폼",
+   "period": "확인",
+   "region": "전국",
+   "start": null,
+   "title": "2026년 안전교육 전문인력 등록계획 공고",
+   "url": "https://www.mois.go.kr/frt/bbs/type013/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000006&nttId=128558"
+  },
+  {
+   "cat": [
+    "AI·AX"
+   ],
+   "end": "2026-11-11",
+   "id": "g39",
+   "ministry": "행정안전부",
+   "note": "공무원이 만든 AI 도구 대상(결선 11-25) — 기업 직접 참여 어려움, 참고용",
+   "org": "행정안전부 공공인공지능혁신과",
+   "region": "전국",
+   "start": null,
+   "title": "2026년 공공 AI 대전환 챌린지",
+   "url": "https://eiec.kdi.re.kr/policy/materialView.do?num=288372"
+  }
+ ],
+ "source": "기업마당 미러(seenthis)·HRD4U·NIPA·한국연구재단·행정안전부·전자신문·KDI경제정보센터 / 나라장터(산군·오늘지원·모두입찰 수집) 2026-10-27 수집",
+ "updatedAt": "2026-10-27"
 };
 
 const GCATS=["전체","교육·HRD","AI·AX","산업안전","화학물질","바우처·컨설팅","고용·인력","법정교육","R&D"];
@@ -774,6 +1374,7 @@ function kwGroups(it){const text=norm(it.title+" "+(it.kw||[]).join(" "));
   }).map(g=>g.name)}
 let feed=SNAPSHOT, stars=new Set(), events=[], db=null, dbReady=false;
 let gCat="전체", bCat="전체";
+let assess={}, decisions={}, prof=null; const openG=new Set();
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -812,7 +1413,7 @@ function rowHtml(it,kind){
     <div style="min-width:0">${rgPill(it.region)}<a class="ttl" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>
       <div class="info"><span>${esc(it.org)}</span>${period}</div>
       ${it.note?`<div class="info">${esc(it.note)}</div>`:""}
-      <div class="tags">${kind==="b"?kwGroups(it).map(c=>`<span class="tag kw">${esc(c)}</span>`).join(""):(it.cat||[]).map(c=>`<span class="tag">${esc(c)}</span>`).join("")}</div></div>
+      <div class="tags">${kind==="b"?kwGroups(it).map(c=>`<span class="tag kw">${esc(c)}</span>`).join(""):(it.cat||[]).map(c=>`<span class="tag">${esc(c)}</span>`).join("")}</div>${kind==="b"?gngHtml(it):""}</div>
     <button class="star" type="button" data-id="${esc(it.id)}" aria-pressed="${on}" aria-label="관심 공고 ${on?"해제":"지정"}" title="관심 공고(마감일을 일정에 표시)">${starSvg}</button>
   </li>`;
 }
@@ -821,11 +1422,72 @@ function renderLists(){
   let g=feed.grants.filter(it=>(gCat==="전체"||it.cat.includes(gCat))&&(!gq||(it.title+it.org).includes(gq))&&(!hide||!(dleft(it.end)<0))&&(!$("gMine").checked||mine(it))&&(!$("gMin").value||(it.ministry||"기타")===$("gMin").value));
   g.sort((a,b)=>sortKey(a)-sortKey(b));
   $("gList").innerHTML=g.length?g.map(it=>rowHtml(it,"g")).join(""):`<li class="empty">조건에 맞는 공고가 없습니다. 분야를 '전체'로 바꾸거나 검색어를 지워 보세요.</li>`;
-  let bl=feed.bids.filter(it=>kwGroups(it).length&&(bCat==="전체"||kwGroups(it).includes(bCat))&&(!bq||(it.title+it.org).includes(bq))&&!(dleft(it.end)<0)&&(!$("bMine").checked||mine(it)));
+  let bl=feed.bids.filter(it=>kwGroups(it).length&&(bCat==="전체"||kwGroups(it).includes(bCat))&&(!bq||(it.title+it.org).includes(bq))&&!(dleft(it.end)<0)&&(!$("bMine").checked||mine(it))&&verdictOk(it));
   bl.sort((a,b)=>sortKey(a)-sortKey(b));
   $("bList").innerHTML=bl.length?bl.map(it=>rowHtml(it,"b")).join(""):`<li class="empty">조건에 맞는 입찰공고가 없습니다.</li>`;
   document.querySelectorAll(".star").forEach(btn=>btn.onclick=()=>toggleStar(btn.dataset.id));
+  bindGng();renderGngMeta();
 }
+
+/* Go / No Go */
+const vdCls=v=>v==="Go"?"go":v==="No Go"?"no":"chk";
+const decCls=d=>d==="Go"?"go":d==="No Go"?"no":"hold";
+const won=n=>n==null?"":(n>=1e8?(Math.round(n/1e6)/100)+"억":Math.round(n/1e4).toLocaleString()+"만")+"원";
+const pt=n=>n==null?"–":(Math.round(n*10)/10).toString();
+function gngHtml(it){
+  const a=assess[it.id], d=decisions[it.id];
+  if(!a) return "";
+  const sc=a.score&&a.score.max?a.score:null;
+  const got=sc?(sc.got!=null?sc.got:(sc.items||[]).reduce((s,x)=>s+(+x.got||0),0)):null;
+  const head=`<span class="vd ${vdCls(a.verdict)}">AI ${esc(a.verdict)}</span><span class="sum">${esc(a.summary||"")}</span>${sc?`<span class="sc">정량 ${pt(got)}/${pt(sc.max)}</span>`:""}<span class="my ${d&&d.d?decCls(d.d):"wait"}">${d&&d.d?"내 결정 · "+esc(d.d):"내 결정 전"}</span>`;
+  const ck=(a.checks||[]).map(c=>`<div class="ck"><i class="${c.ok===true?"y":c.ok===false?"n":"q"}" aria-label="${c.ok===true?"충족":c.ok===false?"미충족":"확인 필요"}">${c.ok===true?"✓":c.ok===false?"✕":"?"}</i><b>${esc(c.k)}</b><span>${esc(c.t)}</span></div>`).join("");
+  const sr=(n,b,g,m,c)=>`<div class="sr${c||""}"><span>${esc(n)}</span><span class="n">${pt(g)} / ${pt(m)}</span>${b?`<div class="sb">${esc(b)}</div>`:""}</div>`;
+  const rows=sc?(sc.items||[]).map(x=>sr(x.n,x.basis,x.got,x.max)).join("")+sr("정량 합계(예상)",sc.note,got,sc.max," tot"):"";
+  const g2b=a.bidNo?`https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=${encodeURIComponent(a.bidNo.split("-")[0])}&bidPbancOrd=${encodeURIComponent(a.bidNo.split("-")[1]||"000")}`:"";
+  const meta=[a.method&&`<span>방식 <b>${esc(a.method)}</b></span>`,a.est&&`<span>추정가격 <b>${won(a.est)}</b></span>`,a.due&&`<span>마감 <b class="num">${esc(a.due)}</b></span>`,a.submit&&`<span>제출 <b>${esc(a.submit)}</b></span>`,a.bidNo&&`<span>공고번호 <a href="${g2b}" target="_blank" rel="noopener" class="num">${esc(a.bidNo)}</a></span>`].filter(Boolean).join("");
+  const risks=(a.risks||[]).length?`<div class="risk">유의 · ${a.risks.map(esc).join(" · ")}</div>`:"";
+  const basis=prof&&prof.basisLine?`<div class="gmeta"><span>판단 기준 <b>${esc(prof.basisLine)}</b></span></div>`:"";
+  const btn=(v,c)=>`<button type="button" class="${c}" data-dec="${v}" data-id="${esc(it.id)}" aria-pressed="${d&&d.d===v?"true":"false"}">${v}</button>`;
+  return `<details class="gng" data-gid="${esc(it.id)}"${openG.has(it.id)?" open":""}><summary>${head}</summary><div class="gbody">
+    <div><div class="gh">자격 요건</div>${ck||'<div class="ck"><i class="q">?</i><b>자료</b><span>확인된 요건이 없습니다</span></div>'}</div>
+    ${rows?`<div><div class="gh">정량평가 예상</div>${rows}</div>`:`<div class="gmeta"><span>정량평가 배점은 공고문에서 확인되지 않았습니다.</span></div>`}
+    <div class="gmeta">${meta}</div>${risks}${basis}
+    <div class="dec"><span class="lb">내 결정</span>${btn("Go","go")}${btn("No Go","no")}${btn("보류","hold")}<input type="text" data-memo="${esc(it.id)}" placeholder="메모 (예: 실적증명서 확인 후 결정)" value="${esc(d&&d.memo||"")}" aria-label="결정 메모"><span class="st" data-st="${esc(it.id)}">${d&&d.at?esc(d.at.slice(5,16).replace("T"," "))+" 저장":""}</span></div>
+    <div class="gmeta"><span>AI 판단일 ${esc(a.assessedAt||"")} · 출처 ${esc(a.src||"")}</span></div>
+  </div></details>`;
+}
+async function setDecision(id,v){
+  if(!dbReady)return;
+  const cur=decisions[id];
+  try{
+    if(cur&&cur.d===v&&!cur.memo){await db.collection("decisions").doc(id).delete();}
+    else{await db.collection("decisions").doc(id).set({d:cur&&cur.d===v?"":v,memo:cur&&cur.memo||"",at:new Date().toISOString()});}
+    if(v==="Go"&&!(cur&&cur.d==="Go")&&!stars.has(id))toggleStar(id);
+  }catch(e){const s=document.querySelector(`[data-st="${CSS.escape(id)}"]`);if(s)s.textContent="저장 실패"}
+}
+async function setMemo(id,memo){
+  if(!dbReady)return;const cur=decisions[id]||{d:""};
+  try{await db.collection("decisions").doc(id).set({d:cur.d||"",memo,at:new Date().toISOString()})}catch(e){const s=document.querySelector(`[data-st="${CSS.escape(id)}"]`);if(s)s.textContent="저장 실패"}
+}
+function bindGng(){
+  document.querySelectorAll("details.gng").forEach(el=>el.addEventListener("toggle",()=>{el.open?openG.add(el.dataset.gid):openG.delete(el.dataset.gid)}));
+  document.querySelectorAll(".dec button[data-dec]").forEach(b=>b.onclick=()=>setDecision(b.dataset.id,b.dataset.dec));
+  document.querySelectorAll(".dec input[data-memo]").forEach(i=>i.onchange=()=>setMemo(i.dataset.memo,i.value.trim()));
+}
+function verdictOk(it){
+  const v=$("bVerdict").value;if(!v)return true;const a=assess[it.id],d=decisions[it.id];
+  if(v==="wait")return !!a&&!(d&&d.d);if(v==="mine")return !!(d&&d.d==="Go");return !!a&&a.verdict===v;
+}
+function renderGngMeta(){
+  const ids=feed.bids.filter(it=>!(dleft(it.end)<0)&&assess[it.id]).map(it=>it.id);
+  const has=ids.length>0;$("bVerWrap").hidden=!has;$("gLegend").hidden=!has;
+  if(!has){$("bMetaTxt").textContent="키워드 검색 적용 용역 입찰";return}
+  const c={Go:0,"검토":0,"No Go":0};ids.forEach(i=>c[assess[i].verdict]=(c[assess[i].verdict]||0)+1);
+  const mine=ids.filter(i=>decisions[i]&&decisions[i].d==="Go").length, wait=ids.filter(i=>!(decisions[i]&&decisions[i].d)).length;
+  $("bMetaTxt").textContent=`AI 판단 Go ${c.Go} · 검토 ${c["검토"]} · No Go ${c["No Go"]} — 내 결정 Go ${mine} · 결정 전 ${wait}`;
+}
+$("bVerdict").onchange=renderLists;
+
 function renderStrip(){
   const all=[...feed.grants,...feed.bids];
   const hot=all.filter(it=>{const n=dleft(it.end);return n!==null&&n>=0&&n<=7&&!(it.start&&dleft(it.start)>0)}).length;
@@ -933,9 +1595,49 @@ $("sForm").addEventListener("submit",ev=>{ev.preventDefault();syncSearch();$("sG
 /* 날씨 (서울 금천구) */
 const WX_URL="https://api.open-meteo.com/v1/forecast?latitude=37.4569&longitude=126.8955&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=Asia%2FSeoul&forecast_days=1";
 function wxDesc(c){c=Number(c);if(c===0)return["☀","맑음"];if(c===1)return["🌤","대체로 맑음"];if(c===2)return["⛅","구름 조금"];if(c===3)return["☁","흐림"];if(c===45||c===48)return["🌫","안개"];if(c>=51&&c<=57)return["🌦","이슬비"];if(c>=61&&c<=67)return["🌧","비"];if(c>=71&&c<=77)return["🌨","눈"];if(c>=80&&c<=82)return["🌦","소나기"];if(c===85||c===86)return["🌨","눈"];if(c>=95)return["⛈","뇌우"];return["🌡",""]}
-function showWx(w){if(!w||(w.temp==null&&w.max==null))return;const [ic,ds]=wxDesc(w.code);const r=v=>v==null?"–":Math.round(v)+"°";
-  $("wx").innerHTML=`<span aria-hidden="true">${ic}</span>${w.temp==null?"":`<b>${r(w.temp)}</b>`}<span>${esc(w.desc||ds)}</span><span class="dot">·</span><span>최고 ${r(w.max)} / 최저 ${r(w.min)}</span><span class="dot">·</span><span>${esc(w.place||"서울 금천구")}</span>${w.live?"":`<span class="dot">·</span><span>${esc(w.at||"")} 기준</span>`}`;
+function showWx(w){if(!w||(w.temp==null&&w.max==null&&!(w.hourly&&w.hourly.length)))return;
+  if(!w.live&&Array.isArray(w.hourly)&&w.hourly.length&&w.date===ymd(new Date())){const h=new Date().getHours();const cur=w.hourly.reduce((a,x)=>Math.abs(+x.h-h)<Math.abs(+a.h-h)?x:a,w.hourly[0]);w={...w,temp:cur.t,code:cur.c,at:String(cur.h).padStart(2,"0")+"시 예보"}}
+  skyCode=w.code;setSky(w.code,isNight());const [ic,ds]=wxDesc(w.code);const r=v=>v==null?"–":Math.round(v)+"°";
+  const stale=!w.live&&w.date&&w.date!==ymd(new Date());
+  $("wx").innerHTML=`<div class="wt">${w.temp==null?"":`<b>${r(w.temp)}</b>`}<span>${esc(w.desc||ds)}</span></div><div class="wm">최고 ${r(w.max)} / 최저 ${r(w.min)} · ${esc(w.place||"서울 금천구")}${w.live?" · 실시간":` · ${esc(w.at||"")} 기준`}</div>${stale?`<div class="wm">오늘 예보가 아직 없어 이전 값입니다</div>`:""}`;
   $("wx").hidden=false}
+
+/* 하늘 그림: 날씨 코드 + 낮/밤 */
+function skyKind(c){c=Number(c);if(c===0)return"clear";if(c===1||c===2)return"partly";if(c===3)return"cloudy";if(c===45||c===48)return"fog";if((c>=51&&c<=67)||(c>=80&&c<=82))return"rain";if((c>=71&&c<=77)||c===85||c===86)return"snow";if(c>=95)return"storm";return"partly"}
+function isNight(){const h=new Date().getHours();return h<6||h>=18}
+function cloud(x,y,s,fill,op,cls){return `<g class="drift ${cls||""}"><g transform="translate(${x} ${y}) scale(${s})" fill="${fill}" opacity="${op}"><ellipse cx="0" cy="18" rx="62" ry="20"/><circle cx="-26" cy="8" r="22"/><circle cx="8" cy="-4" r="30"/><circle cx="36" cy="10" r="20"/></g></g>`}
+function setSky(code,night){
+  const k=skyKind(code), hdr=document.querySelector("header.top"); if(!hdr)return;
+  hdr.dataset.sky=k; hdr.classList.toggle("night",!!night);
+  const W="#ffffff", G="#dfe6f2", D="#b7c2d6";
+  const sun=`<g><circle cx="470" cy="62" r="54" fill="#ffe9a3" opacity=".28"/><g class="spin">${Array.from({length:12},(_,i)=>`<rect x="467" y="0" width="6" height="22" rx="3" fill="#ffe28a" opacity=".9" transform="rotate(${i*30} 470 62)"/>`).join("")}</g><circle cx="470" cy="62" r="30" fill="#ffd24d"/></g>`;
+  const moon=`<g><circle cx="470" cy="60" r="44" fill="#fff6d6" opacity=".14"/><path d="M482 32a28 28 0 1 0 14 48 24 24 0 1 1-14-48z" fill="#fff1c2"/></g>`;
+  const dropsA=(n,col)=>Array.from({length:n},(_,i)=>{const x=400+i*(150/n)+(i%3)*6,y=104+(i%3)*12;return `<line class="fall ${i%2?"s2":""}" x1="${x}" y1="${y}" x2="${x-6}" y2="${y+14}" stroke="${col}" stroke-width="3" stroke-linecap="round"/>`}).join("");
+  const flakesA=Array.from({length:8},(_,i)=>`<circle class="flake ${i%2?"s2":""}" style="animation-delay:-${(i*.8).toFixed(1)}s" cx="${405+i*18}" cy="${150-(i%3)*12}" r="3.4" fill="#fff"/>`).join("");
+  let a="";
+  if(k==="clear") a=night?moon:sun;
+  else if(k==="partly") a=(night?moon:sun)+cloud(430,92,.85,W,.97);
+  else if(k==="cloudy") a=cloud(500,58,.8,G,.9,"b")+cloud(430,88,1,W,.97);
+  else if(k==="fog") a=(night?moon:`<circle cx="470" cy="60" r="28" fill="#fff6d6" opacity=".6"/>`)+[78,96,114].map((y,i)=>`<rect class="band" style="animation-delay:-${i*4}s" x="${380+i*10}" y="${y}" width="${180-i*16}" height="9" rx="4.5" fill="#fff" opacity="${.85-i*.15}"/>`).join("");
+  else if(k==="rain") a=cloud(500,52,.8,D,.95,"b")+cloud(440,74,.95,G,1)+dropsA(8,"#e3eeff");
+  else if(k==="snow") a=cloud(500,50,.8,G,.95,"b")+cloud(440,72,.95,W,1)+flakesA;
+  else if(k==="storm") a=cloud(500,52,.85,"#8a94ab",1,"b")+cloud(440,74,1,"#9aa4b9",1)+`<path class="bolt" d="M455 96 l-14 30 h13 l-9 28 l28-40 h-14 l11-18z" fill="#ffe066"/>`+dropsA(5,"#d5e0f3");
+  $("wxArt").innerHTML=`<svg viewBox="372 -6 216 182" preserveAspectRatio="xMidYMid meet">${a}</svg>`;
+  /* 상자 전체 분위기 */
+  let b="";
+  const faint=(x,y,s,o)=>cloud(x,y,s,"#fff",o,"b");
+  if(night) b+=Array.from({length:26},(_,i)=>`<circle class="tw ${i%2?"s2":""}" cx="${(i*97)%1200}" cy="${(i*53)%160+6}" r="${i%4?1.3:2.2}" fill="#fff"/>`).join("");
+  if(k==="clear"&&!night) b+=faint(780,40,.5,.18)+faint(1080,130,.6,.22);
+  if(k==="partly") b+=faint(700,30,.6,.22)+faint(1000,140,.7,.25)+faint(360,150,.5,.14);
+  if(k==="cloudy"||k==="storm"||k==="rain"||k==="snow") b+=faint(640,20,.9,.18)+faint(900,10,1.1,.2)+faint(1150,40,.9,.2)+faint(380,0,.8,.12);
+  if(k==="fog") b+=[40,70,100,130].map((y,i)=>`<rect class="band" style="animation-delay:-${i*5}s" x="${80+i*60}" y="${y}" width="${1000-i*80}" height="10" rx="5" fill="#fff" opacity=".12"/>`).join("");
+  if(k==="rain"||k==="storm") b+=Array.from({length:46},(_,i)=>{const x=(i*29)%1200+10,y=(i*41)%140+10;return `<line class="fall ${i%2?"s2":""}" style="animation-delay:-${(i*.07).toFixed(2)}s" x1="${x}" y1="${y}" x2="${x-6}" y2="${y+14}" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".28"/>`}).join("");
+  if(k==="snow") b+=Array.from({length:40},(_,i)=>`<circle class="flake ${i%2?"s2":""}" style="animation-delay:-${(i*.31).toFixed(2)}s" cx="${(i*61)%1200}" cy="${(i*37)%170}" r="${i%3?1.8:2.8}" fill="#fff" opacity=".55"/>`).join("");
+  $("sky").innerHTML=`<svg viewBox="0 0 1200 170" preserveAspectRatio="xMidYMid slice">${b}</svg>`;
+}
+let skyCode=1;
+setSky(1,isNight());
+setInterval(()=>setSky(skyCode,isNight()),600000);
 let wxLive=false;
 fetch(WX_URL).then(r=>r.ok?r.json():Promise.reject()).then(j=>{wxLive=true;showWx({temp:j.current.temperature_2m,code:j.current.weather_code,max:j.daily.temperature_2m_max[0],min:j.daily.temperature_2m_min[0],live:true})}).catch(()=>{});
 
@@ -952,9 +1654,11 @@ fetch(WX_URL).then(r=>r.ok?r.json():Promise.reject()).then(j=>{wxLive=true;showW
   db.doc("weather/today").onSnapshot(s=>{if(!wxLive&&s.exists)showWx(s.data())},()=>{});
   db.doc("briefing/latest").onSnapshot(s=>{brief=s.exists?s.data():null;renderBrief()},()=>{});
   db.doc("prefs/stars").onSnapshot(s=>{stars=new Set(s.exists&&Array.isArray(s.data().ids)?s.data().ids:[]);render()},()=>{});
+  db.collection("assess").onSnapshot(q=>{assess={};q.docs.forEach(d=>assess[d.id]=d.data());renderLists()},()=>{});
+  db.collection("decisions").onSnapshot(q=>{decisions={};q.docs.forEach(d=>decisions[d.id]=d.data());if(!document.activeElement||!document.activeElement.matches(".dec input"))renderLists();else renderGngMeta()},()=>{});
+  db.doc("company/profile").onSnapshot(s=>{prof=s.exists?s.data():null},()=>{});
   db.collection("events").onSnapshot(q=>{events=q.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{$("saveState").textContent="일정 동기화 중단 · 새로고침 필요"});
 })();
 </script>
-
 </body>
 </html>
