@@ -1658,7 +1658,7 @@ fetch(WX_URL).then(r=>r.ok?r.json():Promise.reject()).then(j=>{wxLive=true;showW
   db.doc("prefs/stars").onSnapshot(s=>{stars=new Set(s.exists&&Array.isArray(s.data().ids)?s.data().ids:[]);render()},()=>{});
   db.collection("assess").onSnapshot(q=>{assess={};q.docs.forEach(d=>assess[d.id]=d.data());renderLists()},()=>{});
   db.collection("decisions").onSnapshot(q=>{decisions={};q.docs.forEach(d=>decisions[d.id]=d.data());if(!document.activeElement||!document.activeElement.matches(".dec input"))renderLists();else renderGngMeta()},()=>{});
-  db.doc("company/profile").onSnapshot(s=>{prof=s.exists?s.data():null},()=>{});
+  db.doc("company/profile").onSnapshot(s=>{prof=s.exists?s.data():null;renderLists()},()=>{});
   db.collection("events").onSnapshot(q=>{events=q.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{$("saveState").textContent="일정 동기화 중단 · 새로고침 필요"});
 })();
 </script>
