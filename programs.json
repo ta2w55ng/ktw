@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-27T09:03",
+ "updated": "2026-10-28T09:06",
  "sources": [
   "기업마당",
   "NIPA",
@@ -7,8 +7,62 @@
  ],
  "items": [
   {
+   "agency": "(주)오픈놀",
+   "checked": "2026-10-28",
+   "deadline": "2026-11-09",
+   "deadline_note": "",
+   "field": "시설ㆍ공간ㆍ보육",
+   "first_seen": "2026-10-28",
+   "ministry": "",
+   "note": "서초창업스테이션 11월 창업 교육 프로그램(브랜드 만들기) 참가자 모집",
+   "period": "10/26 ~ 11/9",
+   "posted": "2026-10-27",
+   "rank": 179622,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "[서초창업스테이션] 11월 창업 교육 프로그램 - 초기 스타트업을 위한 브랜드 만들기",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179622",
+   "id": "ks-seocho-brand-nov"
+  },
+  {
+   "agency": "서울과학기술대학교 창업지원단",
+   "checked": "2026-10-28",
+   "deadline": "2026-11-01",
+   "deadline_note": "",
+   "field": "창업교육",
+   "first_seen": "2026-10-28",
+   "ministry": "",
+   "note": "예비창업패키지 ST 창업준비 아카데미 참여자 모집",
+   "period": "10/26 ~ 11/1",
+   "posted": "2026-10-26",
+   "rank": 179616,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026 예비창업패키지 ST 창업준비 아카데미 참여자 모집",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179616",
+   "id": "ks-st-prestartup-academy"
+  },
+  {
+   "agency": "관악구청",
+   "checked": "2026-10-28",
+   "deadline": "2026-11-16",
+   "deadline_note": "",
+   "field": "창업교육",
+   "first_seen": "2026-10-28",
+   "ministry": "",
+   "note": "관악구 청년 취창업 특강 참가자 모집",
+   "period": "10/23 ~ 11/16",
+   "posted": "2026-10-26",
+   "rank": 179611,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "[청년 취창업 특강] 나만의 일을 만들어가는 방법",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179611",
+   "id": "ks-gwanak-youth-lecture"
+  },
+  {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-10-27",
+   "checked": "2026-10-28",
    "deadline": "2026-11-06T18:00",
    "deadline_note": "",
    "field": "",
@@ -26,7 +80,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-10-27",
+   "checked": "2026-10-28",
    "deadline": "2026-10-28T15:00",
    "deadline_note": "",
    "field": "인프라",
@@ -314,7 +368,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-10-27",
+   "checked": "2026-10-28",
    "deadline": "2026-11-04T22:00",
    "deadline_note": "",
    "field": "용역ㆍ해외진출",
@@ -385,24 +439,6 @@
    "id": "ks-ydp-livecommerce"
   },
   {
-   "agency": "㈜컴퍼니엑스",
-   "checked": "2026-10-14",
-   "deadline": "2026-10-20",
-   "deadline_note": "",
-   "field": "멘토링ㆍ컨설팅ㆍ교육",
-   "first_seen": "2026-10-14",
-   "ministry": "",
-   "note": "프로젝트 창업 인큐베이팅 참여자 모집",
-   "period": "10/7 ~ 10/20",
-   "posted": "2026-10-13",
-   "rank": 179446,
-   "relevant": false,
-   "source": "K-Startup",
-   "title": "2026년 프로젝트 창업 인큐베이팅 : 2027 모두의 창업 선정 프로젝트",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179446",
-   "id": "ks-project-incubating"
-  },
-  {
    "agency": "광명시창업지원센터",
    "checked": "2026-10-14",
    "deadline": "2026-10-29",
@@ -457,8 +493,26 @@
    "id": "ks-quantum-qx-forum"
   },
   {
+   "agency": "창업진흥원",
+   "checked": "2026-10-28",
+   "deadline": "2026-10-29T15:00",
+   "deadline_note": "",
+   "field": "사업화",
+   "first_seen": "2026-10-28",
+   "ministry": "중소벤처기업부",
+   "note": "초격차 스타트업 프로젝트 정부 첫 실증·구매 주관기관 모집",
+   "period": "10/8 11:00 ~ 10/29 15:00",
+   "posted": "2026-10-08",
+   "rank": 179428,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2027년 초격차 스타트업 프로젝트 정부 첫 실증·구매 주관기관 모집공고",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179428",
+   "id": "ks-chogyeokcha-proof-2027"
+  },
+  {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-10-27",
+   "checked": "2026-10-28",
    "deadline": "2026-10-22T23:00",
    "deadline_note": "",
    "field": "해외진출",
@@ -529,24 +583,6 @@
    "id": "ks-seocho-edu-oct"
   },
   {
-   "agency": "(재)경기도경제과학진흥원",
-   "checked": "2026-10-08",
-   "deadline": "2026-10-20",
-   "deadline_note": "",
-   "field": "멘토링ㆍ컨설팅ㆍ교육",
-   "first_seen": "2026-10-07",
-   "ministry": "",
-   "note": "경기도경제과학진흥원 주관 창업가 초청 특강, 참가자 모집",
-   "period": "10/6 ~ 10/20",
-   "posted": "2026-10-06",
-   "rank": 12,
-   "relevant": false,
-   "source": "K-Startup",
-   "title": "이타카앤파트너스 조용민 대표 초청 특강 - 내가 투자한 스타트업과 성공하는 창업가의 3가지 비밀",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179426",
-   "id": "ks-itaca-lecture"
-  },
-  {
    "agency": "서울시립대학교창업보육센터",
    "checked": "2026-10-08",
    "deadline": "2026-10-27",
@@ -563,24 +599,6 @@
    "title": "[동대문구 창업지원센터] 10월 메이커스페이스(레이저커터, 3D프린팅) 교육 일정",
    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?pbancSn=179420",
    "id": "ks-ddm-makerspace-oct"
-  },
-  {
-   "agency": "한국사회적기업진흥원",
-   "checked": "2026-10-06",
-   "deadline": "2026-10-20",
-   "deadline_note": "",
-   "field": "기타",
-   "first_seen": "2026-10-06",
-   "ministry": "문화체육관광부",
-   "note": "문화체육관광형 예비사회적기업 지정 신청 접수",
-   "period": "10/1 ~ 10/20",
-   "posted": "2026-10-02",
-   "rank": 126975,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "2026년 문화체육관광형 예비사회적기업 지정 계획 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126975",
-   "id": "biz-126975"
   },
   {
    "agency": "한국에너지기술평가원",
@@ -908,7 +926,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-10-27",
+   "checked": "2026-10-28",
    "deadline": "2026-10-30T13:00",
    "deadline_note": "",
    "field": "기타",
@@ -1067,24 +1085,6 @@
    "title": "2026년 스타트업 원스톱 온라인 심화상담 지원 모집 공고",
    "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126686",
    "id": "biz-126686"
-  },
-  {
-   "agency": "경기테크노파크",
-   "checked": "2026-09-21",
-   "deadline": null,
-   "deadline_note": "예산 소진 시",
-   "field": "기술",
-   "first_seen": "2026-09-21",
-   "ministry": "경기도",
-   "note": "안산시 국가기술거래플랫폼 기술코칭 참여기업 모집",
-   "period": "예산 소진시까지",
-   "posted": "2026-09-18",
-   "rank": 6620,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "[경기] 안산시 2026년 국가기술거래플랫폼 기술코칭 참여기업 모집 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126620",
-   "id": "biz-126620"
   }
  ]
 }
