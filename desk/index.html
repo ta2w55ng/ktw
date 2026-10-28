@@ -674,33 +674,6 @@ const SNAPSHOT = {
    "region": "경기"
   },
   {
-   "id": "b05",
-   "title": "26년도 PIM인공지능반도체 핵심기술개발사업 효과분석 및 산업동향조사 연구",
-   "org": "정보통신기획평가원",
-   "amount": "1.1억 원",
-   "end": "2026-11-11",
-   "stage": "입찰",
-   "cat": [
-    "연구·컨설팅",
-    "AI·AX"
-   ],
-   "url": "https://todayjiwon.co.kr/procurement/7f4a508b-895b-434b-bdf8-a8657e479581",
-   "region": "전국"
-  },
-  {
-   "id": "b06",
-   "title": "2027년 과학기술정보 AI 학습데이터 및 학술정보 DB구축",
-   "org": "한국과학기술정보연구원",
-   "amount": "12.6억 원",
-   "end": "2026-11-28",
-   "stage": "입찰",
-   "cat": [
-    "AI·AX"
-   ],
-   "url": "https://todayjiwon.co.kr/procurement/d84316a9-f3ab-440c-af35-c3ad696b58be",
-   "region": "전국"
-  },
-  {
    "id": "b07",
    "title": "2027년 공공기관 폭력예방교육 현장점검 및 컨설팅 운영",
    "org": "조달청 서울지방조달청",
@@ -720,21 +693,6 @@ const SNAPSHOT = {
    "note": "폭력예방교육은 법정의무교육 항목"
   },
   {
-   "id": "b09",
-   "title": "국민체감 성과 확산을 위한 공공 AI 서비스 성과관리 용역",
-   "org": "한국지능정보사회진흥원(NIA)",
-   "amount": "공고문 확인",
-   "end": null,
-   "stage": "사전규격",
-   "posted": "2026-10-22",
-   "cat": [
-    "AI·AX",
-    "연구·컨설팅"
-   ],
-   "url": "https://www.nia.or.kr/site/nia_kor/ex/bbs/List.do?cbIdx=78336",
-   "region": null
-  },
-  {
    "id": "b11",
    "title": "AI 맞춤형 교수학습 플랫폼 고도화 사업 위탁감리",
    "org": "한국지능정보사회진흥원(NIA)",
@@ -750,49 +708,6 @@ const SNAPSHOT = {
    "kw": [
     "디지털 교육"
    ]
-  },
-  {
-   "id": "b13",
-   "title": "빅데이터혁신융합대학 사업_AI&Bigdata 게임개발 프로그램 운영 용역",
-   "org": "경기과학기술대학교 산학협력단",
-   "region": "전국",
-   "amount": "7,000만 원",
-   "end": "2026-11-07",
-   "stage": "입찰",
-   "posted": "2026-10-26",
-   "cat": [
-    "교육 운영",
-    "AI·AX"
-   ],
-   "url": "https://todayjiwon.co.kr/procurement/426ed029-5247-43ba-b572-3a2784601e0f"
-  },
-  {
-   "id": "b14",
-   "title": "광양만권 철강·금속 기업 AX 기술지원(기초단계) 용역",
-   "org": "한국산업기술시험원",
-   "region": "전국",
-   "amount": "1.4억 원",
-   "end": "2026-11-07",
-   "stage": "입찰",
-   "posted": "2026-10-26",
-   "cat": [
-    "AI·AX"
-   ],
-   "url": "https://todayjiwon.co.kr/procurement/af8e3f84-313f-4caa-87dc-34d42d5039a7"
-  },
-  {
-   "id": "b15",
-   "title": "AX서비스 개발환경 구축 용역",
-   "org": "한국남동발전(주)",
-   "region": "전국",
-   "amount": "7.8억 원",
-   "end": "2026-11-07",
-   "stage": "입찰",
-   "posted": "2026-10-26",
-   "cat": [
-    "AI·AX"
-   ],
-   "url": "https://todayjiwon.co.kr/procurement/a3e0d8d2-c43b-4b34-ac02-d6a09b88268f"
   },
   {
    "id": "b16",
@@ -813,6 +728,7 @@ const SNAPSHOT = {
  "bidKeywords": [
   "온라인교육",
   "온라인연수",
+  "원격",
   "원격교육",
   "법정교육",
   "법정의무교육",
@@ -824,10 +740,12 @@ const SNAPSHOT = {
   "외국인",
   "다국어",
   "콘텐츠",
-  "AI",
-  "AI agent",
-  "AI 에이전트",
-  "AX",
+  "교육 영상",
+  "AI 교육",
+  "AI 챗봇",
+  "AI 학습플랫폼",
+  "AX 컨설팅",
+  "AX 교육",
   "디지털 교육"
  ]
 };
@@ -835,17 +753,25 @@ const SNAPSHOT = {
 const GCATS=["전체","교육·HRD","AI·AX","산업안전","화학물질","바우처·컨설팅","고용·인력","법정교육","R&D"];
 const MINS=["과학기술정보통신부","행정안전부","고용노동부","중소벤처기업부","산업통상부","기후에너지환경부","지자체","기타"];
 const KW_GROUPS=[
- {name:"온라인·이러닝",terms:["온라인교육","온라인 교육","온라인연수","온라인 연수","원격교육","원격 교육","원격연수","사이버연수","사이버 연수","사이버교육","이러닝","e-learning","elearning"]},
+ {name:"온라인·원격·이러닝",terms:["온라인교육","온라인연수","원격","사이버연수","사이버교육","이러닝","e-learning","elearning"],not:["원격감시","원격제어","원격검침","원격관제","원격감리","원격탐사"]},
  {name:"법정·안전보건교육",terms:["법정교육","법정의무교육","의무교육","산업안전보건교육","안전보건교육","관리감독자"]},
  {name:"외국인·다국어",terms:["외국인","다국어"]},
- {name:"콘텐츠",terms:["콘텐츠","컨텐츠"]},
- {name:"AI·에이전트",terms:["AI","인공지능","AI agent","AI 에이전트","AI에이전트","에이전트"]},
- {name:"AX",terms:["AX"]},
- {name:"디지털 교육",terms:["디지털 교육","디지털교육","디지털배움터","디지털 역량"]}
+ {name:"콘텐츠·교육영상",terms:["콘텐츠","컨텐츠","교육영상"]},
+ {name:"AI 교육·챗봇·학습플랫폼",all:[["AI","인공지능"],["교육","챗봇","학습플랫폼"]]},
+ {name:"AX 컨설팅·교육",all:[["AX"],["컨설팅","교육"]]},
+ {name:"디지털 교육",terms:["디지털교육","디지털배움터","디지털역량"]}
 ];
 const BCATS=["전체",...KW_GROUPS.map(g=>g.name)];
-function hasTerm(text,t){if(/^[A-Za-z]+$/.test(t)){return new RegExp("(^|[^A-Za-z])"+t+"([^A-Za-z]|$)","i").test(text)}return text.toLowerCase().includes(t.toLowerCase())}
-function kwGroups(it){const text=it.title+" "+(it.kw||[]).join(" ");return KW_GROUPS.filter(g=>g.terms.some(t=>hasTerm(text,t))).map(g=>g.name)}
+const norm=t=>String(t||"").replace(/\s+/g,"");
+function hasTerm(text,t){t=norm(t);if(/^[A-Za-z]+$/.test(t)){return new RegExp("(^|[^A-Za-z])"+t+"([^A-Za-z]|$)","i").test(text)}return text.toLowerCase().includes(t.toLowerCase())}
+function kwGroups(it){const text=norm(it.title+" "+(it.kw||[]).join(" "));
+  return KW_GROUPS.filter(g=>{
+    if(g.all)return g.all.every(list=>list.some(t=>hasTerm(text,t)));
+    const hits=g.terms.filter(t=>hasTerm(text,t));
+    if(!hits.length)return false;
+    if(g.not&&hits.every(t=>t==="원격")&&g.not.some(t=>hasTerm(text,t))&&!/원격(교육|연수|강의|수업|평생)/.test(text))return false;
+    return true;
+  }).map(g=>g.name)}
 let feed=SNAPSHOT, stars=new Set(), events=[], db=null, dbReady=false;
 let gCat="전체", bCat="전체";
 const $=id=>document.getElementById(id);
@@ -895,7 +821,7 @@ function renderLists(){
   let g=feed.grants.filter(it=>(gCat==="전체"||it.cat.includes(gCat))&&(!gq||(it.title+it.org).includes(gq))&&(!hide||!(dleft(it.end)<0))&&(!$("gMine").checked||mine(it))&&(!$("gMin").value||(it.ministry||"기타")===$("gMin").value));
   g.sort((a,b)=>sortKey(a)-sortKey(b));
   $("gList").innerHTML=g.length?g.map(it=>rowHtml(it,"g")).join(""):`<li class="empty">조건에 맞는 공고가 없습니다. 분야를 '전체'로 바꾸거나 검색어를 지워 보세요.</li>`;
-  let bl=feed.bids.filter(it=>(bCat==="전체"||kwGroups(it).includes(bCat))&&(!bq||(it.title+it.org).includes(bq))&&!(dleft(it.end)<0)&&(!$("bMine").checked||mine(it)));
+  let bl=feed.bids.filter(it=>kwGroups(it).length&&(bCat==="전체"||kwGroups(it).includes(bCat))&&(!bq||(it.title+it.org).includes(bq))&&!(dleft(it.end)<0)&&(!$("bMine").checked||mine(it)));
   bl.sort((a,b)=>sortKey(a)-sortKey(b));
   $("bList").innerHTML=bl.length?bl.map(it=>rowHtml(it,"b")).join(""):`<li class="empty">조건에 맞는 입찰공고가 없습니다.</li>`;
   document.querySelectorAll(".star").forEach(btn=>btn.onclick=()=>toggleStar(btn.dataset.id));
