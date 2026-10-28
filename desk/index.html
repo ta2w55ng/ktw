@@ -337,7 +337,8 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
 <script>
 /* GitHub Pages용: Claude 저장소가 없을 때 브라우저 저장소(localStorage)와 같은 폴더의 JSON 파일을 대신 사용 */
 const LocalDB=(()=>{const K="desk:",subs={};
- const remote={"feed/current":"desk-feed.json","briefing/latest":"desk-briefing.json"};
+ const remote={"feed/current":"desk-feed.json","briefing/latest":"desk-briefing.json","company/profile":"desk-company.json"};
+ const remoteCol={"assess":"desk-assess.json"};
  const read=p=>{try{return JSON.parse(localStorage.getItem(K+p))}catch(e){return null}};
  const write=(p,v)=>{try{localStorage.setItem(K+p,JSON.stringify(v))}catch(e){throw{code:"unavailable"}}};
  const emit=k=>(subs[k]||[]).forEach(f=>f());
@@ -351,7 +352,8 @@ const LocalDB=(()=>{const K="desk:",subs={};
    async set(d){if(remote[p])throw{code:"invalid_argument"};write(p,d);idx(c,id,true);emit(p);emit("col:"+c)},
    async update(d){const cur=read(p);if(!cur)throw{code:"invalid_argument"};write(p,{...cur,...d});emit(p);emit("col:"+c)},
    async delete(){try{localStorage.removeItem(K+p)}catch(e){};idx(c,id,false);emit(p);emit("col:"+c)}}}
- function collection(c){return{path:c,doc:id=>doc(c+"/"+(id||newId())),
+ function collection(c){if(remoteCol[c])return{path:c,doc:id=>doc(c+"/"+id),async add(){throw{code:"invalid_argument"}},onSnapshot(next){fetch(remoteCol[c],{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(o=>{const docs=Object.entries(o||{}).map(([k,v])=>snap(k,v));next({docs,size:docs.length,empty:!docs.length,docChanges:()=>[],metadata:{fromCache:false,hasPendingWrites:false}})}).catch(()=>{});return()=>{}}};
+  return{path:c,doc:id=>doc(c+"/"+(id||newId())),
    async add(v){const d=doc(c+"/"+newId());await d.set(v);return d},
    onSnapshot(next){const f=()=>{const docs=(read("idx:"+c)||[]).map(i=>snap(i,read(c+"/"+i))).filter(x=>x.exists);next({docs,size:docs.length,empty:!docs.length,docChanges:()=>[],metadata:{fromCache:false,hasPendingWrites:false}})};(subs["col:"+c]=subs["col:"+c]||[]).push(f);f();return()=>{}}}}
  return{doc,collection};
