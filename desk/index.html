@@ -1588,6 +1588,9 @@ function renderBrief(){
   const acts=(brief.actions||[]).slice(0,2).map(a=>`<span class="act"><span>${esc(a)}</span></span>`).join("");
   el.innerHTML=`<div class="bgrid"><div class="bcol"><div class="bh">핫 이슈 · 정부 정책</div>${iss||'<div class="iss"><span></span><div class="c">이슈 없음</div></div>'}${kw?`<div class="bh" style="margin-top:4px">추천 키워드</div><div class="kwc">${kw}</div>`:""}</div><div class="bcol"><div class="bh">신사업 아이디어</div>${ideas}</div></div>${acts?`<div class="bfoot"><span class="bh">이번 주 추진</span>${acts}</div>`:""}`;
 }
+/* KERIS 인증·승인 조건이 있는 콘텐츠 개발 용역은 목록에서 제외(사용자 지시) */
+const KERIS_RE=/KERIS|한국교육학술정보원/i;
+function hideKeris(){const raw=feed.__raw||(feed.__raw=feed.bids);feed.bids=raw.filter(it=>!it.keris&&!(assess[it.id]&&assess[it.id].keris)&&!KERIS_RE.test((it.title||"")+" "+(it.note||"")))}
 function render(){renderKw();renderBrief();chips($("gChips"),GCATS,gCat,c=>gCat=c);chips($("bChips"),BCATS,bCat,c=>bCat=c);renderLists();renderCal();renderStrip()}
 
 $("bDate").onchange=e=>{briefSel=e.target.value;renderBrief()};
@@ -1674,13 +1677,13 @@ fetch(WX_URL).then(r=>r.ok?r.json():Promise.reject()).then(j=>{wxLive=true;showW
   dbReady=true;$("saveState").textContent=local?"Claude 데스크 일정 + 이 브라우저 저장":"자동 저장됨";
   db.doc("feed/current").onSnapshot(s=>{
     if(!s.exists)return;const d=s.data();
-    if(d&&Array.isArray(d.grants)&&Array.isArray(d.bids)&&(d.updatedAt||"")>=SNAPSHOT.updatedAt){feed=d;$("srcNote").textContent="평일 16시 자동 수집 · 다음 날 아침 확인";render()}
+    if(d&&Array.isArray(d.grants)&&Array.isArray(d.bids)&&(d.updatedAt||"")>=SNAPSHOT.updatedAt){feed=d;feed.__raw=d.bids;hideKeris();$("srcNote").textContent="평일 16시 자동 수집 · 다음 날 아침 확인";render()}
   },()=>{});
   db.doc("weather/today").onSnapshot(s=>{if(!wxLive&&s.exists)showWx(s.data())},()=>{});
   db.doc("briefing/latest").onSnapshot(s=>{brief=window.__brief0=s.exists?s.data():null;renderBrief()},()=>{});
   db.collection("briefings").onSnapshot(s=>{const o={};s.docs.forEach(d=>{const v=d.data();if(v)o[d.id]=v});briefs=o;renderBrief()},()=>{});
   db.doc("prefs/stars").onSnapshot(s=>{stars=new Set(s.exists&&Array.isArray(s.data().ids)?s.data().ids:[]);render()},()=>{});
-  db.collection("assess").onSnapshot(q=>{assess={};q.docs.forEach(d=>assess[d.id]=d.data());renderLists()},()=>{});
+  db.collection("assess").onSnapshot(q=>{assess={};q.docs.forEach(d=>assess[d.id]=d.data());hideKeris();renderLists();renderStrip()},()=>{});
   db.collection("decisions").onSnapshot(q=>{decisions={};q.docs.forEach(d=>decisions[d.id]=d.data());if(!document.activeElement||!document.activeElement.matches(".dec input"))renderLists();else renderGngMeta()},()=>{});
   db.doc("company/profile").onSnapshot(s=>{prof=s.exists?s.data():null;renderLists()},()=>{});
   db.collection("events").onSnapshot(q=>{events=q.docs.map(d=>({id:d.id,...d.data()}));render()},()=>{$("saveState").textContent="일정 동기화 중단 · 새로고침 필요"});
