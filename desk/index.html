@@ -278,7 +278,7 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
   <div class="grid">
     <div class="main-col">
       <section class="panel brief" aria-labelledby="h-brief">
-        <div class="ph"><h2 id="h-brief">오늘의 신사업 아이디어 브리핑</h2><span class="bsel"><span class="meta" id="bMeta">일일 신사업 아이디어 Briefing 보고서 요약 · 평일 09:13</span><select id="bDate" aria-label="지난 브리핑 날짜 선택" hidden></select></span></div>
+        <div class="ph"><h2 id="h-brief">오늘의 신사업 아이디어 브리핑</h2><span class="bsel"><span class="meta" id="bMeta">일일 신사업 아이디어 Briefing 보고서 요약 · 평일 16:13 작성</span><select id="bDate" aria-label="지난 브리핑 날짜 선택" hidden></select></span></div>
         <div id="bBody"><div class="bempty">브리핑 요약을 불러오는 중입니다.</div></div>
       </section>
 
@@ -356,12 +356,17 @@ const LocalDB=(()=>{const K="desk:",subs={};
    onSnapshot(next){if(remote[p]){fetch(remote[p],{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>next(snap(id,d))).catch(()=>next(snap(id,null)));return()=>{}}
      const f=()=>next(snap(id,read(p)));(subs[p]=subs[p]||[]).push(f);f();return()=>{}},
    async set(d){if(remote[p])throw{code:"invalid_argument"};write(p,d);idx(c,id,true);emit(p);emit("col:"+c)},
-   async update(d){const cur=read(p);if(!cur)throw{code:"invalid_argument"};write(p,{...cur,...d});emit(p);emit("col:"+c)},
-   async delete(){try{localStorage.removeItem(K+p)}catch(e){};idx(c,id,false);emit(p);emit("col:"+c)}}}
+   async update(d){const cur=read(p)||(mergeCol[c]&&remoteDoc(c,id));if(!cur)throw{code:"invalid_argument"};write(p,{...cur,...d});idx(c,id,true);emit(p);emit("col:"+c)},
+   async delete(){try{localStorage.removeItem(K+p)}catch(e){};idx(c,id,false);if(mergeCol[c]&&remoteDoc(c,id)){const h=read("hide:"+c)||[];if(!h.includes(id)){h.push(id);write("hide:"+c,h)}}emit(p);emit("col:"+c)}}}
+ /* 일정: Claude 데스크에서 등록한 일정(desk-events.json, 읽기용)과 이 브라우저에서 등록한 일정을 합쳐 보여줌 */
+ const mergeCol={"events":"desk-events.json"};const RC={};
+ function remoteDoc(c,id){const r=RC[c];return r&&r[id]||null}
  function collection(c){if(remoteCol[c])return{path:c,doc:id=>doc(c+"/"+id),async add(){throw{code:"invalid_argument"}},onSnapshot(next){fetch(remoteCol[c],{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(o=>{const docs=Object.entries(o||{}).map(([k,v])=>snap(k,v));next({docs,size:docs.length,empty:!docs.length,docChanges:()=>[],metadata:{fromCache:false,hasPendingWrites:false}})}).catch(()=>{});return()=>{}}};
   return{path:c,doc:id=>doc(c+"/"+(id||newId())),
    async add(v){const d=doc(c+"/"+newId());await d.set(v);return d},
-   onSnapshot(next){const f=()=>{const docs=(read("idx:"+c)||[]).map(i=>snap(i,read(c+"/"+i))).filter(x=>x.exists);next({docs,size:docs.length,empty:!docs.length,docChanges:()=>[],metadata:{fromCache:false,hasPendingWrites:false}})};(subs["col:"+c]=subs["col:"+c]||[]).push(f);f();return()=>{}}}}
+   onSnapshot(next){if(mergeCol[c]&&!RC[c])fetch(mergeCol[c],{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(o=>{RC[c]=o||{};emit("col:"+c)}).catch(()=>{});
+    const f=()=>{const own=(read("idx:"+c)||[]).map(i=>snap(i,read(c+"/"+i))).filter(x=>x.exists);const ids=new Set(own.map(x=>x.id)),hide=new Set(read("hide:"+c)||[]);
+     const docs=own.concat(Object.entries(RC[c]||{}).filter(([k])=>!ids.has(k)&&!hide.has(k)).map(([k,v])=>snap(k,v)));next({docs,size:docs.length,empty:!docs.length,docChanges:()=>[],metadata:{fromCache:false,hasPendingWrites:false}})};(subs["col:"+c]=subs["col:"+c]||[]).push(f);f();return()=>{}}}}
  return{doc,collection};
 })();
 /* 2026-10-27 기준 수집 스냅샷. 자동 갱신 작업이 저장소의 feed/current 문서를 덮어쓰면 그 값이 우선합니다. */
@@ -1574,7 +1579,7 @@ function renderBrief(){
   renderBriefDates();
   const el=$("bBody");
   const brief=(briefSel&&briefs[briefSel])||window.__brief0;
-  if(!brief){el.innerHTML='<div class="bempty">아직 요약이 없습니다. 평일 09:13 「일일 신사업 아이디어 Briefing 보고서」 작업이 끝나면 핵심 이슈 3건, 신사업 아이디어, 이번 주 추진 과제가 여기에 표시됩니다. 원본 한글 파일은 조간보고 폴더에 저장됩니다.</div>';return}
+  if(!brief){el.innerHTML='<div class="bempty">아직 요약이 없습니다. 평일 16:13 「일일 신사업 아이디어 Briefing 보고서」 작업이 끝나면 핵심 이슈 3건, 신사업 아이디어, 이번 주 추진 과제가 여기에 표시됩니다. 원본 한글 파일은 조간보고 폴더에 저장됩니다.</div>';return}
   const d=parse(brief.date),dl=dleft(brief.date);
   $("bMeta").innerHTML=`<b class="num">${esc(brief.date)}</b> 보고서${dl<0?` · ${-dl}일 전`:""}${brief.file?` · ${esc(brief.file)}`:""}`;
   const iss=(brief.issues||[]).slice(0,3).map((x,i)=>`<div class="iss"><span class="n">${i+1}</span><div style="min-width:0"><div>${esc(x.title)}</div><div class="c">${esc([x.cat,x.summary].filter(Boolean).join(" · "))}</div></div></div>`).join("");
@@ -1666,10 +1671,10 @@ fetch(WX_URL).then(r=>r.ok?r.json():Promise.reject()).then(j=>{wxLive=true;showW
   let local=false;
   if(!db){db=LocalDB;local=true}
   if(!db){$("saveState").textContent="저장소 미연결 · 보기 전용";$("bBody").innerHTML='<div class="bempty">저장소에 연결되지 않아 브리핑 요약을 불러올 수 없습니다.</div>';return}
-  dbReady=true;$("saveState").textContent=local?"이 브라우저에 저장됨":"자동 저장됨";
+  dbReady=true;$("saveState").textContent=local?"Claude 데스크 일정 + 이 브라우저 저장":"자동 저장됨";
   db.doc("feed/current").onSnapshot(s=>{
     if(!s.exists)return;const d=s.data();
-    if(d&&Array.isArray(d.grants)&&Array.isArray(d.bids)&&(d.updatedAt||"")>=SNAPSHOT.updatedAt){feed=d;$("srcNote").textContent="평일 매일 07시 자동 갱신";render()}
+    if(d&&Array.isArray(d.grants)&&Array.isArray(d.bids)&&(d.updatedAt||"")>=SNAPSHOT.updatedAt){feed=d;$("srcNote").textContent="평일 16시 자동 수집 · 다음 날 아침 확인";render()}
   },()=>{});
   db.doc("weather/today").onSnapshot(s=>{if(!wxLive&&s.exists)showWx(s.data())},()=>{});
   db.doc("briefing/latest").onSnapshot(s=>{brief=window.__brief0=s.exists?s.data():null;renderBrief()},()=>{});
