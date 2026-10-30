@@ -1588,9 +1588,9 @@ function renderBrief(){
   const acts=(brief.actions||[]).slice(0,2).map(a=>`<span class="act"><span>${esc(a)}</span></span>`).join("");
   el.innerHTML=`<div class="bgrid"><div class="bcol"><div class="bh">핫 이슈 · 정부 정책</div>${iss||'<div class="iss"><span></span><div class="c">이슈 없음</div></div>'}${kw?`<div class="bh" style="margin-top:4px">추천 키워드</div><div class="kwc">${kw}</div>`:""}</div><div class="bcol"><div class="bh">신사업 아이디어</div>${ideas}</div></div>${acts?`<div class="bfoot"><span class="bh">이번 주 추진</span>${acts}</div>`:""}`;
 }
-/* KERIS 인증·승인 조건이 있는 콘텐츠 개발 용역은 목록에서 제외(사용자 지시) */
+/* KERIS 인증·승인 조건 용역, 서울 업체가 참가할 수 없는 지역제한 공고는 목록에서 제외(사용자 지시) */
 const KERIS_RE=/KERIS|한국교육학술정보원/i;
-function hideKeris(){const raw=feed.__raw||(feed.__raw=feed.bids);feed.bids=raw.filter(it=>!it.keris&&!(assess[it.id]&&assess[it.id].keris)&&!KERIS_RE.test((it.title||"")+" "+(it.note||"")))}
+function hideKeris(){const raw=feed.__raw||(feed.__raw=feed.bids);feed.bids=raw.filter(it=>!it.keris&&!it.regionLock&&!(assess[it.id]&&(assess[it.id].keris||assess[it.id].regionLock))&&!KERIS_RE.test((it.title||"")+" "+(it.note||"")))}
 function render(){renderKw();renderBrief();chips($("gChips"),GCATS,gCat,c=>gCat=c);chips($("bChips"),BCATS,bCat,c=>bCat=c);renderLists();renderCal();renderStrip()}
 
 $("bDate").onchange=e=>{briefSel=e.target.value;renderBrief()};
