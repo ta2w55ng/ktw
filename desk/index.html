@@ -98,13 +98,14 @@ h1{font-family:var(--f-display);font-size:27px;font-weight:700;margin:0;letter-s
 .stamp{font-size:11.5px;opacity:.92;margin-top:6px}
 .stamp b{font-weight:600}
 
-.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;background:var(--sheet);border-radius:18px;box-shadow:var(--shadow)}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;background:var(--sheet);border-radius:18px;box-shadow:var(--shadow)}
 .strip>div{padding:12px 16px;border-left:1px solid var(--line);min-width:0}
 .strip>div:first-child{border-left:0}
 .strip .k{font-size:12px;color:var(--muted);letter-spacing:.02em}
 .strip .v{font-family:var(--f-mono);font-size:24px;font-weight:600;line-height:1.2}
 .strip .v small{font-family:var(--f-body);font-size:12px;color:var(--muted);font-weight:400;margin-left:4px}
 .strip .hot .v{color:var(--seal)}
+.strip .go .v{color:var(--ok)}
 
 .grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
 .panel{background:var(--sheet);border-radius:18px;box-shadow:var(--shadow);min-width:0;overflow:hidden}
@@ -241,7 +242,7 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
 .upcoming{padding:12px 16px;display:flex;flex-direction:column;gap:2px}
 
 @media (max-width:960px){.grid{grid-template-columns:minmax(0,1fr)}.side{position:static}}
-@media (max-width:560px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}.strip>div:nth-child(3){border-left:0}.strip>div:nth-child(n+3){border-top:1px solid var(--line)}
+@media (max-width:560px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}.strip>div:nth-child(3),.strip>div:nth-child(5){border-left:0}.strip>div:nth-child(n+3){border-top:1px solid var(--line)}
   .row{grid-template-columns:54px minmax(0,1fr) 32px;gap:10px;padding:12px}h1{font-size:22px}header.top{padding:18px 18px 44px}.hero-r{align-self:stretch;justify-content:flex-end}.wxart{width:130px;height:78px}.wx .wt b{font-size:30px}.wx{min-width:0}}
 @media (prefers-reduced-motion:no-preference){.row{transition:background .15s}.row:hover{background:var(--paper)}}
 </style>
@@ -273,6 +274,7 @@ form.add input,form.add select{border:1px solid var(--line);background:var(--pap
     <div><div class="k">접수 중 지원사업 <span id="sMetro"></span></div><div class="v" id="sGrant">0<small>건</small></div></div>
     <div><div class="k">용역 입찰·사전규격</div><div class="v" id="sBid">0<small>건</small></div></div>
     <div><div class="k">이번 주 내 일정</div><div class="v" id="sWeek">0<small>건</small></div></div>
+    <div class="go"><div class="k">AI Go <span id="sGoSub"></span></div><div class="v" id="sGoN">0<small>건</small></div></div>
   </section>
 
   <div class="grid">
@@ -1509,6 +1511,7 @@ function renderStrip(){
   const openG=feed.grants.filter(it=>!(dleft(it.end)<0)&&!(it.start&&dleft(it.start)>0));
   $("sMetro").textContent="(전국·수도권 "+openG.filter(it=>["nat","metro"].includes(scope(it.region))).length+")";
   $("sBid").innerHTML=feed.bids.filter(it=>!(dleft(it.end)<0)).length+"<small>건</small>";
+  {const ob=feed.bids.filter(it=>!(dleft(it.end)<0)&&assess[it.id]);const g=ob.filter(it=>assess[it.id].verdict==="Go").length,r=ob.filter(it=>assess[it.id].verdict==="검토").length;$("sGoN").innerHTML=g+"<small>건</small>";$("sGoSub").textContent=ob.length?"(검토 "+r+" · 판단 "+ob.length+")":""}
   const wk=allItems().filter(x=>{const n=dleft(x.date);return n>=0&&n<=7}).length;
   $("sWeek").innerHTML=wk+"<small>건</small>";
   $("asOf").textContent=feed.updatedAt;
