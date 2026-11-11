@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T15:47",
+ "updated": "2026-11-11T15:48",
  "sources": [
   "기업마당",
   "NIPA",
@@ -7,8 +7,44 @@
  ],
  "items": [
   {
+   "agency": "강동구 청년해냄센터",
+   "checked": "2026-11-11",
+   "deadline": "2026-11-23",
+   "deadline_note": "",
+   "field": "멘토링ㆍ컨설팅ㆍ교육",
+   "first_seen": "2026-11-11",
+   "ministry": "",
+   "note": "2027년 정부지원사업 대비 창업교육 프로그램 참가자 모집(서울 강동구)",
+   "period": "11/9 ~ 11/23",
+   "posted": "2026-11-10",
+   "rank": 10,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "[강동구 청년해냄센터] 2027년 정부 지원 사업 대비 성공 창업 스쿨 참가자 모집 공고",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+   "id": "ks-gangdong-success-school"
+  },
+  {
+   "agency": "주식회사 내비온",
+   "checked": "2026-11-11",
+   "deadline": "2026-11-18",
+   "deadline_note": "",
+   "field": "멘토링ㆍ컨설팅ㆍ교육",
+   "first_seen": "2026-11-11",
+   "ministry": "",
+   "note": "경기스타트업플랫폼 온라인 밋업위크 4차 투자자 모집",
+   "period": "11/6 ~ 11/18",
+   "posted": "2026-11-09",
+   "rank": 10,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "2026년 경기스타트업플랫폼 온라인 밋업위크(4차) 투자자 모집",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+   "id": "ks-gg-meetup-week-4"
+  },
+  {
    "agency": "서울시 강동가죽제조지원센터",
-   "checked": "2026-11-10",
+   "checked": "2026-11-11",
    "deadline": "2026-11-16",
    "deadline_note": "",
    "field": "창업교육",
@@ -206,7 +242,7 @@
   },
   {
    "agency": "창업진흥원",
-   "checked": "2026-11-10",
+   "checked": "2026-11-11",
    "deadline": "2026-12-11",
    "deadline_note": "",
    "field": "멘토링ㆍ컨설팅ㆍ교육",
@@ -314,7 +350,7 @@
   },
   {
    "agency": "창업진흥원",
-   "checked": "2026-11-10",
+   "checked": "2026-11-11",
    "deadline": "2026-11-23",
    "deadline_note": "",
    "field": "사업화",
@@ -440,7 +476,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-11-10",
+   "checked": "2026-11-11",
    "deadline": "2026-11-30T15:00",
    "deadline_note": "",
    "field": "",
@@ -455,42 +491,6 @@
    "title": "2027년 월드프렌즈코리아 NIPA자문단 종합관리센터 운영기관 모집공고",
    "url": "https://www.nipa.kr/home/2-2/16982",
    "id": "nipa-16982"
-  },
-  {
-   "agency": "한국기술교육대학교 산학협력단",
-   "checked": "2026-11-03",
-   "deadline": "2026-11-03",
-   "deadline_note": "",
-   "field": "창업교육",
-   "first_seen": "2026-11-02",
-   "ministry": "",
-   "note": "정부 R&D 제도 이해 특강",
-   "period": "10/30 ~ 11/3",
-   "posted": "2026-10-30",
-   "rank": 106,
-   "relevant": false,
-   "source": "K-Startup",
-   "title": "스타트업을 위한 정부 R&D 특강",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
-   "id": "ks-rnd-special-lecture"
-  },
-  {
-   "agency": "알파브라더스",
-   "checked": "2026-10-29",
-   "deadline": "2026-11-03",
-   "deadline_note": "",
-   "field": "",
-   "first_seen": "2026-10-29",
-   "ministry": "",
-   "note": "네이버클라우드 그린하우스 MARKET CONNECT 행사 참가 신청",
-   "period": "10/28 ~ 11/3",
-   "posted": "2026-10-29",
-   "rank": 90,
-   "relevant": true,
-   "source": "K-Startup",
-   "title": "[행사 안내] 2026 네이버클라우드 그린하우스 : MARKET CONNECT",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
-   "id": "ks-navercloud-greenhouse"
   },
   {
    "agency": "광운대학교산학협력단",
@@ -655,24 +655,6 @@
    "id": "nipa-16974"
   },
   {
-   "agency": "충북대학교 충북Pro메이커센터",
-   "checked": "2026-10-27",
-   "deadline": "2026-11-03T14:00",
-   "deadline_note": "",
-   "field": "사업화",
-   "first_seen": "2026-10-27",
-   "ministry": "",
-   "note": "시제품 고도화 바우처 지원 프로그램 참여기업 모집",
-   "period": "10/22 ~ 11/3 14:00",
-   "posted": "2026-10-22",
-   "rank": 179601,
-   "relevant": false,
-   "source": "K-Startup",
-   "title": "<2026년 시제품 고도화 바우처 지원 프로그램> 참여 기업 모집 (~11.3.14시)",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179601",
-   "id": "ks-cbnu-prototype-voucher"
-  },
-  {
    "agency": "재단법인 강원창조경제혁신센터",
    "checked": "2026-10-27",
    "deadline": "2026-11-11",
@@ -800,7 +782,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-11-10",
+   "checked": "2026-11-11",
    "deadline": "2026-11-04T22:00",
    "deadline_note": "",
    "field": "용역ㆍ해외진출",
@@ -1085,6 +1067,24 @@
    "title": "2026년 스타트업 원스톱 온라인 심화상담 지원 모집 공고",
    "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126686",
    "id": "biz-126686"
+  },
+  {
+   "agency": "경기테크노파크",
+   "checked": "2026-09-21",
+   "deadline": null,
+   "deadline_note": "예산 소진 시",
+   "field": "기술",
+   "first_seen": "2026-09-21",
+   "ministry": "경기도",
+   "note": "안산시 국가기술거래플랫폼 기술코칭 참여기업 모집",
+   "period": "예산 소진시까지",
+   "posted": "2026-09-18",
+   "rank": 6620,
+   "relevant": false,
+   "source": "기업마당",
+   "title": "[경기] 안산시 2026년 국가기술거래플랫폼 기술코칭 참여기업 모집 공고",
+   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126620",
+   "id": "biz-126620"
   }
  ]
 }
