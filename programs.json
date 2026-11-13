@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T17:09",
+ "updated": "2026-11-13T15:48",
  "sources": [
   "기업마당",
   "NIPA",
@@ -8,7 +8,7 @@
  "items": [
   {
    "agency": "서울경제진흥원",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-23",
    "deadline_note": "",
    "field": "행사ㆍ네트워크",
@@ -26,7 +26,7 @@
   },
   {
    "agency": "구로구 청년창업지원센터",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-25",
    "deadline_note": "",
    "field": "시설ㆍ공간ㆍ보육",
@@ -44,7 +44,7 @@
   },
   {
    "agency": "(재)경기도경제과학진흥원",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-24",
    "deadline_note": "",
    "field": "멘토링ㆍ컨설팅ㆍ교육",
@@ -62,7 +62,7 @@
   },
   {
    "agency": "마포청년창업취업지원센터 나루",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-20",
    "deadline_note": "",
    "field": "창업교육",
@@ -80,7 +80,7 @@
   },
   {
    "agency": "(재)전라북도콘텐츠융합진흥원",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-23",
    "deadline_note": "",
    "field": "멘토링ㆍ컨설팅ㆍ교육",
@@ -98,7 +98,7 @@
   },
   {
    "agency": "(사)한국여성벤처협회",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-26",
    "deadline_note": "",
    "field": "창업교육",
@@ -116,7 +116,7 @@
   },
   {
    "agency": "한국기술교육대학교 산학협력단",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-17",
    "deadline_note": "",
    "field": "창업교육",
@@ -368,7 +368,7 @@
   },
   {
    "agency": "창업진흥원",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-12-11",
    "deadline_note": "",
    "field": "멘토링ㆍ컨설팅ㆍ교육",
@@ -476,7 +476,7 @@
   },
   {
    "agency": "창업진흥원",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-23",
    "deadline_note": "",
    "field": "사업화",
@@ -602,7 +602,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-11-12",
+   "checked": "2026-11-13",
    "deadline": "2026-11-30T15:00",
    "deadline_note": "",
    "field": "",
