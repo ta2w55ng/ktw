@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T16:05",
+ "updated": "2026-11-17T15:47",
  "sources": [
   "기업마당",
   "NIPA",
@@ -7,8 +7,62 @@
  ],
  "items": [
   {
+   "agency": "씨엔티테크(주)",
+   "checked": "2026-11-17",
+   "deadline": "2026-12-10",
+   "deadline_note": "",
+   "field": "민간 멘토링ㆍ컨설팅ㆍ교육",
+   "first_seen": "2026-11-17",
+   "ministry": "",
+   "note": "2027년 상반기 IBK창공 서울대캠프 참여기업 모집 (멘토링·컨설팅·교육 분야)",
+   "period": "2026-11-16 ~ 2026-12-10",
+   "posted": "2026-11-16",
+   "rank": 13,
+   "relevant": true,
+   "source": "K-Startup",
+   "title": "2027년 상반기 「IBK창공(創工) 서울대캠프」 모집 공고",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+   "id": "ks-ibk-snu-camp-2027"
+  },
+  {
+   "agency": "(재)경기도경제과학진흥원",
+   "checked": "2026-11-17",
+   "deadline": "2026-11-25",
+   "deadline_note": "",
+   "field": "공공 행사ㆍ네트워크",
+   "first_seen": "2026-11-17",
+   "ministry": "",
+   "note": "AI 반도체 분야 글로벌 파트너십 네트워킹 행사 참가자 모집",
+   "period": "2026-11-13 ~ 2026-11-25",
+   "posted": "2026-11-16",
+   "rank": 11,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "제 2회 판다밋업 : AI 반도체 글로벌 파트너십 Innovation Bridge",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+   "id": "ks-panda-meetup-2"
+  },
+  {
+   "agency": "창업진흥원",
+   "checked": "2026-11-17",
+   "deadline": "2026-11-23",
+   "deadline_note": "",
+   "field": "공공 행사ㆍ네트워크",
+   "first_seen": "2026-11-17",
+   "ministry": "",
+   "note": "창업경진대회 왕중왕전 청중평가단 참가자 모집",
+   "period": "2026-11-16 ~ 2026-11-23",
+   "posted": "2026-11-16",
+   "rank": 10,
+   "relevant": false,
+   "source": "K-Startup",
+   "title": "「올해의 K-스타트업 2026」 창업경진대회 왕중왕전 청중평가단 모집",
+   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
+   "id": "ks-kstartup-award-audience"
+  },
+  {
    "agency": "충북대학교 충북Pro메이커센터",
-   "checked": "2026-11-16",
+   "checked": "2026-11-17",
    "deadline": "2026-12-09",
    "deadline_note": "",
    "field": "창업교육",
@@ -26,7 +80,7 @@
   },
   {
    "agency": "강남구여성능력개발센터",
-   "checked": "2026-11-16",
+   "checked": "2026-11-17",
    "deadline": "2026-11-29",
    "deadline_note": "",
    "field": "멘토링ㆍ컨설팅ㆍ교육",
@@ -44,7 +98,7 @@
   },
   {
    "agency": "서울경제진흥원",
-   "checked": "2026-11-16",
+   "checked": "2026-11-17",
    "deadline": "2026-11-23",
    "deadline_note": "",
    "field": "행사ㆍ네트워크",
@@ -404,7 +458,7 @@
   },
   {
    "agency": "창업진흥원",
-   "checked": "2026-11-16",
+   "checked": "2026-11-17",
    "deadline": "2026-12-11",
    "deadline_note": "",
    "field": "멘토링ㆍ컨설팅ㆍ교육",
@@ -512,7 +566,7 @@
   },
   {
    "agency": "창업진흥원",
-   "checked": "2026-11-16",
+   "checked": "2026-11-17",
    "deadline": "2026-11-23",
    "deadline_note": "",
    "field": "사업화",
@@ -638,7 +692,7 @@
   },
   {
    "agency": "정보통신산업진흥원(NIPA)",
-   "checked": "2026-11-16",
+   "checked": "2026-11-17",
    "deadline": "2026-11-30T15:00",
    "deadline_note": "",
    "field": "",
@@ -725,24 +779,6 @@
    "title": "[무료 AI 역량강화 교육] 생성형 AI 기반 무역 금융 리스크 최적화 과정(선착순 모집)",
    "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do",
    "id": "ks-ai-trade-finance"
-  },
-  {
-   "agency": "(주)오픈놀",
-   "checked": "2026-10-28",
-   "deadline": "2026-11-09",
-   "deadline_note": "",
-   "field": "시설ㆍ공간ㆍ보육",
-   "first_seen": "2026-10-28",
-   "ministry": "",
-   "note": "서초창업스테이션 11월 창업 교육 프로그램(브랜드 만들기) 참가자 모집",
-   "period": "10/26 ~ 11/9",
-   "posted": "2026-10-27",
-   "rank": 179622,
-   "relevant": false,
-   "source": "K-Startup",
-   "title": "[서초창업스테이션] 11월 창업 교육 프로그램 - 초기 스타트업을 위한 브랜드 만들기",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179622",
-   "id": "ks-seocho-brand-nov"
   },
   {
    "agency": "관악구청",
@@ -1049,42 +1085,6 @@
    "title": "AI기반 Age-Tech 산업 중심의 디지털의료제품 지원 바이오데이터 및 알고리즘 실증 기술서비스 상시모집 공고(산업혁신기반구축ㆍ2차년도)",
    "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126878",
    "id": "biz-126878"
-  },
-  {
-   "agency": "디지플래닛",
-   "checked": "2026-10-01",
-   "deadline": "2026-11-16",
-   "deadline_note": "",
-   "field": "창업교육",
-   "first_seen": "2026-09-30",
-   "ministry": "",
-   "note": "AI 기획·개발·마케팅 창업가 육성 교육과정 8기 참가자 모집",
-   "period": "9/28 ~ 11/16",
-   "posted": "2026-09-29",
-   "rank": 8997,
-   "relevant": true,
-   "source": "K-Startup",
-   "title": "AI 올라운더(기획,개발,마케팅) 창업가육성과정 8기 모집",
-   "url": "https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&pbancSn=179353",
-   "id": "ks-ai-allrounder-8"
-  },
-  {
-   "agency": "한국기상산업기술원",
-   "checked": "2026-09-23",
-   "deadline": "2026-11-17",
-   "deadline_note": "",
-   "field": "기술",
-   "first_seen": "2026-09-23",
-   "ministry": "기상청",
-   "note": "",
-   "period": "9/16 ~ 11/17",
-   "posted": "2026-09-22",
-   "rank": 1512,
-   "relevant": false,
-   "source": "기업마당",
-   "title": "2026년 하반기 기상청 혁신제품 지정 추진계획 공고",
-   "url": "https://www.bizinfo.go.kr/sii/siia/selectSIIA200Detail.do?pblancId=PBLN_000000000126723",
-   "id": "biz-126723"
   }
  ]
 }
